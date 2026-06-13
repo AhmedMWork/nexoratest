@@ -91,3 +91,11 @@
   },
   "description": "NEXORA V3 Soft Luxury Editorial Commerce Experience"
 }
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,13 +1,15 @@
 {
-  "name": "my-app",
+  "name": "nexora-v2",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "typecheck": "tsc -b --pretty",
+    "preview": "vite preview",
+    "verify": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -84,14 +86,7 @@
     "vite": "^7.2.4"
   },
   "engines": {
-    "node": "20.x"
-  },
-  "packageManager": "pnpm@10.12.4",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@firebase/util",
-      "esbuild",
-      "protobufjs"
-    ]
+    "node": "20.x",
+    "npm": ">=10"
   }
 }

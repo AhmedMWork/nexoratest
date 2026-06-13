@@ -1,52 +1,52 @@
-# NEXORA V1.1 — QA Checklist
+# NEXORA V2 QA Checklist
 
-## Build QA
+## Build
 
-- [x] `npm run lint`
-- [x] `npm run build`
-- [x] `cd functions && npm run build`
+- [ ] `npm install`
+- [ ] `npm run lint`
+- [ ] `npm run typecheck`
+- [ ] `npm run build`
+- [ ] `cd functions && npm install && npm run build`
 
-## Storefront QA
+## Firebase import safety
 
-- [ ] Home opens without layout break.
-- [ ] Header appears on home and all public pages.
-- [ ] `/admin` redirects to `/nexora-admin`.
-- [ ] Mobile menu contains Admin Access.
-- [ ] Footer contains Admin Access.
-- [ ] Dark mode and light mode both render readable contrast.
-- [ ] English is default.
-- [ ] Arabic switches document direction to RTL.
-- [ ] Shop grid displays well on mobile and desktop.
-- [ ] Product cards show sold-out and low-stock states correctly.
-- [ ] Product page supports size selection and sticky mobile purchase behavior.
-- [ ] Cart updates quantities correctly.
-- [ ] Checkout does not show inactive payment methods.
-- [ ] Track order requires order number and phone.
+- [ ] No `src/firebase` folder exists.
+- [ ] No root `firebase/auth.ts` or `firebase/storage.ts` files exist.
+- [ ] No `firebase/*` path alias exists.
+- [ ] Official Firebase SDK imports come only from package imports like `firebase/auth`.
 
-## Admin QA
+## Customer flow
 
-- [ ] Login route opens from `/admin`.
-- [ ] Authenticated admin redirects to dashboard.
-- [ ] Sidebar navigation works.
-- [ ] View Store button works.
-- [ ] Products can be created, edited, hidden, and deleted.
-- [ ] Product image upload works with Firebase Storage.
-- [ ] Orders load and status updates work.
-- [ ] Inventory page reflects stock changes.
-- [ ] Coupons validate against server-side function.
-- [ ] Promotions and Drops are manageable.
-- [ ] Reviews only show after approval.
-- [ ] Settings save correctly.
+- [ ] Home opens.
+- [ ] Shop opens.
+- [ ] Product page opens.
+- [ ] Size can be selected.
+- [ ] Add to cart works.
+- [ ] Coupon validation works.
+- [ ] Checkout creates an order through Cloud Function.
+- [ ] Stock is reduced.
+- [ ] Order tracking works with order number + phone.
+- [ ] No raw Firebase error is shown to customers.
 
-## Production QA
+## Admin flow
 
-- [ ] Firestore rules deployed.
-- [ ] Firestore indexes deployed.
-- [ ] Storage rules deployed.
-- [ ] Cloud Functions deployed.
-- [ ] Vercel environment variables configured.
-- [ ] Test order creates order document.
-- [ ] Stock decreases after order.
-- [ ] Coupon usage increments after valid use.
-- [ ] Admin can update order status.
-- [ ] Customer can track order with phone and order number.
+- [ ] `/admin` redirects correctly.
+- [ ] Admin login works.
+- [ ] Dashboard opens.
+- [ ] Products CRUD works.
+- [ ] Image upload works.
+- [ ] Orders load.
+- [ ] Order status update works.
+- [ ] Coupons work.
+- [ ] Promotions work.
+- [ ] Drops work.
+- [ ] Audit Logs open.
+
+## Responsive
+
+- [ ] iPhone SE width.
+- [ ] iPhone Pro width.
+- [ ] Android 360px.
+- [ ] iPad.
+- [ ] Laptop 1366px.
+- [ ] Desktop 1920px.

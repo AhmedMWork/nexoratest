@@ -1,5 +1,5 @@
 // ============================================================
-// NEXORA — Product Card
+// NEXORA — Midnight Atelier Product Card
 // ============================================================
 
 import { Link } from 'react-router-dom';
@@ -21,12 +21,19 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
   const inWishlist = isInWishlist(product.id);
   const discount = calculateDiscount(product.price, product.compareAtPrice);
+  const availableSizes = product.sizes.filter((s) => s.stock > 0);
+  const totalStock = product.sizes.reduce((sum, size) => sum + Math.max(0, size.stock), 0);
+  const isSoldOut = product.status === 'sold_out' || totalStock <= 0;
+  const isLowStock = !isSoldOut && totalStock <= 5;
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const defaultSize = product.sizes.find((s) => s.stock > 0)?.size || product.sizes[0]?.size;
-    if (!defaultSize) return;
+    const defaultSize = availableSizes[0]?.size;
+    if (!defaultSize || isSoldOut) {
+      toast.error('This piece is currently unavailable');
+      return;
+    }
     addItem({
       productId: product.id,
       slug: product.slug,
@@ -48,79 +55,98 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     });
   };
 
+  const badge = discount > 0
+    ? `-${discount}%`
+    : isSoldOut
+      ? 'Sold Out'
+      : isLowStock
+        ? 'Low Stock'
+        : product.isLimitedDrop
+          ? 'Limited'
+          : product.isNewArrival
+            ? 'New'
+            : product.isBestSeller
+              ? 'Best Seller'
+              : null;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+      viewport={{ once: true, margin: '80px' }}
+      transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.25) }}
+      className="h-full"
     >
       <Link
         to={`/product/${product.slug}`}
-        className="group block bg-[#121212] border border-[#1e1e1e] hover:border-[#333] transition-all duration-500"
+        className="group block h-full border border-[#202024] bg-[#0b0b0d] transition-all duration-500 hover:-translate-y-1 hover:border-[#c8a96a]/40 hover:shadow-[0_24px_80px_rgba(0,0,0,0.28)]"
       >
-        {/* Image Container */}
-        <div className="relative aspect-[3/4] overflow-hidden bg-[#0a0a0a]">
+        <div className="relative aspect-[3/4] overflow-hidden bg-[#050505]">
           <img
-            src={product.images[0] || '/assets/nexora-logo-bg.jpg'}
+            src={product.images[0] || product.thumbnail || '/assets/nexora-logo-bg.jpg'}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className={`w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.045] ${isSoldOut ? 'grayscale opacity-60' : 'opacity-95'}`}
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/55 via-transparent to-[#050505]/5 opacity-80" />
 
-          {/* Discount Badge */}
-          {discount > 0 && (
-            <span className="absolute top-3 left-3 bg-[#ffaa33] text-[#0a0a0a] text-[9px] font-bold px-2 py-1 tracking-wider uppercase">
-              -{discount}%
+          {badge && (
+            <span className={`absolute top-3 left-3 border px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] backdrop-blur-xl ${
+              isSoldOut
+                ? 'border-[#8a8175]/30 bg-[#050505]/70 text-[#b8b0a3]'
+                : discount > 0
+                  ? 'border-[#c8a96a]/30 bg-[#c8a96a] text-[#050505]'
+                  : 'border-[#c8a96a]/30 bg-[#050505]/70 text-[#c8a96a]'
+            }`}>
+              {badge}
             </span>
           )}
 
-          {/* New Badge */}
-          {product.isNewArrival && !discount && (
-            <span className="absolute top-3 left-3 bg-[#f3f3f3] text-[#0a0a0a] text-[9px] font-bold px-2 py-1 tracking-wider uppercase">
-              New
-            </span>
-          )}
-
-          {/* Wishlist */}
           <button
             onClick={handleWishlist}
-            className={`absolute top-3 right-3 p-2 transition-all duration-300 ${
+            className={`absolute top-3 right-3 p-2.5 transition-all duration-300 ${
               inWishlist
-                ? 'bg-[#ffaa33] text-[#0a0a0a]'
-                : 'bg-[#0a0a0a]/60 text-[#f3f3f3] opacity-0 group-hover:opacity-100'
+                ? 'bg-[#c8a96a] text-[#050505]'
+                : 'bg-[#050505]/55 text-[#f4f0e8] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:text-[#c8a96a]'
             }`}
+            aria-label="Toggle wishlist"
           >
             <Heart className={`w-3.5 h-3.5 ${inWishlist ? 'fill-current' : ''}`} />
           </button>
 
-          {/* Quick Add */}
-          <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <div className="absolute bottom-0 left-0 right-0 translate-y-0 sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-300">
             <button
               onClick={handleQuickAdd}
-              className="w-full py-3 bg-[#ffaa33] text-[#0a0a0a] text-[10px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 hover:bg-[#ffbb44] transition-colors"
+              disabled={isSoldOut}
+              className="w-full py-3.5 bg-[#c8a96a] text-[#050505] text-[10px] font-black tracking-[0.22em] uppercase flex items-center justify-center gap-2 hover:bg-[#d8bc7e] transition-colors disabled:bg-[#17171a] disabled:text-[#8a8175]"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
-              Quick Add
+              {isSoldOut ? 'Unavailable' : 'Quick Add'}
             </button>
           </div>
         </div>
 
-        {/* Info */}
-        <div className="p-4">
-          <p className="text-[10px] text-[#555] tracking-[0.15em] uppercase mb-1.5">
-            {product.category} — {product.collection}
+        <div className="p-4 sm:p-5">
+          <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[#8a8175]">
+            {product.category} · {product.collection}
           </p>
-          <h3 className="text-sm font-semibold text-[#f3f3f3] mb-2 truncate group-hover:text-[#ffaa33] transition-colors">
+          <h3 className="mb-3 line-clamp-1 text-sm font-bold text-[#f4f0e8] transition-colors group-hover:text-[#c8a96a]">
             {product.name}
           </h3>
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-bold text-[#f3f3f3]">
-              {formatPrice(product.price)}
-            </span>
-            {product.compareAtPrice && (
-              <span className="text-xs text-[#555] line-through">
-                {formatPrice(product.compareAtPrice)}
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-black text-[#f4f0e8]">
+                {formatPrice(product.price)}
+              </span>
+              {product.compareAtPrice && (
+                <span className="text-xs text-[#8a8175] line-through">
+                  {formatPrice(product.compareAtPrice)}
+                </span>
+              )}
+            </div>
+            {isLowStock && (
+              <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#c8a96a]">
+                {totalStock} left
               </span>
             )}
           </div>

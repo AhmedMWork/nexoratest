@@ -17,6 +17,7 @@ import {
   ChevronLeft,
   Menu,
   X,
+  ExternalLink,
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
@@ -53,7 +54,7 @@ export default function AdminSidebar() {
   };
 
   const sidebarClasses = `
-    fixed top-0 left-0 z-40 h-screen bg-[#0a0a0a] border-r border-[#1e1e1e]
+    fixed top-0 left-0 z-40 h-screen bg-[#050505] border-r border-[#17171a]
     transition-all duration-300 flex flex-col
     ${isCollapsed ? 'w-20' : 'w-64'}
     ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
@@ -64,7 +65,7 @@ export default function AdminSidebar() {
       {/* Mobile Toggle */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="fixed top-4 left-4 z-50 lg:hidden p-2 bg-[#121212] border border-[#222] text-[#f3f3f3]"
+        className="fixed top-4 left-4 z-50 lg:hidden p-2 bg-[#0b0b0d] border border-[#202024] text-[#f4f0e8]"
       >
         {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
@@ -80,7 +81,7 @@ export default function AdminSidebar() {
       {/* Sidebar */}
       <aside className={sidebarClasses}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-[#1e1e1e] h-16">
+        <div className="flex items-center justify-between p-4 border-b border-[#17171a] h-16">
           {!isCollapsed && (
             <Link to="/nexora-admin/dashboard" className="flex items-center gap-2">
               <img
@@ -88,12 +89,12 @@ export default function AdminSidebar() {
                 alt="NEXORA"
                 className="h-7 w-auto object-contain brightness-0 invert"
               />
-              <span className="text-[10px] font-bold tracking-[0.2em] text-[#888]">ADMIN</span>
+              <span className="text-[10px] font-bold tracking-[0.2em] text-[#b8b0a3]">ADMIN</span>
             </Link>
           )}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex p-1.5 text-[#555] hover:text-[#f3f3f3] transition-colors"
+            className="hidden lg:flex p-1.5 text-[#8a8175] hover:text-[#f4f0e8] transition-colors"
           >
             <ChevronLeft
               className={`w-4 h-4 transition-transform ${isCollapsed ? 'rotate-180' : ''}`}
@@ -114,8 +115,8 @@ export default function AdminSidebar() {
                 onClick={() => setIsMobileOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 text-xs font-medium tracking-wider uppercase transition-all duration-200 rounded ${
                   isActive
-                    ? 'bg-[#ffaa33]/10 text-[#ffaa33] border-l-2 border-[#ffaa33]'
-                    : 'text-[#666] hover:text-[#f3f3f3] hover:bg-[#1e1e1e]'
+                    ? 'bg-[#c8a96a]/10 text-[#c8a96a] border-l-2 border-[#c8a96a]'
+                    : 'text-[#8a8175] hover:text-[#f4f0e8] hover:bg-[#17171a]'
                 }`}
                 title={isCollapsed ? link.label : undefined}
               >
@@ -126,11 +127,19 @@ export default function AdminSidebar() {
           })}
         </nav>
 
-        {/* Logout */}
-        <div className="p-2 border-t border-[#1e1e1e]">
+        {/* Store + Logout */}
+        <div className="p-2 border-t border-[#17171a] space-y-1">
+          <Link
+            to="/"
+            onClick={() => setIsMobileOpen(false)}
+            className="flex items-center gap-3 px-3 py-2.5 w-full text-xs font-medium tracking-wider uppercase text-[#8a8175] hover:text-[#c8a96a] hover:bg-[#17171a] transition-all rounded"
+          >
+            <ExternalLink className="w-4 h-4" />
+            {!isCollapsed && <span>View Store</span>}
+          </Link>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 w-full text-xs font-medium tracking-wider uppercase text-[#666] hover:text-red-400 hover:bg-red-400/5 transition-all rounded"
+            className="flex items-center gap-3 px-3 py-2.5 w-full text-xs font-medium tracking-wider uppercase text-[#8a8175] hover:text-red-400 hover:bg-red-400/5 transition-all rounded"
           >
             <LogOut className="w-4 h-4" />
             {!isCollapsed && <span>Logout</span>}

@@ -18,7 +18,7 @@ export default function ThemeLanguageControls({ compact = false }: ThemeLanguage
         onClick={toggleTheme}
         aria-label={isDark ? t('theme.light') : t('theme.dark')}
         title={isDark ? t('theme.light') : t('theme.dark')}
-        className="h-9 min-w-9 px-2 border border-[#222] bg-[#121212]/80 text-[#888] hover:text-[#ffaa33] hover:border-[#ffaa33]/60 transition-colors flex items-center justify-center gap-2"
+        className="h-9 min-w-9 px-2 border border-[#202024] bg-[#0b0b0d]/80 text-[#b8b0a3] hover:text-[#c8a96a] hover:border-[#c8a96a]/50 transition-colors flex items-center justify-center gap-2 backdrop-blur-xl"
       >
         {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
         {!compact && <span className="hidden xl:inline text-[10px] uppercase tracking-wider">{isDark ? 'Light' : 'Dark'}</span>}
@@ -28,10 +28,10 @@ export default function ThemeLanguageControls({ compact = false }: ThemeLanguage
         onClick={toggleLang}
         aria-label={lang === 'en' ? t('language.arabic') : t('language.english')}
         title={lang === 'en' ? t('language.arabic') : t('language.english')}
-        className="h-9 min-w-9 px-2 border border-[#222] bg-[#121212]/80 text-[#888] hover:text-[#ffaa33] hover:border-[#ffaa33]/60 transition-colors flex items-center justify-center gap-2"
+        className="h-9 min-w-9 px-2 border border-[#202024] bg-[#0b0b0d]/80 text-[#b8b0a3] hover:text-[#c8a96a] hover:border-[#c8a96a]/50 transition-colors flex items-center justify-center gap-2 backdrop-blur-xl"
       >
         <Languages className="w-4 h-4" />
-        <span className="text-[10px] font-bold tracking-wider">{lang === 'en' ? 'AR' : 'EN'}</span>
+        <span className="text-[10px] font-black tracking-wider">{lang === 'en' ? 'AR' : 'EN'}</span>
       </button>
     </div>
   );

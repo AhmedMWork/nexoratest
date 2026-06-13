@@ -12,7 +12,7 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#f3f3f3]">
+    <div className="min-h-screen bg-[#050505] text-[#f4f0e8]">
       <Navbar />
       <main>{children}</main>
       <Footer />

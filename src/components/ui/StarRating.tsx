@@ -31,7 +31,7 @@ export default function StarRating({
             <div key={i} className="relative">
               <Star
                 size={size}
-                className="text-[#333]"
+                className="text-[#2a2a2d]"
                 strokeWidth={0}
                 fill="currentColor"
               />
@@ -41,7 +41,7 @@ export default function StarRating({
               >
                 <Star
                   size={size}
-                  className="text-[#ffaa33]"
+                  className="text-[#c8a96a]"
                   strokeWidth={0}
                   fill="currentColor"
                 />
@@ -51,10 +51,10 @@ export default function StarRating({
         })}
       </div>
       {showValue && (
-        <span className="text-xs text-[#888] ml-1">{rating.toFixed(1)}</span>
+        <span className="text-xs text-[#b8b0a3] ml-1">{rating.toFixed(1)}</span>
       )}
       {reviewCount !== undefined && (
-        <span className="text-xs text-[#555] ml-1">({reviewCount})</span>
+        <span className="text-xs text-[#8a8175] ml-1">({reviewCount})</span>
       )}
     </div>
   );

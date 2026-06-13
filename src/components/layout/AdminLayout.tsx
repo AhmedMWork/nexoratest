@@ -23,8 +23,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-[#ffaa33] animate-spin" />
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-[#c8a96a] animate-spin" />
       </div>
     );
   }
@@ -41,11 +41,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   // Login page without sidebar
   if (isLoginPage) {
-    return <div className="min-h-screen bg-[#0a0a0a]">{children}</div>;
+    return <div className="min-h-screen bg-[#050505]">{children}</div>;
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#f3f3f3]">
+    <div className="min-h-screen bg-[#050505] text-[#f4f0e8]">
       <AdminSidebar />
       <main className="lg:ml-64 min-h-screen">
         <div className="p-4 lg:p-8">{children}</div>

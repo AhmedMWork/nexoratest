@@ -39,7 +39,7 @@ export default function SplashScreen() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-[9999] bg-[#0a0a0a] flex items-center justify-center cursor-pointer"
+          className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center cursor-pointer"
           onClick={handleEnter}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
@@ -103,7 +103,7 @@ export default function SplashScreen() {
               />
               {/* Glow ring */}
               <motion.div
-                className="absolute inset-0 -m-4 rounded-full border border-[#ffaa33]/20"
+                className="absolute inset-0 -m-4 rounded-full border border-[#c8a96a]/20"
                 animate={{
                   scale: [1, 1.1, 1],
                   opacity: [0.3, 0.6, 0.3],
@@ -121,7 +121,7 @@ export default function SplashScreen() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-[10px] tracking-[0.5em] uppercase text-[#555]"
+              className="text-[10px] tracking-[0.5em] uppercase text-[#8a8175]"
             >
               Built Different.
             </motion.p>
@@ -136,7 +136,7 @@ export default function SplashScreen() {
                 repeat: Infinity,
                 times: [0, 0.2, 0.7, 0.8, 1],
               }}
-              className="mt-4 text-xs tracking-[0.3em] uppercase text-[#ffaa33]/70 hover:text-[#ffaa33] transition-colors"
+              className="mt-4 text-xs tracking-[0.3em] uppercase text-[#c8a96a]/70 hover:text-[#c8a96a] transition-colors"
             >
               Tap To Enter
             </motion.button>

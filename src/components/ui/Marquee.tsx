@@ -29,17 +29,17 @@ const Marquee = memo(function Marquee({
   const text = items.join(' \u00A0\u00A0 // \u00A0\u00A0 ');
 
   return (
-    <div className={`relative overflow-hidden whitespace-nowrap bg-[#333] py-5 ${className}`}>
+    <div className={`relative overflow-hidden whitespace-nowrap bg-[#2a2a2d] py-5 ${className}`}>
       <div
         className="inline-flex"
         style={{
           animation: `marquee-slide ${speed}s linear infinite`,
         }}
       >
-        <span className="text-[13px] font-bold tracking-[0.3em] uppercase text-[#f3f3f3] px-4">
+        <span className="text-[13px] font-bold tracking-[0.3em] uppercase text-[#f4f0e8] px-4">
           {text}
         </span>
-        <span className="text-[13px] font-bold tracking-[0.3em] uppercase text-[#f3f3f3] px-4">
+        <span className="text-[13px] font-bold tracking-[0.3em] uppercase text-[#f4f0e8] px-4">
           {text}
         </span>
       </div>

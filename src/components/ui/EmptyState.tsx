@@ -60,13 +60,13 @@ export default function EmptyState({
 
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
-      <div className="w-16 h-16 flex items-center justify-center border border-[#222] mb-6">
-        <Icon className="w-7 h-7 text-[#333]" />
+      <div className="w-16 h-16 flex items-center justify-center border border-[#202024] mb-6">
+        <Icon className="w-7 h-7 text-[#2a2a2d]" />
       </div>
-      <h3 className="text-lg font-semibold text-[#f3f3f3] mb-2">
+      <h3 className="text-lg font-semibold text-[#f4f0e8] mb-2">
         {title || defaults_.title}
       </h3>
-      <p className="text-sm text-[#555] max-w-sm mb-6">
+      <p className="text-sm text-[#8a8175] max-w-sm mb-6">
         {description || defaults_.description}
       </p>
       {action || (

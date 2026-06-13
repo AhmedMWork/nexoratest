@@ -1,10 +1,10 @@
 // ============================================================
-// NEXORA — Footer
+// NEXORA — Midnight Atelier Footer
 // ============================================================
 
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Instagram, Facebook, Twitter, Send } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Send, Shield } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -45,9 +45,23 @@ export default function Footer() {
     }
   };
 
+  const renderFooterLink = (link: { label: string; href: string }) => {
+    const label = link.href === '/admin' ? t('footer.adminAccess') : link.label;
+    return (
+      <Link
+        to={link.href}
+        className="text-xs text-[#8a8175] hover:text-[#c8a96a] transition-colors"
+      >
+        {label}
+      </Link>
+    );
+  };
+
   return (
-    <footer className="bg-[#0a0a0a] border-t border-[#1e1e1e]">
-      {/* Newsletter CTA */}
+    <footer className="relative overflow-hidden bg-[#050505] border-t border-[#202024]">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c8a96a]/30 to-transparent" />
+      <div className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-[#c8a96a]/5 blur-3xl" />
+
       <div className="w-full px-4 sm:px-6 lg:px-10 py-20 lg:py-28">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -55,14 +69,15 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="border border-[#202024] bg-[#0b0b0d]/70 px-5 py-12 sm:px-10"
           >
-            <p className="nexora-caption mb-4">{t('footer.newsletterCaption')}</p>
+            <p className="nexora-caption mb-4 text-[#c8a96a]">{t('footer.newsletterCaption')}</p>
             <h3 className="nexora-heading-md mb-6">
               {t('footer.newsletterTitleA')}
-              <span className="text-[#ffaa33]"> NEXORA </span>
+              <span className="text-[#c8a96a]"> NEXORA </span>
               {t('footer.newsletterTitleB')}
             </h3>
-            <p className="text-[#666] text-sm max-w-md mx-auto mb-8">
+            <p className="text-[#8a8175] text-sm max-w-md mx-auto mb-8 leading-7">
               {t('footer.newsletterText')}
             </p>
 
@@ -75,7 +90,7 @@ export default function Footer() {
                   {...register('email')}
                   type="email"
                   placeholder={t('footer.emailPlaceholder')}
-                  className="w-full bg-[#121212] border border-[#222] px-5 py-3.5 text-sm text-[#f3f3f3] placeholder:text-[#444] focus:outline-none focus:border-[#ffaa33] transition-colors"
+                  className="w-full bg-[#050505] border border-[#202024] px-5 py-3.5 text-sm text-[#f4f0e8] placeholder:text-[#6f675d] focus:outline-none focus:border-[#c8a96a] transition-colors"
                 />
                 {errors.email && (
                   <span className="absolute -bottom-5 left-0 text-[10px] text-red-400">
@@ -98,19 +113,18 @@ export default function Footer() {
 
       <div className="nexora-divider" />
 
-      {/* Footer Links */}
       <div className="w-full px-4 sm:px-6 lg:px-10 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-16">
-          {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="inline-block mb-6">
+            <Link to="/" className="inline-flex items-center gap-3 mb-6">
               <img
                 src="/assets/nexora-logo.png"
                 alt="NEXORA"
-                className="h-10 w-auto object-contain brightness-0 invert opacity-80"
+                className="h-10 w-auto object-contain brightness-0 invert opacity-85"
               />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#f4f0e8]">NEXORA</span>
             </Link>
-            <p className="text-xs text-[#555] leading-relaxed mb-6 max-w-[200px]">
+            <p className="text-xs text-[#8a8175] leading-relaxed mb-6 max-w-[220px]">
               {t('footer.brandText')}
             </p>
             <div className="flex items-center gap-3">
@@ -122,7 +136,8 @@ export default function Footer() {
                 <a
                   key={i}
                   href={href}
-                  className="w-8 h-8 flex items-center justify-center border border-[#222] text-[#555] hover:text-[#ffaa33] hover:border-[#ffaa33] transition-colors"
+                  className="w-9 h-9 flex items-center justify-center border border-[#202024] text-[#8a8175] hover:text-[#c8a96a] hover:border-[#c8a96a]/50 transition-colors"
+                  aria-label="NEXORA social profile"
                 >
                   <Icon className="w-3.5 h-3.5" />
                 </a>
@@ -130,79 +145,44 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Shop Links */}
-          <div>
-            <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-5">
-              {t('footer.shop')}
-            </h4>
-            <ul className="space-y-3">
-              {FOOTER_LINKS.shop.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-xs text-[#555] hover:text-[#ffaa33] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support Links */}
-          <div>
-            <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-5">
-              {t('footer.support')}
-            </h4>
-            <ul className="space-y-3">
-              {FOOTER_LINKS.support.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-xs text-[#555] hover:text-[#ffaa33] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-5">
-              {t('footer.company')}
-            </h4>
-            <ul className="space-y-3">
-              {FOOTER_LINKS.company.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-xs text-[#555] hover:text-[#ffaa33] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {[
+            [t('footer.shop'), FOOTER_LINKS.shop],
+            [t('footer.support'), FOOTER_LINKS.support],
+            [t('footer.company'), FOOTER_LINKS.company],
+          ].map(([title, links]) => (
+            <div key={String(title)}>
+              <h4 className="text-xs font-black tracking-[0.22em] uppercase text-[#f4f0e8] mb-5">
+                {String(title)}
+              </h4>
+              <ul className="space-y-3">
+                {(links as typeof FOOTER_LINKS.shop).map((link) => (
+                  <li key={`${link.href}-${link.label}`}>
+                    {renderFooterLink(link)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
 
       <div className="nexora-divider" />
 
-      {/* Bottom Bar */}
       <div className="w-full px-4 sm:px-6 lg:px-10 py-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] text-[#444] tracking-wider">
+          <p className="text-[10px] text-[#6f675d] tracking-wider">
             &copy; {new Date().getFullYear()} NEXORA. Built Different.
           </p>
-          <div className="flex items-center gap-6">
-            <Link to="/info/privacy" className="text-[10px] text-[#444] hover:text-[#888] transition-colors tracking-wider">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
+            <Link to="/info/privacy" className="text-[10px] text-[#6f675d] hover:text-[#b8b0a3] transition-colors tracking-wider">
               {t('footer.privacy')}
             </Link>
-            <Link to="/info/terms" className="text-[10px] text-[#444] hover:text-[#888] transition-colors tracking-wider">
+            <Link to="/info/terms" className="text-[10px] text-[#6f675d] hover:text-[#b8b0a3] transition-colors tracking-wider">
               {t('footer.terms')}
+            </Link>
+            <Link to="/admin" className="inline-flex items-center gap-1.5 text-[10px] text-[#6f675d] hover:text-[#c8a96a] transition-colors tracking-wider">
+              <Shield className="h-3 w-3" />
+              {t('footer.adminAccess')}
             </Link>
           </div>
         </div>

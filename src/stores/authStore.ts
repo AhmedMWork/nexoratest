@@ -3,7 +3,7 @@
 // ============================================================
 
 import { create } from 'zustand';
-import { onAuthChange, loginAdmin, logoutAdmin, getCurrentAdmin } from '@/firebase/auth';
+import { onAuthChange, loginAdmin, logoutAdmin, getCurrentAdmin } from '@/lib/firebase/auth';
 import type { Admin } from '@/types';
 
 interface AuthStore {

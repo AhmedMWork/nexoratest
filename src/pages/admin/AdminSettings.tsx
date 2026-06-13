@@ -42,7 +42,7 @@ export default function AdminSettings() {
 
     const loadSettings = async () => {
       try {
-        const { getSiteSettings } = await import('@/firebase/db');
+        const { getSiteSettings } = await import('@/lib/firebase/db');
         const currentSettings = await getSiteSettings();
 
         if (!mounted || !currentSettings) return;
@@ -75,7 +75,7 @@ export default function AdminSettings() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      const { updateSiteSettings } = await import('@/firebase/db');
+      const { updateSiteSettings } = await import('@/lib/firebase/db');
       await updateSiteSettings({
         storeName: settings.storeName,
         logo: '/assets/nexora-logo.png',

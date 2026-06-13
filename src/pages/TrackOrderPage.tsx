@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSearchParams } from 'react-router-dom';
 import { trackOrderSchema, type TrackOrderFormData } from '@/lib/validators';
-import { getOrderByNumberAndPhone } from '@/firebase/db';
+import { getOrderByNumberAndPhone } from '@/lib/firebase/db';
 import { formatTimestamp, getStatusColor, getStatusLabel } from '@/lib/utils';
 import type { Order, OrderStatus } from '@/types';
 import SectionReveal from '@/components/ui/SectionReveal';

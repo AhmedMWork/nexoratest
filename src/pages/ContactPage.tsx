@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle } from 'lucide-react';
 import { contactSchema, type ContactFormData } from '@/lib/validators';
 import { generateWhatsAppLink } from '@/lib/egyptData';
-import { createContactMessage } from '@/firebase/db';
+import { createContactMessage } from '@/lib/firebase/db';
 import SectionReveal from '@/components/ui/SectionReveal';
 import toast from 'react-hot-toast';
 
@@ -26,7 +26,7 @@ export default function ContactPage() {
 
   useEffect(() => {
     let mounted = true;
-    import('@/firebase/db')
+    import('@/lib/firebase/db')
       .then(({ getSiteSettings }) => getSiteSettings())
       .then((settings) => {
         if (mounted && settings?.whatsappNumber) setWhatsAppNumber(settings.whatsappNumber);

@@ -15,7 +15,7 @@ export default function ReviewsSection() {
 
   useEffect(() => {
     let mounted = true;
-    import('@/firebase/db')
+    import('@/lib/firebase/db')
       .then(({ getReviews }) => getReviews({ isApproved: true, isFeatured: true }))
       .then((reviews) => { if (mounted) setFeaturedReviews(reviews.slice(0, 8)); })
       .catch(() => { if (mounted) setFeaturedReviews([]); });

@@ -44,7 +44,7 @@ export default function AdminInventory() {
     setProducts(products.map((p) => p.id === productId ? { ...p, sizes: updatedSizes } : p));
 
     try {
-      const { updateProduct } = await import('@/firebase/db');
+      const { updateProduct } = await import('@/lib/firebase/db');
       await updateProduct(productId, { sizes: updatedSizes });
       toast.success('Stock updated');
     } catch {

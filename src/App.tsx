@@ -41,6 +41,7 @@ const AdminCoupons = lazy(() => import('@/pages/admin/AdminCoupons'));
 const AdminPromotions = lazy(() => import('@/pages/admin/AdminPromotions'));
 const AdminDrops = lazy(() => import('@/pages/admin/AdminDrops'));
 const AdminSettings = lazy(() => import('@/pages/admin/AdminSettings'));
+const AdminAuditLogs = lazy(() => import('@/pages/admin/AdminAuditLogs'));
 
 // ─── Scroll to top on route change ───
 function ScrollToTop() {
@@ -101,6 +102,7 @@ function AdminRoutes() {
           <Route path="/promotions" element={<PageTransition><AdminPromotions /></PageTransition>} />
           <Route path="/drops" element={<PageTransition><AdminDrops /></PageTransition>} />
           <Route path="/settings" element={<PageTransition><AdminSettings /></PageTransition>} />
+          <Route path="/audit-logs" element={<PageTransition><AdminAuditLogs /></PageTransition>} />
         </Routes>
       </AnimatePresence>
     </AdminLayout>

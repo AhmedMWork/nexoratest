@@ -16,7 +16,7 @@ export default function AdminReviews() {
   const loadReviews = async () => {
     setIsLoading(true);
     try {
-      const { getReviews } = await import('@/firebase/db');
+      const { getReviews } = await import('@/lib/firebase/db');
       setReviews(await getReviews());
     } catch {
       toast.error('Could not load reviews');
@@ -35,7 +35,7 @@ export default function AdminReviews() {
 
   const approveReviewById = async (id: string) => {
     try {
-      const { approveReview } = await import('@/firebase/db');
+      const { approveReview } = await import('@/lib/firebase/db');
       await approveReview(id);
       setReviews((current) => current.map((r) => r.id === id ? { ...r, isApproved: true } : r));
       toast.success('Review approved');
@@ -47,7 +47,7 @@ export default function AdminReviews() {
   const deleteReviewById = async (id: string) => {
     if (!window.confirm('Delete this review?')) return;
     try {
-      const { deleteReview } = await import('@/firebase/db');
+      const { deleteReview } = await import('@/lib/firebase/db');
       await deleteReview(id);
       setReviews((current) => current.filter((r) => r.id !== id));
       toast.success('Review deleted');

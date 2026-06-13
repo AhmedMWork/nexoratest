@@ -82,6 +82,7 @@ export const ADMIN_NAV_LINKS = [
   { label: 'Promotions', href: '/nexora-admin/promotions', icon: 'BadgePercent' },
   { label: 'Drops', href: '/nexora-admin/drops', icon: 'CalendarClock' },
   { label: 'Settings', href: '/nexora-admin/settings', icon: 'Settings' },
+  { label: 'Audit Logs', href: '/nexora-admin/audit-logs', icon: 'ShieldCheck' },
 ];
 
 export const BRAND_VALUES = [

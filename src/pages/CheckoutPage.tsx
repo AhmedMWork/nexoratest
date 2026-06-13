@@ -54,7 +54,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     let mounted = true;
-    import('@/firebase/db')
+    import('@/lib/firebase/db')
       .then(({ getSiteSettings }) => getSiteSettings())
       .then((settings) => {
         if (mounted && settings?.whatsappNumber) setWhatsAppNumber(settings.whatsappNumber);
@@ -67,7 +67,7 @@ export default function CheckoutPage() {
     if (!couponCode.trim()) return;
     setIsCheckingCoupon(true);
     try {
-      const { validateCouponForCart } = await import('@/firebase/db');
+      const { validateCouponForCart } = await import('@/lib/firebase/db');
       const result = await validateCouponForCart({
         code: couponCode,
         subtotal,
@@ -94,7 +94,7 @@ export default function CheckoutPage() {
     }
 
     try {
-      const { createOrderWithStockTransaction } = await import('@/firebase/db');
+      const { createOrderWithStockTransaction } = await import('@/lib/firebase/db');
       const newOrderNumber = generateOrderNumber();
 
       const createdOrder = await createOrderWithStockTransaction({

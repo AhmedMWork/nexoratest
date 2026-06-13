@@ -75,7 +75,7 @@ export default function AdminProducts() {
   const loadCatalog = async () => {
     setIsLoading(true);
     try {
-      const { getAdminProducts } = await import('@/firebase/db');
+      const { getAdminProducts } = await import('@/lib/firebase/db');
       setProducts(await getAdminProducts());
     } catch {
       toast.error('Could not load products');
@@ -129,7 +129,7 @@ export default function AdminProducts() {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Delete this product?')) return;
     try {
-      const { deleteProduct } = await import('@/firebase/db');
+      const { deleteProduct } = await import('@/lib/firebase/db');
       await deleteProduct(id);
       setProducts(products.filter((p) => p.id !== id));
       toast.success('Product deleted');
@@ -142,7 +142,7 @@ export default function AdminProducts() {
     if (!file) return;
     setIsUploadingImage(true);
     try {
-      const { uploadProductImage } = await import('@/firebase/storage');
+      const { uploadProductImage } = await import('@/lib/firebase/storage');
       const url = await uploadProductImage(file, draft.sku || draft.name || 'product');
       setDraft((current) => ({ ...current, images: current.images ? `${current.images}\n${url}` : url }));
       toast.success('Image uploaded');
@@ -196,7 +196,7 @@ export default function AdminProducts() {
     };
 
     try {
-      const { createProduct, updateProduct } = await import('@/firebase/db');
+      const { createProduct, updateProduct } = await import('@/lib/firebase/db');
       if (mode === 'edit' && editingProduct) {
         await updateProduct(editingProduct.id, payload);
         toast.success('Product updated');

@@ -55,7 +55,7 @@ export default function ProductDetailPage() {
           if (mounted) {
             setRelatedProducts(products.filter((p) => p.slug !== loadedProduct.slug).slice(0, 4));
           }
-          const { getReviews } = await import('@/firebase/db');
+          const { getReviews } = await import('@/lib/firebase/db');
           const loadedReviews = await getReviews({ productId: loadedProduct.id, isApproved: true });
           if (mounted) setReviews(loadedReviews);
         } else {

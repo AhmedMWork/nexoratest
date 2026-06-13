@@ -1,6 +1,6 @@
 import type { Product } from '@/types';
 import { SEED_PRODUCTS } from '@/lib/seedData';
-import { getProductBySlug, getProducts as getFirestoreProducts } from '@/firebase/db';
+import { getProductBySlug, getProducts as getFirestoreProducts } from '@/lib/firebase/db';
 
 const seedFallbackEnabled = import.meta.env.DEV || import.meta.env.VITE_ENABLE_SEED_FALLBACK === 'true';
 

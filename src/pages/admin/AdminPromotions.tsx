@@ -49,7 +49,7 @@ export default function AdminPromotions() {
 
   const loadPromotions = async () => {
     setIsLoading(true);
-    try { const { getPromotions } = await import('@/firebase/db'); setPromotions(await getPromotions()); }
+    try { const { getPromotions } = await import('@/lib/firebase/db'); setPromotions(await getPromotions()); }
     catch { toast.error('Could not load promotions'); }
     finally { setIsLoading(false); }
   };
@@ -77,7 +77,7 @@ export default function AdminPromotions() {
         startDate: new Date(draft.startDate), endDate: new Date(draft.endDate), bannerText: draft.bannerText.trim(),
         showOnHome: draft.showOnHome, showOnProduct: draft.showOnProduct, showOnCart: draft.showOnCart, showCountdown: draft.showCountdown,
       };
-      const { createPromotion, updatePromotion } = await import('@/firebase/db');
+      const { createPromotion, updatePromotion } = await import('@/lib/firebase/db');
       if (editing) await updatePromotion(editing.id, payload); else await createPromotion(payload);
       toast.success(editing ? 'Promotion updated' : 'Promotion created');
       setShowForm(false); await loadPromotions();
@@ -86,7 +86,7 @@ export default function AdminPromotions() {
 
   const remove = async (p: Promotion) => {
     if (!window.confirm(`Delete promotion ${p.title}?`)) return;
-    try { const { deletePromotion } = await import('@/firebase/db'); await deletePromotion(p.id); toast.success('Promotion deleted'); await loadPromotions(); }
+    try { const { deletePromotion } = await import('@/lib/firebase/db'); await deletePromotion(p.id); toast.success('Promotion deleted'); await loadPromotions(); }
     catch { toast.error('Could not delete promotion'); }
   };
 

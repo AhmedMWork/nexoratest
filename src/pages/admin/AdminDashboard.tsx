@@ -36,7 +36,7 @@ export default function AdminDashboard() {
       setIsLoading(true);
       try {
         const [{ getOrders }, { loadProducts }] = await Promise.all([
-          import('@/firebase/db'),
+          import('@/lib/firebase/db'),
           import('@/services/productService'),
         ]);
         const [orders, products] = await Promise.all([getOrders(), loadProducts()]);

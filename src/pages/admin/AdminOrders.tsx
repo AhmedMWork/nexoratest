@@ -20,7 +20,7 @@ export default function AdminOrders() {
   const loadOrders = async () => {
     setIsLoading(true);
     try {
-      const { getOrders } = await import('@/firebase/db');
+      const { getOrders } = await import('@/lib/firebase/db');
       setOrders(await getOrders());
     } catch {
       toast.error('Could not load orders');
@@ -47,7 +47,7 @@ export default function AdminOrders() {
 
   const updateStatus = async (orderId: string, newStatus: OrderStatus) => {
     try {
-      const { updateOrderStatus } = await import('@/firebase/db');
+      const { updateOrderStatus } = await import('@/lib/firebase/db');
       await updateOrderStatus(orderId, newStatus);
       setOrders((current) => current.map((o) =>
         o.id === orderId

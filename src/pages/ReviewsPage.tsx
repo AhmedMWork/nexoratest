@@ -15,7 +15,7 @@ export default function ReviewsPage() {
 
   useEffect(() => {
     let mounted = true;
-    import('@/firebase/db')
+    import('@/lib/firebase/db')
       .then(({ getReviews }) => getReviews({ isApproved: true }))
       .then((loadedReviews) => { if (mounted) setReviews(loadedReviews); })
       .catch(() => { if (mounted) setReviews([]); })

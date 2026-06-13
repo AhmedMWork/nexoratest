@@ -74,7 +74,7 @@ export default function AdminCoupons() {
   const loadCoupons = async () => {
     setIsLoading(true);
     try {
-      const { getCoupons } = await import('@/firebase/db');
+      const { getCoupons } = await import('@/lib/firebase/db');
       setCoupons(await getCoupons());
     } catch {
       toast.error('Could not load coupons');
@@ -147,7 +147,7 @@ export default function AdminCoupons() {
         excludedCollections: draft.excludedCollections.split(',').map((v) => v.trim()).filter(Boolean),
         firstOrderOnly: draft.firstOrderOnly,
       };
-      const { createCoupon, updateCoupon } = await import('@/firebase/db');
+      const { createCoupon, updateCoupon } = await import('@/lib/firebase/db');
       if (editingCoupon) await updateCoupon(editingCoupon.id, payload);
       else await createCoupon(payload);
       toast.success(editingCoupon ? 'Coupon updated' : 'Coupon created');
@@ -162,7 +162,7 @@ export default function AdminCoupons() {
 
   const toggleActive = async (coupon: Coupon) => {
     try {
-      const { updateCoupon } = await import('@/firebase/db');
+      const { updateCoupon } = await import('@/lib/firebase/db');
       await updateCoupon(coupon.id, { isActive: !coupon.isActive, status: !coupon.isActive ? 'active' : 'paused' });
       await loadCoupons();
       toast.success('Coupon status updated');
@@ -172,7 +172,7 @@ export default function AdminCoupons() {
   const removeCoupon = async (coupon: Coupon) => {
     if (!window.confirm(`Delete coupon ${coupon.code}?`)) return;
     try {
-      const { deleteCoupon } = await import('@/firebase/db');
+      const { deleteCoupon } = await import('@/lib/firebase/db');
       await deleteCoupon(coupon.id);
       await loadCoupons();
       toast.success('Coupon deleted');

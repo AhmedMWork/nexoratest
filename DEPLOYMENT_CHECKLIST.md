@@ -58,3 +58,35 @@ cd functions && npm run build
 ```bash
 firebase deploy --only firestore:rules,firestore:indexes,storage,functions
 ```
+
+---
+
+# V1.1 Midnight Atelier Addendum
+
+## Verified in this package
+
+- `npm run lint` passed.
+- `npm run build` passed.
+- `cd functions && npm run build` passed.
+- `/admin` shortcut added for easy admin access.
+- Header, mobile menu, footer, admin login, and product cards upgraded to Midnight Atelier visual system.
+
+## Admin access paths
+
+- `/admin`
+- `/nexora-admin`
+- Header shield icon
+- Mobile menu Admin Access
+- Footer Admin Access
+
+## Recommended first production test
+
+1. Log in to Firebase Console.
+2. Create an admin auth user.
+3. Add the user UID to `admins/{uid}`.
+4. Deploy rules, indexes, storage, and functions.
+5. Add one product through Admin Products.
+6. Place one COD order from the storefront.
+7. Confirm stock decreased.
+8. Update the order status from Admin Orders.
+9. Track the order from `/track-order`.

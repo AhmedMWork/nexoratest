@@ -50,3 +50,42 @@ Set the variables from `.env.example`, then deploy the frontend.
 2. Copy the user UID.
 3. Create document `admins/{uid}` in Firestore.
 4. Add fields: `email`, `displayName`, `role: "owner"`, `createdAt`, `lastLoginAt`.
+
+---
+
+# V1.1 Notes
+
+This package includes the Midnight Atelier visual upgrade and easier admin access.
+
+Use:
+
+```bash
+npm install
+npm run dev
+```
+
+Admin shortcuts:
+
+- `http://localhost:5173/admin`
+- `http://localhost:5173/nexora-admin`
+
+Production build verification:
+
+```bash
+npm run lint
+npm run build
+cd functions
+npm run build
+```
+
+## Windows install note
+
+This package intentionally does not include `node_modules` or npm `package-lock.json` files. Run `npm install` in the project root and again inside `functions` before building.
+
+If npm tries to download from any non-public registry, run:
+
+```powershell
+npm config set registry https://registry.npmjs.org/
+```
+
+Then perform a clean install as documented in `INSTALL_FIX_WINDOWS.md`.

@@ -18,6 +18,7 @@ import {
   Menu,
   X,
   ExternalLink,
+  ShieldCheck,
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
@@ -34,6 +35,7 @@ const iconMap: Record<string, React.ElementType> = {
   Settings,
   BadgePercent,
   CalendarClock,
+  ShieldCheck,
 };
 
 export default function AdminSidebar() {

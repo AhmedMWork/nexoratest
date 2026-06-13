@@ -34,7 +34,7 @@ export default function Footer() {
   const onSubmit = async (data: NewsletterForm) => {
     setIsSubmitting(true);
     try {
-      const { subscribeNewsletter } = await import('@/firebase/db');
+      const { subscribeNewsletter } = await import('@/lib/firebase/db');
       await subscribeNewsletter(data.email);
       toast.success('Subscribed to NEXORA updates');
       reset();

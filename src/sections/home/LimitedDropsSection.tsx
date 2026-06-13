@@ -23,14 +23,14 @@ export default function LimitedDropsSection() {
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #121212 50%, #0a0a0a 100%)',
+          background: 'linear-gradient(135deg, #050505 0%, #0b0b0d 50%, #050505 100%)',
         }}
       />
       <div className="absolute inset-0 opacity-10">
         <div
           className="w-full h-full"
           style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #333 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #2a2a2d 1px, transparent 0)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -41,15 +41,15 @@ export default function LimitedDropsSection() {
           {/* Left — Text */}
           <SectionReveal>
             <div className="flex items-center gap-3 mb-6">
-              <Timer className="w-4 h-4 text-[#ffaa33]" />
-              <p className="nexora-caption text-[#ffaa33]">Limited Availability</p>
+              <Timer className="w-4 h-4 text-[#c8a96a]" />
+              <p className="nexora-caption text-[#c8a96a]">Limited Availability</p>
             </div>
             <h2 className="nexora-heading-md mb-6">
               LIMITED
               <br />
-              <span className="text-[#ffaa33]">DROPS</span>
+              <span className="text-[#c8a96a]">DROPS</span>
             </h2>
-            <p className="text-sm text-[#888] max-w-md mb-8 leading-relaxed">
+            <p className="text-sm text-[#b8b0a3] max-w-md mb-8 leading-relaxed">
               Exclusive pieces produced in limited quantities. Once they are gone,
               they are gone forever. Each drop is numbered and crafted with the
               same obsessive attention to detail.
@@ -69,9 +69,9 @@ export default function LimitedDropsSection() {
               <SectionReveal key={product.slug} delay={0.1 + i * 0.1}>
                 <Link
                   to={`/product/${product.slug}`}
-                  className="group flex items-center gap-4 bg-[#121212] border border-[#1e1e1e] hover:border-[#ffaa33]/30 transition-all p-4"
+                  className="group flex items-center gap-4 bg-[#0b0b0d] border border-[#17171a] hover:border-[#c8a96a]/30 transition-all p-4"
                 >
-                  <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-[#0a0a0a]">
+                  <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-[#050505]">
                     <img
                       src={product.images[0]}
                       alt={product.name}
@@ -79,17 +79,17 @@ export default function LimitedDropsSection() {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#555] mb-1">
+                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#8a8175] mb-1">
                       {product.category} — Only {product.sizes.reduce((sum, s) => sum + s.stock, 0)} left
                     </p>
-                    <h3 className="text-sm font-bold text-[#f3f3f3] group-hover:text-[#ffaa33] transition-colors truncate">
+                    <h3 className="text-sm font-bold text-[#f4f0e8] group-hover:text-[#c8a96a] transition-colors truncate">
                       {product.name}
                     </h3>
-                    <p className="text-xs text-[#ffaa33] mt-1">
+                    <p className="text-xs text-[#c8a96a] mt-1">
                       {formatPrice(product.price)}
                     </p>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#333] group-hover:text-[#ffaa33] transition-colors flex-shrink-0" />
+                  <ArrowRight className="w-4 h-4 text-[#2a2a2d] group-hover:text-[#c8a96a] transition-colors flex-shrink-0" />
                 </Link>
               </SectionReveal>
             ))}

@@ -183,21 +183,21 @@ export default function AdminCoupons() {
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f3f3f3]">Coupons</h1>
-          <p className="text-xs text-[#555] mt-1">Control discount codes, usage limits, targeting, and date windows</p>
+          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f4f0e8]">Coupons</h1>
+          <p className="text-xs text-[#8a8175] mt-1">Control discount codes, usage limits, targeting, and date windows</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2">
-          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search coupons..." className="bg-[#121212] border border-[#222] px-3 py-2.5 text-xs text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]" />
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search coupons..." className="bg-[#0b0b0d] border border-[#202024] px-3 py-2.5 text-xs text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]" />
           <button onClick={loadCoupons} className="nexora-button flex items-center gap-2"><RefreshCw className="w-3.5 h-3.5" />Refresh</button>
-          <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2.5 bg-[#ffaa33] text-[#0a0a0a] text-xs font-bold tracking-wider uppercase hover:bg-[#ffbb44]"><Plus className="w-3.5 h-3.5" />Add Coupon</button>
+          <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2.5 bg-[#c8a96a] text-[#050505] text-xs font-bold tracking-wider uppercase hover:bg-[#d8bc7e]"><Plus className="w-3.5 h-3.5" />Add Coupon</button>
         </div>
       </div>
 
       {showForm && (
-        <div className="p-5 bg-[#121212] border border-[#1e1e1e]">
+        <div className="p-5 bg-[#0b0b0d] border border-[#17171a]">
           <div className="flex items-center justify-between mb-5">
-            <h3 className="text-sm font-bold text-[#f3f3f3]">{editingCoupon ? 'Edit Coupon' : 'New Coupon'}</h3>
-            <button onClick={() => setShowForm(false)} className="text-[#555] hover:text-[#f3f3f3]"><X className="w-4 h-4" /></button>
+            <h3 className="text-sm font-bold text-[#f4f0e8]">{editingCoupon ? 'Edit Coupon' : 'New Coupon'}</h3>
+            <button onClick={() => setShowForm(false)} className="text-[#8a8175] hover:text-[#f4f0e8]"><X className="w-4 h-4" /></button>
           </div>
           <div className="grid md:grid-cols-4 gap-4">
             <Field label="Code"><input value={draft.code} onChange={(e) => setDraft({ ...draft, code: e.target.value.toUpperCase() })} className="admin-input" placeholder="SUMMER25" /></Field>
@@ -220,28 +220,28 @@ export default function AdminCoupons() {
             <Field label="Description"><input value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} className="admin-input" /></Field>
           </div>
           <div className="mt-5 flex items-center gap-4">
-            <label className="flex items-center gap-2 text-xs text-[#888]"><input type="checkbox" checked={draft.firstOrderOnly} onChange={(e) => setDraft({ ...draft, firstOrderOnly: e.target.checked })} /> First order only</label>
+            <label className="flex items-center gap-2 text-xs text-[#b8b0a3]"><input type="checkbox" checked={draft.firstOrderOnly} onChange={(e) => setDraft({ ...draft, firstOrderOnly: e.target.checked })} /> First order only</label>
             <button onClick={saveCoupon} disabled={isSaving} className="nexora-button-primary disabled:opacity-50">{isSaving ? 'Saving...' : 'Save Coupon'}</button>
           </div>
         </div>
       )}
 
-      <div className="bg-[#121212] border border-[#1e1e1e] overflow-x-auto">
+      <div className="bg-[#0b0b0d] border border-[#17171a] overflow-x-auto">
         <table className="w-full text-left min-w-[980px]">
-          <thead><tr className="border-b border-[#1e1e1e]"><Th>Code</Th><Th>Type</Th><Th>Value</Th><Th>Min</Th><Th>Uses</Th><Th>Dates</Th><Th>Status</Th><Th>Actions</Th></tr></thead>
+          <thead><tr className="border-b border-[#17171a]"><Th>Code</Th><Th>Type</Th><Th>Value</Th><Th>Min</Th><Th>Uses</Th><Th>Dates</Th><Th>Status</Th><Th>Actions</Th></tr></thead>
           <tbody>
-            {isLoading ? <tr><td colSpan={8} className="p-8 text-center text-xs text-[#555]">Loading coupons...</td></tr> : filtered.length ? filtered.map((coupon) => (
-              <tr key={coupon.id} className="border-b border-[#1e1e1e]/50">
-                <td className="p-4"><span className="flex items-center gap-2 text-xs font-bold text-[#ffaa33]"><Tag className="w-3 h-3" />{coupon.code}</span><p className="text-[10px] text-[#555] mt-1">{coupon.title}</p></td>
-                <td className="p-4 text-xs text-[#888] uppercase">{coupon.type}</td>
-                <td className="p-4 text-xs text-[#f3f3f3]">{coupon.type === 'percentage' ? `${coupon.value}%` : coupon.type === 'fixed' ? formatPrice(coupon.value) : 'Free shipping'}</td>
-                <td className="p-4 text-xs text-[#888]">{coupon.minOrderAmount ? formatPrice(coupon.minOrderAmount) : 'None'}</td>
-                <td className="p-4 text-xs text-[#888]">{coupon.usedCount || 0} / {coupon.usageLimit || '∞'}</td>
-                <td className="p-4 text-[10px] text-[#888]">{formatTimestamp(coupon.startDate)} — {formatTimestamp(coupon.endDate)}</td>
+            {isLoading ? <tr><td colSpan={8} className="p-8 text-center text-xs text-[#8a8175]">Loading coupons...</td></tr> : filtered.length ? filtered.map((coupon) => (
+              <tr key={coupon.id} className="border-b border-[#17171a]/50">
+                <td className="p-4"><span className="flex items-center gap-2 text-xs font-bold text-[#c8a96a]"><Tag className="w-3 h-3" />{coupon.code}</span><p className="text-[10px] text-[#8a8175] mt-1">{coupon.title}</p></td>
+                <td className="p-4 text-xs text-[#b8b0a3] uppercase">{coupon.type}</td>
+                <td className="p-4 text-xs text-[#f4f0e8]">{coupon.type === 'percentage' ? `${coupon.value}%` : coupon.type === 'fixed' ? formatPrice(coupon.value) : 'Free shipping'}</td>
+                <td className="p-4 text-xs text-[#b8b0a3]">{coupon.minOrderAmount ? formatPrice(coupon.minOrderAmount) : 'None'}</td>
+                <td className="p-4 text-xs text-[#b8b0a3]">{coupon.usedCount || 0} / {coupon.usageLimit || '∞'}</td>
+                <td className="p-4 text-[10px] text-[#b8b0a3]">{formatTimestamp(coupon.startDate)} — {formatTimestamp(coupon.endDate)}</td>
                 <td className="p-4"><button onClick={() => toggleActive(coupon)} className={`text-[10px] px-2.5 py-1 uppercase tracking-wider border ${coupon.isActive ? 'border-green-400/30 text-green-400' : 'border-red-400/30 text-red-400'}`}>{coupon.isActive ? 'Active' : 'Paused'}</button></td>
-                <td className="p-4"><div className="flex gap-2"><button onClick={() => openEdit(coupon)} className="p-1.5 text-[#555] hover:text-[#ffaa33]"><Edit className="w-3.5 h-3.5" /></button><button onClick={() => removeCoupon(coupon)} className="p-1.5 text-[#555] hover:text-red-400"><Trash2 className="w-3.5 h-3.5" /></button></div></td>
+                <td className="p-4"><div className="flex gap-2"><button onClick={() => openEdit(coupon)} className="p-1.5 text-[#8a8175] hover:text-[#c8a96a]"><Edit className="w-3.5 h-3.5" /></button><button onClick={() => removeCoupon(coupon)} className="p-1.5 text-[#8a8175] hover:text-red-400"><Trash2 className="w-3.5 h-3.5" /></button></div></td>
               </tr>
-            )) : <tr><td colSpan={8} className="p-8 text-center text-xs text-[#555]">No coupons yet</td></tr>}
+            )) : <tr><td colSpan={8} className="p-8 text-center text-xs text-[#8a8175]">No coupons yet</td></tr>}
           </tbody>
         </table>
       </div>
@@ -250,6 +250,6 @@ export default function AdminCoupons() {
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return <div><label className="text-[10px] text-[#555] uppercase tracking-wider mb-1 block">{label}</label>{children}</div>;
+  return <div><label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1 block">{label}</label>{children}</div>;
 }
-function Th({ children }: { children: React.ReactNode }) { return <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">{children}</th>; }
+function Th({ children }: { children: React.ReactNode }) { return <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">{children}</th>; }

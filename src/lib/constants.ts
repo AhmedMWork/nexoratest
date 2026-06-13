@@ -9,6 +9,8 @@ export const SITE_URL = 'https://nexora.store';
 
 export const NAV_LINKS = [
   { label: 'Shop', href: '/shop' },
+  { label: 'Men', href: '/shop/men' },
+  { label: 'Women', href: '/shop/women' },
   { label: 'Drops', href: '/drops' },
   { label: 'Reviews', href: '/reviews' },
   { label: 'Contact', href: '/contact' },
@@ -123,5 +125,6 @@ export const FOOTER_LINKS = {
     { label: 'About NEXORA', href: '/info/about' },
     { label: 'Contact Us', href: '/contact' },
     { label: 'Privacy Policy', href: '/info/privacy' },
+    { label: 'Admin Access', href: '/admin' },
   ],
 };

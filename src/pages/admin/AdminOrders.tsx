@@ -73,20 +73,20 @@ export default function AdminOrders() {
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f3f3f3]">Orders</h1>
-          <p className="text-xs text-[#555] mt-1">{orders.length} orders</p>
+          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f4f0e8]">Orders</h1>
+          <p className="text-xs text-[#8a8175] mt-1">{orders.length} orders</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#555]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a8175]" />
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search order, customer, phone..."
-              className="w-full sm:w-72 bg-[#121212] border border-[#222] pl-10 pr-4 py-2.5 text-xs text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33]"
+              className="w-full sm:w-72 bg-[#0b0b0d] border border-[#202024] pl-10 pr-4 py-2.5 text-xs text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a]"
             />
           </div>
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-[#121212] border border-[#222] px-3 py-2.5 text-xs text-[#888] focus:outline-none">
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-[#0b0b0d] border border-[#202024] px-3 py-2.5 text-xs text-[#b8b0a3] focus:outline-none">
             <option value="">All Statuses</option>
             {ORDER_STATUSES.map((s) => <option key={s} value={s}>{getStatusLabel(s)}</option>)}
           </select>
@@ -96,33 +96,33 @@ export default function AdminOrders() {
         </div>
       </div>
 
-      <div className="bg-[#121212] border border-[#1e1e1e] overflow-x-auto">
+      <div className="bg-[#0b0b0d] border border-[#17171a] overflow-x-auto">
         <table className="w-full text-left min-w-[820px]">
           <thead>
-            <tr className="border-b border-[#1e1e1e]">
-              <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Order #</th>
-              <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Customer</th>
-              <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Phone</th>
-              <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Total</th>
-              <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Status</th>
-              <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Actions</th>
+            <tr className="border-b border-[#17171a]">
+              <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Order #</th>
+              <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Customer</th>
+              <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Phone</th>
+              <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Total</th>
+              <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Status</th>
+              <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody>
             {isLoading ? (
-              <tr><td colSpan={6} className="p-8 text-center text-xs text-[#555]">Loading orders...</td></tr>
+              <tr><td colSpan={6} className="p-8 text-center text-xs text-[#8a8175]">Loading orders...</td></tr>
             ) : filteredOrders.length ? filteredOrders.map((order) => (
-              <tr key={order.id} className="border-b border-[#1e1e1e]/50 hover:bg-[#1e1e1e]/30 transition-colors">
-                <td className="p-4 text-xs text-[#ffaa33] font-medium">{order.orderNumber}</td>
-                <td className="p-4 text-xs text-[#f3f3f3]">{order.customer.fullName}</td>
-                <td className="p-4 text-xs text-[#888]">{order.customer.phone}</td>
+              <tr key={order.id} className="border-b border-[#17171a]/50 hover:bg-[#17171a]/30 transition-colors">
+                <td className="p-4 text-xs text-[#c8a96a] font-medium">{order.orderNumber}</td>
+                <td className="p-4 text-xs text-[#f4f0e8]">{order.customer.fullName}</td>
+                <td className="p-4 text-xs text-[#b8b0a3]">{order.customer.phone}</td>
                 <td className="p-4 text-xs font-medium">{formatPrice(order.total)}</td>
                 <td className="p-4"><span className={`status-badge ${getStatusColor(order.status)} text-[9px]`}>{getStatusLabel(order.status)}</span></td>
                 <td className="p-4">
                   <div className="flex items-center gap-2">
-                    <button onClick={() => setSelectedOrder(selectedOrder?.id === order.id ? null : order)} className="p-1.5 text-[#555] hover:text-[#ffaa33] transition-colors"><Eye className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => setSelectedOrder(selectedOrder?.id === order.id ? null : order)} className="p-1.5 text-[#8a8175] hover:text-[#c8a96a] transition-colors"><Eye className="w-3.5 h-3.5" /></button>
                     {getNextStatus(order.status) && (
-                      <button onClick={() => updateStatus(order.id, getNextStatus(order.status)! as OrderStatus)} className="flex items-center gap-1 px-2 py-1 bg-[#ffaa33]/10 text-[#ffaa33] text-[9px] uppercase tracking-wider hover:bg-[#ffaa33]/20 transition-colors">
+                      <button onClick={() => updateStatus(order.id, getNextStatus(order.status)! as OrderStatus)} className="flex items-center gap-1 px-2 py-1 bg-[#c8a96a]/10 text-[#c8a96a] text-[9px] uppercase tracking-wider hover:bg-[#c8a96a]/20 transition-colors">
                         <Package className="w-3 h-3" /> {getStatusLabel(getNextStatus(order.status)!)}
                       </button>
                     )}
@@ -130,46 +130,46 @@ export default function AdminOrders() {
                 </td>
               </tr>
             )) : (
-              <tr><td colSpan={6} className="p-8 text-center text-xs text-[#555]">No orders found</td></tr>
+              <tr><td colSpan={6} className="p-8 text-center text-xs text-[#8a8175]">No orders found</td></tr>
             )}
           </tbody>
         </table>
       </div>
 
       {selectedOrder && (
-        <div className="p-5 bg-[#121212] border border-[#1e1e1e] space-y-4">
+        <div className="p-5 bg-[#0b0b0d] border border-[#17171a] space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-[#f3f3f3]">{selectedOrder.orderNumber}</h3>
-            <button onClick={() => setSelectedOrder(null)} className="text-[#555] hover:text-[#f3f3f3]"><ChevronDown className="w-4 h-4" /></button>
+            <h3 className="text-sm font-bold text-[#f4f0e8]">{selectedOrder.orderNumber}</h3>
+            <button onClick={() => setSelectedOrder(null)} className="text-[#8a8175] hover:text-[#f4f0e8]"><ChevronDown className="w-4 h-4" /></button>
           </div>
           <div className="grid sm:grid-cols-2 gap-3 text-xs">
-            <div className="p-3 bg-[#0a0a0a] border border-[#1e1e1e]">
-              <p className="text-[#555] mb-1">Customer</p>
-              <p className="text-[#f3f3f3]">{selectedOrder.customer.fullName}</p>
-              <p className="text-[#888]">{selectedOrder.customer.phone}</p>
-              <p className="text-[#888] mt-1">{selectedOrder.customer.address}, {selectedOrder.customer.city}, {selectedOrder.customer.governorate}</p>
+            <div className="p-3 bg-[#050505] border border-[#17171a]">
+              <p className="text-[#8a8175] mb-1">Customer</p>
+              <p className="text-[#f4f0e8]">{selectedOrder.customer.fullName}</p>
+              <p className="text-[#b8b0a3]">{selectedOrder.customer.phone}</p>
+              <p className="text-[#b8b0a3] mt-1">{selectedOrder.customer.address}, {selectedOrder.customer.city}, {selectedOrder.customer.governorate}</p>
             </div>
-            <div className="p-3 bg-[#0a0a0a] border border-[#1e1e1e]">
-              <p className="text-[#555] mb-1">Order Details</p>
-              <p className="text-[#f3f3f3]">Subtotal: {formatPrice(selectedOrder.subtotal)}</p>
-              <p className="text-[#888]">Shipping: {formatPrice(selectedOrder.shippingFee)}</p>
-              <p className="text-[#888]">Date: {formatTimestamp(selectedOrder.createdAt)}</p>
-              <p className="text-[#ffaa33] font-bold mt-1">Total: {formatPrice(selectedOrder.total)}</p>
+            <div className="p-3 bg-[#050505] border border-[#17171a]">
+              <p className="text-[#8a8175] mb-1">Order Details</p>
+              <p className="text-[#f4f0e8]">Subtotal: {formatPrice(selectedOrder.subtotal)}</p>
+              <p className="text-[#b8b0a3]">Shipping: {formatPrice(selectedOrder.shippingFee)}</p>
+              <p className="text-[#b8b0a3]">Date: {formatTimestamp(selectedOrder.createdAt)}</p>
+              <p className="text-[#c8a96a] font-bold mt-1">Total: {formatPrice(selectedOrder.total)}</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
             {ORDER_STATUSES.map((status) => (
-              <button key={status} onClick={() => updateStatus(selectedOrder.id, status)} className={`px-3 py-1.5 text-[9px] uppercase tracking-wider border transition-colors ${selectedOrder.status === status ? 'border-[#ffaa33] text-[#ffaa33] bg-[#ffaa33]/5' : 'border-[#222] text-[#555] hover:border-[#444]'}`}>
+              <button key={status} onClick={() => updateStatus(selectedOrder.id, status)} className={`px-3 py-1.5 text-[9px] uppercase tracking-wider border transition-colors ${selectedOrder.status === status ? 'border-[#c8a96a] text-[#c8a96a] bg-[#c8a96a]/5' : 'border-[#202024] text-[#8a8175] hover:border-[#6f675d]'}`}>
                 {getStatusLabel(status)}
               </button>
             ))}
           </div>
           <div className="space-y-2">
-            <h4 className="text-[10px] uppercase tracking-wider text-[#555]">Items</h4>
+            <h4 className="text-[10px] uppercase tracking-wider text-[#8a8175]">Items</h4>
             {selectedOrder.items.map((item) => (
-              <div key={`${item.productId}-${item.size}`} className="flex justify-between text-xs border-b border-[#1e1e1e]/50 pb-2">
-                <span className="text-[#f3f3f3]">{item.name} — {item.size} x{item.quantity}</span>
-                <span className="text-[#888]">{formatPrice(item.price * item.quantity)}</span>
+              <div key={`${item.productId}-${item.size}`} className="flex justify-between text-xs border-b border-[#17171a]/50 pb-2">
+                <span className="text-[#f4f0e8]">{item.name} — {item.size} x{item.quantity}</span>
+                <span className="text-[#b8b0a3]">{formatPrice(item.price * item.quantity)}</span>
               </div>
             ))}
           </div>

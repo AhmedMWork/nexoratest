@@ -138,11 +138,11 @@ export default function ShopPage() {
         <link rel="canonical" href={`/shop${category ? `/${category}` : ''}`} />
       </Helmet>
 
-      <div className="pt-24 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
         <div className="w-full px-4 sm:px-6 lg:px-10">
           {/* Header */}
           <SectionReveal>
-            <p className="nexora-caption text-[#ffaa33] mb-3">Collection</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">Atelier Selection</p>
             <h1 className="nexora-heading-md mb-8">
               {selectedCategory
                 ? `${selectedCategory === 'men' ? "MEN'S" : "WOMEN'S"} T-SHIRTS`
@@ -154,18 +154,18 @@ export default function ShopPage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
             {/* Search */}
             <div className="relative w-full sm:max-w-sm">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#555]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a8175]" />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#121212] border border-[#222] pl-10 pr-4 py-2.5 text-sm text-[#f3f3f3] placeholder:text-[#444] focus:outline-none focus:border-[#ffaa33] transition-colors"
+                className="w-full bg-[#0b0b0d] border border-[#202024] pl-10 pr-4 py-2.5 text-sm text-[#f4f0e8] placeholder:text-[#6f675d] focus:outline-none focus:border-[#c8a96a] transition-colors"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#555] hover:text-[#f3f3f3]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8a8175] hover:text-[#f4f0e8]"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -177,7 +177,7 @@ export default function ShopPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#121212] border border-[#222] px-3 py-2.5 text-xs text-[#888] focus:outline-none focus:border-[#ffaa33]"
+                className="bg-[#0b0b0d] border border-[#202024] px-3 py-2.5 text-xs text-[#b8b0a3] focus:outline-none focus:border-[#c8a96a]"
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -191,8 +191,8 @@ export default function ShopPage() {
                 onClick={() => setShowFilters(!showFilters)}
                 className={`flex items-center gap-2 px-4 py-2.5 border text-xs tracking-wider uppercase transition-colors ${
                   showFilters
-                    ? 'border-[#ffaa33] text-[#ffaa33]'
-                    : 'border-[#222] text-[#888] hover:text-[#f3f3f3]'
+                    ? 'border-[#c8a96a] text-[#c8a96a]'
+                    : 'border-[#202024] text-[#b8b0a3] hover:text-[#f4f0e8]'
                 }`}
               >
                 <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -206,12 +206,12 @@ export default function ShopPage() {
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
-              className="border border-[#1e1e1e] bg-[#121212] p-5 mb-8"
+              className="border border-[#17171a] bg-[#0b0b0d] p-5 mb-8"
             >
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Category */}
                 <div>
-                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#888] mb-3">Category</h4>
+                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#b8b0a3] mb-3">Category</h4>
                   <div className="flex flex-wrap gap-2">
                     {PRODUCT_CATEGORIES.map((cat) => (
                       <button
@@ -221,8 +221,8 @@ export default function ShopPage() {
                         }
                         className={`px-3 py-1.5 text-xs border transition-colors ${
                           selectedCategory === cat.value
-                            ? 'border-[#ffaa33] text-[#ffaa33] bg-[#ffaa33]/5'
-                            : 'border-[#222] text-[#666] hover:border-[#444]'
+                            ? 'border-[#c8a96a] text-[#c8a96a] bg-[#c8a96a]/5'
+                            : 'border-[#202024] text-[#8a8175] hover:border-[#6f675d]'
                         }`}
                       >
                         {cat.label}
@@ -233,7 +233,7 @@ export default function ShopPage() {
 
                 {/* Size */}
                 <div>
-                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#888] mb-3">Size</h4>
+                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#b8b0a3] mb-3">Size</h4>
                   <div className="flex flex-wrap gap-2">
                     {PRODUCT_SIZES.map((size) => (
                       <button
@@ -241,8 +241,8 @@ export default function ShopPage() {
                         onClick={() => toggleSize(size)}
                         className={`w-9 h-9 flex items-center justify-center text-xs border transition-colors ${
                           selectedSizes.includes(size)
-                            ? 'border-[#ffaa33] text-[#ffaa33] bg-[#ffaa33]/5'
-                            : 'border-[#222] text-[#666] hover:border-[#444]'
+                            ? 'border-[#c8a96a] text-[#c8a96a] bg-[#c8a96a]/5'
+                            : 'border-[#202024] text-[#8a8175] hover:border-[#6f675d]'
                         }`}
                       >
                         {size}
@@ -253,7 +253,7 @@ export default function ShopPage() {
 
                 {/* Color */}
                 <div>
-                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#888] mb-3">Color</h4>
+                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#b8b0a3] mb-3">Color</h4>
                   <div className="flex flex-wrap gap-2">
                     {PRODUCT_COLORS.map((color) => (
                       <button
@@ -262,8 +262,8 @@ export default function ShopPage() {
                         title={color.label}
                         className={`w-7 h-7 border-2 transition-colors ${
                           selectedColors.includes(color.value)
-                            ? 'border-[#ffaa33] scale-110'
-                            : 'border-transparent hover:border-[#444]'
+                            ? 'border-[#c8a96a] scale-110'
+                            : 'border-transparent hover:border-[#6f675d]'
                         }`}
                         style={{ backgroundColor: color.hex }}
                       />
@@ -273,7 +273,7 @@ export default function ShopPage() {
 
                 {/* Price */}
                 <div>
-                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#888] mb-3">Price</h4>
+                  <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#b8b0a3] mb-3">Price</h4>
                   <div className="flex flex-wrap gap-2">
                     {PRICE_RANGES.map((range) => (
                       <button
@@ -283,8 +283,8 @@ export default function ShopPage() {
                         }
                         className={`px-3 py-1.5 text-xs border transition-colors ${
                           selectedPriceRange === range.label
-                            ? 'border-[#ffaa33] text-[#ffaa33] bg-[#ffaa33]/5'
-                            : 'border-[#222] text-[#666] hover:border-[#444]'
+                            ? 'border-[#c8a96a] text-[#c8a96a] bg-[#c8a96a]/5'
+                            : 'border-[#202024] text-[#8a8175] hover:border-[#6f675d]'
                         }`}
                       >
                         {range.label}
@@ -295,10 +295,10 @@ export default function ShopPage() {
               </div>
 
               {hasActiveFilters && (
-                <div className="mt-4 pt-4 border-t border-[#1e1e1e] flex justify-end">
+                <div className="mt-4 pt-4 border-t border-[#17171a] flex justify-end">
                   <button
                     onClick={clearFilters}
-                    className="text-xs text-[#888] hover:text-[#ffaa33] transition-colors"
+                    className="text-xs text-[#b8b0a3] hover:text-[#c8a96a] transition-colors"
                   >
                     Clear All Filters
                   </button>
@@ -308,26 +308,26 @@ export default function ShopPage() {
           )}
 
           {/* Results count */}
-          <p className="text-xs text-[#555] mb-6">
+          <p className="text-xs text-[#8a8175] mb-6">
             {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
           </p>
 
           {/* Product Grid */}
           {isLoading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="aspect-[3/4] bg-[#121212] border border-[#1e1e1e] skeleton-pulse" />
+                <div key={i} className="aspect-[3/4] bg-[#0b0b0d] border border-[#17171a] skeleton-pulse" />
               ))}
             </div>
           ) : filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
               {filteredProducts.map((product, i) => (
                 <ProductCard key={product.slug} product={product} index={i} />
               ))}
             </div>
           ) : (
             <div className="text-center py-20">
-              <p className="text-[#555] mb-4">No products match your criteria</p>
+              <p className="text-[#8a8175] mb-4">No products match your criteria</p>
               <button
                 onClick={clearFilters}
                 className="nexora-button text-xs"

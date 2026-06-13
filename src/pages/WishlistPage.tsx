@@ -30,17 +30,17 @@ export default function WishlistPage() {
   return (
     <>
       <Helmet><title>Wishlist | NEXORA</title></Helmet>
-      <div className="pt-24 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
         <div className="w-full px-4 sm:px-6 lg:px-10">
           <SectionReveal>
-            <p className="nexora-caption text-[#ffaa33] mb-3">Saved Items</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">Saved Items</p>
             <h1 className="nexora-heading-md mb-10">YOUR WISHLIST</h1>
           </SectionReveal>
 
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="aspect-[3/4] bg-[#121212] border border-[#1e1e1e] skeleton-pulse" />
+                <div key={i} className="aspect-[3/4] bg-[#0b0b0d] border border-[#17171a] skeleton-pulse" />
               ))}
             </div>
           ) : wishlistProducts.length > 0 ? (

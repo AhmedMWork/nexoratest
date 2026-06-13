@@ -10,11 +10,11 @@ export default function NotFoundPage() {
   return (
     <>
       <Helmet><title>Page Not Found | NEXORA</title></Helmet>
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center px-4">
         <div className="text-center">
-          <p className="text-[8rem] font-black text-[#1e1e1e] leading-none">404</p>
-          <h1 className="text-2xl font-bold text-[#f3f3f3] -mt-8 mb-4">Page Not Found</h1>
-          <p className="text-sm text-[#888] mb-8 max-w-sm mx-auto">
+          <p className="text-[8rem] font-black text-[#17171a] leading-none">404</p>
+          <h1 className="text-2xl font-bold text-[#f4f0e8] -mt-8 mb-4">Page Not Found</h1>
+          <p className="text-sm text-[#b8b0a3] mb-8 max-w-sm mx-auto">
             The page you are looking for does not exist or has been moved.
           </p>
           <div className="flex items-center justify-center gap-4">

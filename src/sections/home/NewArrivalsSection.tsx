@@ -18,17 +18,17 @@ export default function NewArrivalsSection() {
   }, []);
 
   return (
-    <section className="py-20 lg:py-32 bg-[#0a0a0a]">
+    <section className="py-20 lg:py-32 bg-[#050505]">
       <div className="w-full px-4 sm:px-6 lg:px-10">
         {/* Header */}
         <SectionReveal className="flex items-end justify-between mb-12">
           <div>
-            <p className="nexora-caption text-[#ffaa33] mb-3">Just Landed</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">Just Landed</p>
             <h2 className="nexora-heading-md">NEW ARRIVALS</h2>
           </div>
           <Link
             to="/shop?sort=newest"
-            className="hidden sm:flex items-center gap-2 text-xs tracking-wider uppercase text-[#888] hover:text-[#ffaa33] transition-colors"
+            className="hidden sm:flex items-center gap-2 text-xs tracking-wider uppercase text-[#b8b0a3] hover:text-[#c8a96a] transition-colors"
           >
             View All
             <ArrowRight className="w-3.5 h-3.5" />

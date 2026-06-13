@@ -149,7 +149,7 @@ export default function CheckoutPage() {
     return (
       <>
         <Helmet><title>{t('checkout.title')} | NEXORA</title></Helmet>
-        <div className="pt-32 pb-20 min-h-screen bg-[#0a0a0a]">
+        <div className="pt-32 pb-20 min-h-screen bg-[#050505]">
           <EmptyState type="cart" />
         </div>
       </>
@@ -159,24 +159,24 @@ export default function CheckoutPage() {
   if (orderComplete) {
     const whatsappMessage = `Hello NEXORA! I just placed an order. My order number is: ${orderNumber}`;
     return (
-      <div className="pt-32 pb-20 min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+      <div className="pt-32 pb-20 min-h-screen bg-[#050505] flex items-center justify-center">
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center max-w-md mx-auto px-6">
-          <div className="w-16 h-16 flex items-center justify-center bg-[#ffaa33]/10 border border-[#ffaa33]/20 mx-auto mb-6">
-            <CheckCircle className="w-8 h-8 text-[#ffaa33]" />
+          <div className="w-16 h-16 flex items-center justify-center bg-[#c8a96a]/10 border border-[#c8a96a]/20 mx-auto mb-6">
+            <CheckCircle className="w-8 h-8 text-[#c8a96a]" />
           </div>
-          <h1 className="text-2xl font-bold text-[#f3f3f3] mb-3">{t('checkout.confirmed')}</h1>
-          <p className="text-sm text-[#888] mb-6">{t('checkout.confirmedText')}</p>
+          <h1 className="text-2xl font-bold text-[#f4f0e8] mb-3">{t('checkout.confirmed')}</h1>
+          <p className="text-sm text-[#b8b0a3] mb-6">{t('checkout.confirmedText')}</p>
 
-          <div className="p-4 bg-[#121212] border border-[#1e1e1e] mb-6">
-            <p className="text-[10px] text-[#555] uppercase tracking-wider mb-2">{t('checkout.orderNumber')}</p>
+          <div className="p-4 bg-[#0b0b0d] border border-[#17171a] mb-6">
+            <p className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-2">{t('checkout.orderNumber')}</p>
             <div className="flex items-center justify-center gap-3">
-              <span className="text-lg font-bold text-[#ffaa33] tracking-wider">{orderNumber}</span>
+              <span className="text-lg font-bold text-[#c8a96a] tracking-wider">{orderNumber}</span>
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(orderNumber);
                   toast.success('Copied!');
                 }}
-                className="p-1.5 text-[#555] hover:text-[#ffaa33] transition-colors"
+                className="p-1.5 text-[#8a8175] hover:text-[#c8a96a] transition-colors"
                 aria-label="Copy order number"
               >
                 <Copy className="w-4 h-4" />
@@ -194,7 +194,7 @@ export default function CheckoutPage() {
             <Link to={`/track-order?order=${encodeURIComponent(orderNumber)}&phone=${encodeURIComponent(customerPhone)}`} className="nexora-button flex items-center justify-center gap-2">
               {t('checkout.track')}
             </Link>
-            <Link to="/shop" className="text-xs text-[#888] hover:text-[#ffaa33] transition-colors tracking-wider uppercase">
+            <Link to="/shop" className="text-xs text-[#b8b0a3] hover:text-[#c8a96a] transition-colors tracking-wider uppercase">
               {t('common.continueShopping')}
             </Link>
           </div>
@@ -206,41 +206,41 @@ export default function CheckoutPage() {
   return (
     <>
       <Helmet><title>{t('checkout.title')} | NEXORA</title></Helmet>
-      <div className="pt-24 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
         <div className="w-full px-4 sm:px-6 lg:px-10">
           <SectionReveal>
-            <Link to="/cart" className="flex items-center gap-2 text-xs text-[#888] hover:text-[#ffaa33] transition-colors tracking-wider uppercase mb-6">
+            <Link to="/cart" className="flex items-center gap-2 text-xs text-[#b8b0a3] hover:text-[#c8a96a] transition-colors tracking-wider uppercase mb-6">
               <ArrowLeft className="w-3 h-3" />
               Back to Cart
             </Link>
-            <p className="nexora-caption text-[#ffaa33] mb-3">{t('checkout.almostThere')}</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">{t('checkout.almostThere')}</p>
             <h1 className="nexora-heading-md mb-10">{t('checkout.title').toUpperCase()}</h1>
           </SectionReveal>
 
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="p-6 bg-[#121212] border border-[#1e1e1e]">
-                  <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-5">{t('checkout.personalInfo')}</h3>
+                <div className="p-6 bg-[#0b0b0d] border border-[#17171a]">
+                  <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f4f0e8] mb-5">{t('checkout.personalInfo')}</h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('checkout.fullName')} *</label>
-                      <input {...register('fullName')} className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors" placeholder="Enter your full name" />
+                      <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('checkout.fullName')} *</label>
+                      <input {...register('fullName')} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors" placeholder="Enter your full name" />
                       {errors.fullName && <p className="text-[10px] text-red-400 mt-1">{errors.fullName.message}</p>}
                     </div>
                     <div>
-                      <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('checkout.phone')} *</label>
-                      <input {...register('phone')} className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors" placeholder="01XXXXXXXXX" dir="ltr" />
+                      <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('checkout.phone')} *</label>
+                      <input {...register('phone')} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors" placeholder="01XXXXXXXXX" dir="ltr" />
                       {errors.phone && <p className="text-[10px] text-red-400 mt-1">{errors.phone.message}</p>}
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6 bg-[#121212] border border-[#1e1e1e]">
-                  <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-5">{t('checkout.shippingAddress')}</h3>
+                <div className="p-6 bg-[#0b0b0d] border border-[#17171a]">
+                  <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f4f0e8] mb-5">{t('checkout.shippingAddress')}</h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('checkout.governorate')} *</label>
+                      <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('checkout.governorate')} *</label>
                       <select
                         {...register('governorate')}
                         onChange={(e) => {
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
                           setValue('governorate', e.target.value);
                           setValue('city', '');
                         }}
-                        className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33] transition-colors appearance-none"
+                        className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a] transition-colors appearance-none"
                       >
                         <option value="">Select Governorate</option>
                         {getGovernorateNames().map((g) => <option key={g} value={g}>{g}</option>)}
@@ -256,8 +256,8 @@ export default function CheckoutPage() {
                       {errors.governorate && <p className="text-[10px] text-red-400 mt-1">{errors.governorate.message}</p>}
                     </div>
                     <div>
-                      <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('checkout.city')} *</label>
-                      <select {...register('city')} disabled={!watchedGovernorate} className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33] transition-colors appearance-none disabled:opacity-50">
+                      <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('checkout.city')} *</label>
+                      <select {...register('city')} disabled={!watchedGovernorate} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a] transition-colors appearance-none disabled:opacity-50">
                         <option value="">Select City</option>
                         {cities.map((c) => <option key={c} value={c}>{c}</option>)}
                       </select>
@@ -265,24 +265,24 @@ export default function CheckoutPage() {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('checkout.address')} *</label>
-                    <textarea {...register('address')} rows={2} className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors resize-none" placeholder="Building name, street, apartment number, nearest landmark" />
+                    <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('checkout.address')} *</label>
+                    <textarea {...register('address')} rows={2} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors resize-none" placeholder="Building name, street, apartment number, nearest landmark" />
                     {errors.address && <p className="text-[10px] text-red-400 mt-1">{errors.address.message}</p>}
                   </div>
                   <div className="mt-4">
-                    <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('checkout.notes')}</label>
-                    <textarea {...register('notes')} rows={2} className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors resize-none" placeholder="Delivery instructions (optional)" />
+                    <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('checkout.notes')}</label>
+                    <textarea {...register('notes')} rows={2} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors resize-none" placeholder="Delivery instructions (optional)" />
                   </div>
                 </div>
 
-                <div className="p-6 bg-[#121212] border border-[#1e1e1e]">
-                  <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-5">{t('checkout.paymentMethod')}</h3>
+                <div className="p-6 bg-[#0b0b0d] border border-[#17171a]">
+                  <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f4f0e8] mb-5">{t('checkout.paymentMethod')}</h3>
                   <div className="space-y-3">
-                    <button type="button" onClick={() => setValue('paymentMethod', 'cod')} className="w-full flex items-center gap-4 p-4 border border-[#ffaa33] bg-[#ffaa33]/5 transition-all">
-                      <Banknote className="w-5 h-5 text-[#ffaa33]" />
+                    <button type="button" onClick={() => setValue('paymentMethod', 'cod')} className="w-full flex items-center gap-4 p-4 border border-[#c8a96a] bg-[#c8a96a]/5 transition-all">
+                      <Banknote className="w-5 h-5 text-[#c8a96a]" />
                       <div className="text-left rtl:text-right">
-                        <p className="text-sm font-medium text-[#f3f3f3]">{t('checkout.cod')}</p>
-                        <p className="text-[10px] text-[#555]">{t('checkout.codDesc')}</p>
+                        <p className="text-sm font-medium text-[#f4f0e8]">{t('checkout.cod')}</p>
+                        <p className="text-[10px] text-[#8a8175]">{t('checkout.codDesc')}</p>
                       </div>
                     </button>
                   </div>
@@ -295,36 +295,36 @@ export default function CheckoutPage() {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="p-6 bg-[#121212] border border-[#1e1e1e] sticky top-24">
-                <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-5">{t('checkout.orderSummary')}</h3>
+              <div className="p-6 bg-[#0b0b0d] border border-[#17171a] sticky top-24">
+                <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f4f0e8] mb-5">{t('checkout.orderSummary')}</h3>
                 <div className="space-y-3 mb-5 max-h-60 overflow-y-auto">
                   {items.map((item) => (
                     <div key={`${item.productId}-${item.size}`} className="flex gap-3">
-                      <img src={item.image} alt={item.name} className="w-12 h-12 object-cover bg-[#0a0a0a]" />
+                      <img src={item.image} alt={item.name} className="w-12 h-12 object-cover bg-[#050505]" />
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs text-[#f3f3f3] truncate">{item.name}</p>
-                        <p className="text-[10px] text-[#555]">Size: {item.size} x{item.quantity}</p>
+                        <p className="text-xs text-[#f4f0e8] truncate">{item.name}</p>
+                        <p className="text-[10px] text-[#8a8175]">Size: {item.size} x{item.quantity}</p>
                       </div>
-                      <span className="text-xs text-[#888]">{formatPrice(item.price * item.quantity)}</span>
+                      <span className="text-xs text-[#b8b0a3]">{formatPrice(item.price * item.quantity)}</span>
                     </div>
                   ))}
                 </div>
-                <div className="h-px bg-[#1e1e1e] mb-4" />
+                <div className="h-px bg-[#17171a] mb-4" />
                 <div className="mb-4">
-                  <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Coupon Code</label>
+                  <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Coupon Code</label>
                   <div className="flex gap-2">
-                    <input value={couponCode} onChange={(e) => setCouponCode(e.target.value.toUpperCase())} className="flex-1 bg-[#0a0a0a] border border-[#222] px-3 py-2 text-xs text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]" placeholder="NEXORA10" />
-                    <button type="button" onClick={applyCoupon} disabled={isCheckingCoupon} className="px-3 py-2 bg-[#ffaa33]/10 text-[#ffaa33] text-[10px] uppercase tracking-wider disabled:opacity-50">{isCheckingCoupon ? '...' : 'Apply'}</button>
+                    <input value={couponCode} onChange={(e) => setCouponCode(e.target.value.toUpperCase())} className="flex-1 bg-[#050505] border border-[#202024] px-3 py-2 text-xs text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]" placeholder="NEXORA10" />
+                    <button type="button" onClick={applyCoupon} disabled={isCheckingCoupon} className="px-3 py-2 bg-[#c8a96a]/10 text-[#c8a96a] text-[10px] uppercase tracking-wider disabled:opacity-50">{isCheckingCoupon ? '...' : 'Apply'}</button>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm"><span className="text-[#888]">{t('checkout.subtotal')}</span><span className="text-[#f3f3f3]">{formatPrice(subtotal)}</span></div>
-                  {appliedCoupon && <div className="flex justify-between text-sm"><span className="text-[#888]">Discount ({appliedCoupon.code})</span><span className="text-green-400">-{formatPrice(discount)}</span></div>}
-                  <div className="flex justify-between text-sm"><span className="text-[#888]">{t('checkout.shipping')}</span><span className={shipping === 0 ? 'text-green-400' : 'text-[#f3f3f3]'}>{shipping === 0 ? t('checkout.free') : formatPrice(shipping)}</span></div>
-                  <div className="h-px bg-[#1e1e1e] my-2" />
-                  <div className="flex justify-between"><span className="text-sm font-bold">{t('checkout.total')}</span><span className="text-lg font-bold text-[#ffaa33]">{formatPrice(total)}</span></div>
+                  <div className="flex justify-between text-sm"><span className="text-[#b8b0a3]">{t('checkout.subtotal')}</span><span className="text-[#f4f0e8]">{formatPrice(subtotal)}</span></div>
+                  {appliedCoupon && <div className="flex justify-between text-sm"><span className="text-[#b8b0a3]">Discount ({appliedCoupon.code})</span><span className="text-green-400">-{formatPrice(discount)}</span></div>}
+                  <div className="flex justify-between text-sm"><span className="text-[#b8b0a3]">{t('checkout.shipping')}</span><span className={shipping === 0 ? 'text-green-400' : 'text-[#f4f0e8]'}>{shipping === 0 ? t('checkout.free') : formatPrice(shipping)}</span></div>
+                  <div className="h-px bg-[#17171a] my-2" />
+                  <div className="flex justify-between"><span className="text-sm font-bold">{t('checkout.total')}</span><span className="text-lg font-bold text-[#c8a96a]">{formatPrice(total)}</span></div>
                 </div>
-                <div className="mt-4 flex items-center gap-2 text-[10px] text-[#444]"><Shield className="w-3 h-3" /><span>{t('checkout.secure')}</span></div>
+                <div className="mt-4 flex items-center gap-2 text-[10px] text-[#6f675d]"><Shield className="w-3 h-3" /><span>{t('checkout.secure')}</span></div>
               </div>
             </div>
           </div>

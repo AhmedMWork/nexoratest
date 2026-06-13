@@ -46,12 +46,12 @@ export default function DropsPage() {
         <meta name="description" content="Explore NEXORA's limited edition drops and core collection. Premium summer t-shirts." />
       </Helmet>
 
-      <div className="pt-24 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
         <div className="w-full px-4 sm:px-6 lg:px-10">
           <SectionReveal>
-            <p className="nexora-caption text-[#ffaa33] mb-3">Collections</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">Collections</p>
             <h1 className="nexora-heading-md mb-4">THE DROPS</h1>
-            <p className="text-sm text-[#888] max-w-lg mb-12">
+            <p className="text-sm text-[#b8b0a3] max-w-lg mb-12">
               Each drop tells a story. Limited quantities, unlimited quality. Once they are gone, they are gone.
             </p>
           </SectionReveal>
@@ -60,11 +60,11 @@ export default function DropsPage() {
             {drops.map((drop, i) => (
               <SectionReveal key={drop.id} delay={i * 0.1}>
                 <div className={`grid lg:grid-cols-2 gap-8 ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                  <div className={`relative aspect-[4/3] overflow-hidden bg-[#121212] ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className={`relative aspect-[4/3] overflow-hidden bg-[#0b0b0d] ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
                     <img src={drop.image} alt={drop.name} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/60 to-transparent" />
                     {drop.featured && (
-                      <span className="absolute top-4 left-4 bg-[#ffaa33] text-[#0a0a0a] text-[9px] font-bold px-3 py-1.5 tracking-wider uppercase">
+                      <span className="absolute top-4 left-4 bg-[#c8a96a] text-[#050505] text-[9px] font-bold px-3 py-1.5 tracking-wider uppercase">
                         Featured
                       </span>
                     )}
@@ -72,14 +72,14 @@ export default function DropsPage() {
 
                   <div className={`flex flex-col justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
                     <div className="flex items-center gap-2 mb-3">
-                      <Calendar className="w-3.5 h-3.5 text-[#555]" />
-                      <span className="text-xs text-[#555]">{drop.date}</span>
+                      <Calendar className="w-3.5 h-3.5 text-[#8a8175]" />
+                      <span className="text-xs text-[#8a8175]">{drop.date}</span>
                     </div>
-                    <h2 className="text-2xl lg:text-3xl font-bold text-[#f3f3f3] mb-4">{drop.name}</h2>
-                    <p className="text-sm text-[#888] leading-relaxed mb-6">{drop.description}</p>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-[#f4f0e8] mb-4">{drop.name}</h2>
+                    <p className="text-sm text-[#b8b0a3] leading-relaxed mb-6">{drop.description}</p>
                     <div className="flex items-center gap-4 mb-6">
-                      <Tag className="w-3.5 h-3.5 text-[#555]" />
-                      <span className="text-xs text-[#555]">{drop.products.length} products</span>
+                      <Tag className="w-3.5 h-3.5 text-[#8a8175]" />
+                      <span className="text-xs text-[#8a8175]">{drop.products.length} products</span>
                     </div>
                     <Link to="/shop" className="nexora-button inline-flex items-center gap-2 w-fit">
                       Shop Collection
@@ -90,13 +90,13 @@ export default function DropsPage() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-8">
                   {drop.products.slice(0, 4).map((product) => (
-                    <Link key={product.id} to={`/product/${product.slug}`} className="group bg-[#121212] border border-[#1e1e1e] hover:border-[#333] transition-all">
+                    <Link key={product.id} to={`/product/${product.slug}`} className="group bg-[#0b0b0d] border border-[#17171a] hover:border-[#2a2a2d] transition-all">
                       <div className="aspect-square overflow-hidden">
                         <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                       </div>
                       <div className="p-3">
-                        <p className="text-xs font-medium text-[#f3f3f3] group-hover:text-[#ffaa33] transition-colors truncate">{product.name}</p>
-                        <p className="text-[10px] text-[#ffaa33] mt-1">{formatPrice(product.price)}</p>
+                        <p className="text-xs font-medium text-[#f4f0e8] group-hover:text-[#c8a96a] transition-colors truncate">{product.name}</p>
+                        <p className="text-[10px] text-[#c8a96a] mt-1">{formatPrice(product.price)}</p>
                       </div>
                     </Link>
                   ))}

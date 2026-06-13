@@ -81,14 +81,14 @@ export default function ProductDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="pt-32 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
         <div className="w-full px-4 sm:px-6 lg:px-10">
           <div className="grid lg:grid-cols-7 gap-8 lg:gap-12">
-            <div className="lg:col-span-4 aspect-[3/4] bg-[#121212] skeleton-pulse" />
+            <div className="lg:col-span-4 aspect-[3/4] bg-[#0b0b0d] skeleton-pulse" />
             <div className="lg:col-span-3 space-y-4">
-              <div className="h-4 w-32 bg-[#121212] skeleton-pulse" />
-              <div className="h-10 w-3/4 bg-[#121212] skeleton-pulse" />
-              <div className="h-8 w-40 bg-[#121212] skeleton-pulse" />
+              <div className="h-4 w-32 bg-[#0b0b0d] skeleton-pulse" />
+              <div className="h-10 w-3/4 bg-[#0b0b0d] skeleton-pulse" />
+              <div className="h-8 w-40 bg-[#0b0b0d] skeleton-pulse" />
             </div>
           </div>
         </div>
@@ -98,8 +98,8 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="pt-32 pb-20 text-center bg-[#0a0a0a] min-h-screen">
-        <h1 className="text-2xl font-bold mb-4 text-[#f3f3f3]">Product Not Found</h1>
+      <div className="pt-32 pb-20 text-center bg-[#050505] min-h-screen">
+        <h1 className="text-2xl font-bold mb-4 text-[#f4f0e8]">Product Not Found</h1>
         <Link to="/shop" className="nexora-button">Back to Shop</Link>
       </div>
     );
@@ -150,19 +150,19 @@ export default function ProductDetailPage() {
         <link rel="canonical" href={`/product/${product.slug}`} />
       </Helmet>
 
-      <div className="pt-24 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
         {/* Breadcrumb */}
         <div className="w-full px-4 sm:px-6 lg:px-10 mb-8">
-          <div className="flex items-center gap-2 text-[10px] text-[#555] uppercase tracking-wider">
-            <Link to="/" className="hover:text-[#888] transition-colors">Home</Link>
+          <div className="flex items-center gap-2 text-[10px] text-[#8a8175] uppercase tracking-wider">
+            <Link to="/" className="hover:text-[#b8b0a3] transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link to="/shop" className="hover:text-[#888] transition-colors">Shop</Link>
+            <Link to="/shop" className="hover:text-[#b8b0a3] transition-colors">Shop</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link to={`/shop/${product.category}`} className="hover:text-[#888] transition-colors capitalize">
+            <Link to={`/shop/${product.category}`} className="hover:text-[#b8b0a3] transition-colors capitalize">
               {product.category}
             </Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-[#888]">{product.name}</span>
+            <span className="text-[#b8b0a3]">{product.name}</span>
           </div>
         </div>
 
@@ -173,7 +173,7 @@ export default function ProductDetailPage() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="relative aspect-[3/4] bg-[#121212] overflow-hidden"
+                className="relative aspect-[3/4] bg-[#0b0b0d] overflow-hidden"
               >
                 <img
                   src={product.images[0]}
@@ -181,7 +181,7 @@ export default function ProductDetailPage() {
                   className="w-full h-full object-cover"
                 />
                 {discount > 0 && (
-                  <span className="absolute top-4 left-4 bg-[#ffaa33] text-[#0a0a0a] text-[10px] font-bold px-3 py-1.5 tracking-wider uppercase">
+                  <span className="absolute top-4 left-4 bg-[#c8a96a] text-[#050505] text-[10px] font-bold px-3 py-1.5 tracking-wider uppercase">
                     Save {discount}%
                   </span>
                 )}
@@ -195,10 +195,10 @@ export default function ProductDetailPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#ffaa33] mb-2">
+                <p className="text-[10px] tracking-[0.2em] uppercase text-[#c8a96a] mb-2">
                   {product.category} — {product.collection}
                 </p>
-                <h1 className="text-2xl lg:text-3xl font-bold text-[#f3f3f3] mb-3">
+                <h1 className="text-2xl lg:text-3xl font-bold text-[#f4f0e8] mb-3">
                   {product.name}
                 </h1>
 
@@ -210,24 +210,24 @@ export default function ProductDetailPage() {
                         key={i}
                         className={`w-3.5 h-3.5 ${
                           i < Math.floor(product.rating)
-                            ? 'text-[#ffaa33] fill-[#ffaa33]'
-                            : 'text-[#333]'
+                            ? 'text-[#c8a96a] fill-[#c8a96a]'
+                            : 'text-[#2a2a2d]'
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-xs text-[#888]">
+                  <span className="text-xs text-[#b8b0a3]">
                     {product.rating} ({product.reviewCount} reviews)
                   </span>
                 </div>
 
                 {/* Price */}
-                <div className="flex items-center gap-3 mb-8 pb-8 border-b border-[#1e1e1e]">
-                  <span className="text-3xl font-bold text-[#f3f3f3]">
+                <div className="flex items-center gap-3 mb-8 pb-8 border-b border-[#17171a]">
+                  <span className="text-3xl font-bold text-[#f4f0e8]">
                     {formatPrice(product.price)}
                   </span>
                   {product.compareAtPrice && (
-                    <span className="text-lg text-[#555] line-through">
+                    <span className="text-lg text-[#8a8175] line-through">
                       {formatPrice(product.compareAtPrice)}
                     </span>
                   )}
@@ -236,10 +236,10 @@ export default function ProductDetailPage() {
                 {/* Size Selection */}
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-medium tracking-wider uppercase text-[#888]">
+                    <span className="text-xs font-medium tracking-wider uppercase text-[#b8b0a3]">
                       Size
                     </span>
-                    <button className="text-[10px] text-[#555] hover:text-[#ffaa33] transition-colors">
+                    <button className="text-[10px] text-[#8a8175] hover:text-[#c8a96a] transition-colors">
                       Size Guide
                     </button>
                   </div>
@@ -256,19 +256,19 @@ export default function ProductDetailPage() {
                           disabled={!isAvailable}
                           className={`relative w-11 h-11 flex items-center justify-center text-xs font-medium border transition-all ${
                             isSelected
-                              ? 'border-[#ffaa33] text-[#ffaa33] bg-[#ffaa33]/5'
+                              ? 'border-[#c8a96a] text-[#c8a96a] bg-[#c8a96a]/5'
                               : isAvailable
-                              ? 'border-[#222] text-[#888] hover:border-[#444] hover:text-[#f3f3f3]'
-                              : 'border-[#1a1a1a] text-[#333] cursor-not-allowed'
+                              ? 'border-[#202024] text-[#b8b0a3] hover:border-[#6f675d] hover:text-[#f4f0e8]'
+                              : 'border-[#1a1a1a] text-[#2a2a2d] cursor-not-allowed'
                           }`}
                         >
                           {size.size}
                           {isLowStock && (
-                            <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#ffaa33] rounded-full" />
+                            <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#c8a96a] rounded-full" />
                           )}
                           {!isAvailable && (
                             <span className="absolute inset-0 flex items-center justify-center">
-                              <span className="w-6 h-px bg-[#222] rotate-45" />
+                              <span className="w-6 h-px bg-[#202024] rotate-45" />
                             </span>
                           )}
                         </button>
@@ -276,7 +276,7 @@ export default function ProductDetailPage() {
                     })}
                   </div>
                   {selectedSize && (
-                    <p className="text-[10px] text-[#555] mt-2">
+                    <p className="text-[10px] text-[#8a8175] mt-2">
                       {product.sizes.find((s) => s.size === selectedSize)?.stock} units available
                     </p>
                   )}
@@ -284,22 +284,22 @@ export default function ProductDetailPage() {
 
                 {/* Quantity */}
                 <div className="mb-8">
-                  <span className="text-xs font-medium tracking-wider uppercase text-[#888] block mb-3">
+                  <span className="text-xs font-medium tracking-wider uppercase text-[#b8b0a3] block mb-3">
                     Quantity
                   </span>
                   <div className="flex items-center gap-0">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-11 h-11 flex items-center justify-center border border-[#222] text-[#888] hover:border-[#444] transition-colors"
+                      className="w-11 h-11 flex items-center justify-center border border-[#202024] text-[#b8b0a3] hover:border-[#6f675d] transition-colors"
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="w-14 h-11 flex items-center justify-center border-t border-b border-[#222] text-sm font-medium">
+                    <span className="w-14 h-11 flex items-center justify-center border-t border-b border-[#202024] text-sm font-medium">
                       {quantity}
                     </span>
                     <button
                       onClick={() => setQuantity(Math.min(product.sizes.find((s) => s.size === selectedSize)?.stock || quantity + 1, quantity + 1))}
-                      className="w-11 h-11 flex items-center justify-center border border-[#222] text-[#888] hover:border-[#444] transition-colors"
+                      className="w-11 h-11 flex items-center justify-center border border-[#202024] text-[#b8b0a3] hover:border-[#6f675d] transition-colors"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -319,8 +319,8 @@ export default function ProductDetailPage() {
                     onClick={handleWishlist}
                     className={`w-14 h-14 flex items-center justify-center border transition-all ${
                       inWishlist
-                        ? 'border-[#ffaa33] bg-[#ffaa33]/5 text-[#ffaa33]'
-                        : 'border-[#222] text-[#888] hover:border-[#444]'
+                        ? 'border-[#c8a96a] bg-[#c8a96a]/5 text-[#c8a96a]'
+                        : 'border-[#202024] text-[#b8b0a3] hover:border-[#6f675d]'
                     }`}
                   >
                     <Heart className={`w-5 h-5 ${inWishlist ? 'fill-current' : ''}`} />
@@ -328,15 +328,15 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Trust Badges */}
-                <div className="grid grid-cols-3 gap-3 mb-8 pb-8 border-b border-[#1e1e1e]">
+                <div className="grid grid-cols-3 gap-3 mb-8 pb-8 border-b border-[#17171a]">
                   {[
                     { icon: Truck, label: 'Fast Delivery' },
                     { icon: RotateCcw, label: 'Easy Returns' },
                     { icon: Shield, label: 'Secure Payment' },
                   ].map(({ icon: Icon, label }) => (
                     <div key={label} className="flex flex-col items-center gap-2 py-3">
-                      <Icon className="w-4 h-4 text-[#555]" />
-                      <span className="text-[9px] text-[#666] text-center uppercase tracking-wider">
+                      <Icon className="w-4 h-4 text-[#8a8175]" />
+                      <span className="text-[9px] text-[#8a8175] text-center uppercase tracking-wider">
                         {label}
                       </span>
                     </div>
@@ -349,7 +349,7 @@ export default function ProductDetailPage() {
                     <Link
                       key={tag}
                       to={`/shop?tag=${tag}`}
-                      className="text-[10px] px-2.5 py-1 bg-[#121212] text-[#555] border border-[#1e1e1e] hover:border-[#333] hover:text-[#888] transition-colors uppercase tracking-wider"
+                      className="text-[10px] px-2.5 py-1 bg-[#0b0b0d] text-[#8a8175] border border-[#17171a] hover:border-[#2a2a2d] hover:text-[#b8b0a3] transition-colors uppercase tracking-wider"
                     >
                       {tag}
                     </Link>
@@ -361,15 +361,15 @@ export default function ProductDetailPage() {
 
           {/* Tabs */}
           <div className="mt-16 lg:mt-24">
-            <div className="flex gap-0 border-b border-[#1e1e1e] mb-8">
+            <div className="flex gap-0 border-b border-[#17171a] mb-8">
               {(['description', 'shipping', 'reviews'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-6 py-3 text-xs tracking-[0.15em] uppercase transition-colors border-b-2 ${
                     activeTab === tab
-                      ? 'text-[#ffaa33] border-[#ffaa33]'
-                      : 'text-[#555] border-transparent hover:text-[#888]'
+                      ? 'text-[#c8a96a] border-[#c8a96a]'
+                      : 'text-[#8a8175] border-transparent hover:text-[#b8b0a3]'
                   }`}
                 >
                   {tab}
@@ -379,23 +379,23 @@ export default function ProductDetailPage() {
 
             {activeTab === 'description' && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <p className="text-sm text-[#888] leading-relaxed max-w-2xl mb-6">
+                <p className="text-sm text-[#b8b0a3] leading-relaxed max-w-2xl mb-6">
                   {product.description}
                 </p>
                 <div className="grid sm:grid-cols-2 gap-4 max-w-2xl">
                   <div>
-                    <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#888] mb-2">Materials</h4>
+                    <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#b8b0a3] mb-2">Materials</h4>
                     <ul className="space-y-1">
                       {product.materials.map((m) => (
-                        <li key={m} className="text-xs text-[#666]">{m}</li>
+                        <li key={m} className="text-xs text-[#8a8175]">{m}</li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#888] mb-2">Colors</h4>
+                    <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#b8b0a3] mb-2">Colors</h4>
                     <div className="flex flex-wrap gap-2">
                       {product.colors.map((c) => (
-                        <span key={c} className="text-xs text-[#666] capitalize">{c}</span>
+                        <span key={c} className="text-xs text-[#8a8175] capitalize">{c}</span>
                       ))}
                     </div>
                   </div>
@@ -406,21 +406,21 @@ export default function ProductDetailPage() {
             {activeTab === 'shipping' && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-2xl">
                 <div className="space-y-4">
-                  <div className="p-4 bg-[#121212] border border-[#1e1e1e]">
-                    <h4 className="text-xs font-bold tracking-wider uppercase text-[#f3f3f3] mb-2">Delivery</h4>
-                    <p className="text-xs text-[#888] leading-relaxed">
+                  <div className="p-4 bg-[#0b0b0d] border border-[#17171a]">
+                    <h4 className="text-xs font-bold tracking-wider uppercase text-[#f4f0e8] mb-2">Delivery</h4>
+                    <p className="text-xs text-[#b8b0a3] leading-relaxed">
                       We deliver across all Egyptian governorates. Orders typically arrive within 2-5 business days depending on your location. Cairo and Giza orders are usually delivered within 48 hours.
                     </p>
                   </div>
-                  <div className="p-4 bg-[#121212] border border-[#1e1e1e]">
-                    <h4 className="text-xs font-bold tracking-wider uppercase text-[#f3f3f3] mb-2">Free Shipping</h4>
-                    <p className="text-xs text-[#888] leading-relaxed">
+                  <div className="p-4 bg-[#0b0b0d] border border-[#17171a]">
+                    <h4 className="text-xs font-bold tracking-wider uppercase text-[#f4f0e8] mb-2">Free Shipping</h4>
+                    <p className="text-xs text-[#b8b0a3] leading-relaxed">
                       Enjoy free shipping on all orders over 1,500 EGP. Standard shipping fee is 60 EGP for orders below that threshold.
                     </p>
                   </div>
-                  <div className="p-4 bg-[#121212] border border-[#1e1e1e]">
-                    <h4 className="text-xs font-bold tracking-wider uppercase text-[#f3f3f3] mb-2">Returns</h4>
-                    <p className="text-xs text-[#888] leading-relaxed">
+                  <div className="p-4 bg-[#0b0b0d] border border-[#17171a]">
+                    <h4 className="text-xs font-bold tracking-wider uppercase text-[#f4f0e8] mb-2">Returns</h4>
+                    <p className="text-xs text-[#b8b0a3] leading-relaxed">
                       Not satisfied? Return unused items with original tags within 14 days of delivery for a full refund or exchange. Return shipping is on us.
                     </p>
                   </div>
@@ -433,27 +433,27 @@ export default function ProductDetailPage() {
                 {reviews.length > 0 ? (
                   <div className="space-y-4 max-w-2xl">
                     {reviews.map((review, i) => (
-                      <div key={i} className="p-5 bg-[#121212] border border-[#1e1e1e]">
+                      <div key={i} className="p-5 bg-[#0b0b0d] border border-[#17171a]">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="flex">
                             {Array.from({ length: 5 }).map((_, j) => (
                               <Star
                                 key={j}
-                                className={`w-3 h-3 ${j < review.rating ? 'text-[#ffaa33] fill-[#ffaa33]' : 'text-[#333]'}`}
+                                className={`w-3 h-3 ${j < review.rating ? 'text-[#c8a96a] fill-[#c8a96a]' : 'text-[#2a2a2d]'}`}
                               />
                             ))}
                           </div>
-                          <span className="text-xs text-[#888]">{review.customerName}</span>
+                          <span className="text-xs text-[#b8b0a3]">{review.customerName}</span>
                         </div>
-                        <h4 className="text-sm font-semibold text-[#f3f3f3] mb-1">{review.title}</h4>
-                        <p className="text-xs text-[#888] leading-relaxed">{review.body}</p>
+                        <h4 className="text-sm font-semibold text-[#f4f0e8] mb-1">{review.title}</h4>
+                        <p className="text-xs text-[#b8b0a3] leading-relaxed">{review.body}</p>
                       </div>
                     ))}
                   </div>
                 ) : (
                   <div className="text-center py-10">
-                    <MessageSquare className="w-8 h-8 text-[#333] mx-auto mb-3" />
-                    <p className="text-sm text-[#555]">No reviews yet. Be the first to review!</p>
+                    <MessageSquare className="w-8 h-8 text-[#2a2a2d] mx-auto mb-3" />
+                    <p className="text-sm text-[#8a8175]">No reviews yet. Be the first to review!</p>
                   </div>
                 )}
               </motion.div>
@@ -464,7 +464,7 @@ export default function ProductDetailPage() {
           {relatedProducts.length > 0 && (
             <div className="mt-20">
               <SectionReveal>
-                <h2 className="text-xl font-bold tracking-wider uppercase text-[#f3f3f3] mb-8">
+                <h2 className="text-xl font-bold tracking-wider uppercase text-[#f4f0e8] mb-8">
                   You May Also Like
                 </h2>
               </SectionReveal>

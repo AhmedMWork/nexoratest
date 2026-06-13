@@ -81,26 +81,26 @@ export default function TrackOrderPage() {
         <meta name="description" content="Track your NEXORA order status in real-time." />
       </Helmet>
 
-      <div className="pt-24 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
         <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-10">
           <SectionReveal>
-            <p className="nexora-caption text-[#ffaa33] mb-3">{t('track.caption')}</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">{t('track.caption')}</p>
             <h1 className="nexora-heading-md mb-8">{t('track.title').toUpperCase()}</h1>
           </SectionReveal>
 
           <SectionReveal delay={0.1}>
             <form onSubmit={handleSubmit(onSubmit)} className="grid sm:grid-cols-[1fr_1fr_auto] gap-3 mb-10">
               <div>
-                <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('track.orderNumber')}</label>
-                <input {...register('orderNumber')} placeholder={t('track.placeholderOrder')} className="w-full bg-[#121212] border border-[#222] px-4 py-3.5 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors uppercase" />
+                <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('track.orderNumber')}</label>
+                <input {...register('orderNumber')} placeholder={t('track.placeholderOrder')} className="w-full bg-[#0b0b0d] border border-[#202024] px-4 py-3.5 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors uppercase" />
                 {errors.orderNumber && <p className="text-[10px] text-red-400 mt-1">{errors.orderNumber.message}</p>}
               </div>
               <div>
-                <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">{t('track.phone')}</label>
-                <input {...register('phone')} placeholder={t('track.placeholderPhone')} className="w-full bg-[#121212] border border-[#222] px-4 py-3.5 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors" dir="ltr" />
+                <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">{t('track.phone')}</label>
+                <input {...register('phone')} placeholder={t('track.placeholderPhone')} className="w-full bg-[#0b0b0d] border border-[#202024] px-4 py-3.5 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors" dir="ltr" />
                 {errors.phone && <p className="text-[10px] text-red-400 mt-1">{errors.phone.message}</p>}
               </div>
-              <button type="submit" disabled={loading} className="sm:self-end px-6 py-3.5 bg-[#ffaa33] text-[#0a0a0a] font-bold text-xs tracking-wider uppercase hover:bg-[#ffbb44] transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+              <button type="submit" disabled={loading} className="sm:self-end px-6 py-3.5 bg-[#c8a96a] text-[#050505] font-bold text-xs tracking-wider uppercase hover:bg-[#d8bc7e] transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
                 <Search className="w-4 h-4" />
                 {loading ? t('common.loading') : t('track.action')}
               </button>
@@ -111,25 +111,25 @@ export default function TrackOrderPage() {
 
           {order && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-              <div className="p-5 bg-[#121212] border border-[#1e1e1e]">
+              <div className="p-5 bg-[#0b0b0d] border border-[#17171a]">
                 <div className="flex items-center justify-between mb-4 gap-4">
                   <div>
-                    <p className="text-[10px] text-[#555] uppercase tracking-wider">{t('track.orderNumber')}</p>
-                    <p className="text-lg font-bold text-[#ffaa33]">{order.orderNumber}</p>
+                    <p className="text-[10px] text-[#8a8175] uppercase tracking-wider">{t('track.orderNumber')}</p>
+                    <p className="text-lg font-bold text-[#c8a96a]">{order.orderNumber}</p>
                   </div>
                   <span className={`status-badge ${getStatusColor(order.status)}`}>{getStatusLabel(order.status, lang)}</span>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-3 text-xs">
-                  <div><p className="text-[#555]">{t('track.customer')}</p><p className="text-[#f3f3f3]">{order.customer.fullName}</p></div>
-                  <div><p className="text-[#555]">{t('track.phone')}</p><p className="text-[#f3f3f3]">{order.customer.phone}</p></div>
-                  <div><p className="text-[#555]">{t('track.location')}</p><p className="text-[#f3f3f3]">{order.customer.governorate}, {order.customer.city}</p></div>
-                  <div><p className="text-[#555]">{t('track.payment')}</p><p className="text-[#f3f3f3] uppercase">{order.paymentMethod === 'cod' ? t('checkout.cod') : order.paymentMethod}</p></div>
+                  <div><p className="text-[#8a8175]">{t('track.customer')}</p><p className="text-[#f4f0e8]">{order.customer.fullName}</p></div>
+                  <div><p className="text-[#8a8175]">{t('track.phone')}</p><p className="text-[#f4f0e8]">{order.customer.phone}</p></div>
+                  <div><p className="text-[#8a8175]">{t('track.location')}</p><p className="text-[#f4f0e8]">{order.customer.governorate}, {order.customer.city}</p></div>
+                  <div><p className="text-[#8a8175]">{t('track.payment')}</p><p className="text-[#f4f0e8] uppercase">{order.paymentMethod === 'cod' ? t('checkout.cod') : order.paymentMethod}</p></div>
                 </div>
               </div>
 
               {order.status !== 'cancelled' && order.status !== 'returned' && (
-                <div className="p-5 bg-[#121212] border border-[#1e1e1e] overflow-x-auto">
-                  <h3 className="text-xs font-bold tracking-wider uppercase text-[#f3f3f3] mb-5">{t('track.progress')}</h3>
+                <div className="p-5 bg-[#0b0b0d] border border-[#17171a] overflow-x-auto">
+                  <h3 className="text-xs font-bold tracking-wider uppercase text-[#f4f0e8] mb-5">{t('track.progress')}</h3>
                   <div className="relative min-w-[560px]">
                     <div className="flex justify-between">
                       {statusSteps.map((step, i) => {
@@ -139,30 +139,30 @@ export default function TrackOrderPage() {
                         const isCurrent = i === currentIndex;
                         return (
                           <div key={step} className="flex flex-col items-center relative z-10">
-                            <div className={`w-10 h-10 flex items-center justify-center border-2 transition-all ${isCompleted ? (isCurrent ? 'border-[#ffaa33] bg-[#ffaa33]/10 text-[#ffaa33]' : 'border-[#ffaa33] bg-[#ffaa33] text-[#0a0a0a]') : 'border-[#222] text-[#333]'}`}>
+                            <div className={`w-10 h-10 flex items-center justify-center border-2 transition-all ${isCompleted ? (isCurrent ? 'border-[#c8a96a] bg-[#c8a96a]/10 text-[#c8a96a]' : 'border-[#c8a96a] bg-[#c8a96a] text-[#050505]') : 'border-[#202024] text-[#2a2a2d]'}`}>
                               <Icon className="w-4 h-4" />
                             </div>
-                            <span className={`text-[9px] mt-2 uppercase tracking-wider text-center max-w-20 ${isCompleted ? 'text-[#888]' : 'text-[#333]'}`}>{getStatusLabel(step, lang)}</span>
+                            <span className={`text-[9px] mt-2 uppercase tracking-wider text-center max-w-20 ${isCompleted ? 'text-[#b8b0a3]' : 'text-[#2a2a2d]'}`}>{getStatusLabel(step, lang)}</span>
                           </div>
                         );
                       })}
                     </div>
-                    <div className="absolute top-5 left-5 right-5 h-0.5 bg-[#222] -translate-y-1/2">
-                      <div className="h-full bg-[#ffaa33] transition-all" style={{ width: `${Math.max(0, statusSteps.indexOf(order.status as OrderStatus)) / (statusSteps.length - 1) * 100}%` }} />
+                    <div className="absolute top-5 left-5 right-5 h-0.5 bg-[#202024] -translate-y-1/2">
+                      <div className="h-full bg-[#c8a96a] transition-all" style={{ width: `${Math.max(0, statusSteps.indexOf(order.status as OrderStatus)) / (statusSteps.length - 1) * 100}%` }} />
                     </div>
                   </div>
                 </div>
               )}
 
-              <div className="p-5 bg-[#121212] border border-[#1e1e1e]">
-                <h3 className="text-xs font-bold tracking-wider uppercase text-[#f3f3f3] mb-4">{t('track.updates')}</h3>
+              <div className="p-5 bg-[#0b0b0d] border border-[#17171a]">
+                <h3 className="text-xs font-bold tracking-wider uppercase text-[#f4f0e8] mb-4">{t('track.updates')}</h3>
                 <div className="space-y-3">
                   {order.trackingUpdates.map((update, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-[#ffaa33] rounded-full mt-1.5 flex-shrink-0" />
+                      <div className="w-2 h-2 bg-[#c8a96a] rounded-full mt-1.5 flex-shrink-0" />
                       <div>
-                        <p className="text-xs text-[#f3f3f3]">{update.message}</p>
-                        <p className="text-[10px] text-[#555]">{formatTimestamp(update.timestamp, lang === 'ar' ? 'ar-EG' : 'en-EG')}</p>
+                        <p className="text-xs text-[#f4f0e8]">{update.message}</p>
+                        <p className="text-[10px] text-[#8a8175]">{formatTimestamp(update.timestamp, lang === 'ar' ? 'ar-EG' : 'en-EG')}</p>
                       </div>
                     </div>
                   ))}

@@ -219,49 +219,49 @@ export default function AdminProducts() {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f3f3f3]">Products</h1>
-          <p className="text-xs text-[#555] mt-1">{products.length} products in catalog</p>
+          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f4f0e8]">Products</h1>
+          <p className="text-xs text-[#8a8175] mt-1">{products.length} products in catalog</p>
         </div>
         <div className="flex gap-2">
           <button onClick={loadCatalog} className="nexora-button flex items-center gap-2"><RefreshCw className="w-3.5 h-3.5" />Refresh</button>
-          <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2.5 bg-[#ffaa33] text-[#0a0a0a] text-xs font-bold tracking-wider uppercase hover:bg-[#ffbb44] transition-colors"><Plus className="w-3.5 h-3.5" />Add Product</button>
+          <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2.5 bg-[#c8a96a] text-[#050505] text-xs font-bold tracking-wider uppercase hover:bg-[#d8bc7e] transition-colors"><Plus className="w-3.5 h-3.5" />Add Product</button>
         </div>
       </div>
 
       {mode === 'list' && (
         <>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#555]" />
-            <input type="text" placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-[#121212] border border-[#222] pl-10 pr-4 py-2.5 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a8175]" />
+            <input type="text" placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-[#0b0b0d] border border-[#202024] pl-10 pr-4 py-2.5 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a]" />
           </div>
 
-          <div className="bg-[#121212] border border-[#1e1e1e] overflow-x-auto">
+          <div className="bg-[#0b0b0d] border border-[#17171a] overflow-x-auto">
             <table className="w-full text-left min-w-[820px]">
               <thead>
-                <tr className="border-b border-[#1e1e1e]">
-                  <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Image</th>
-                  <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Name</th>
-                  <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">SKU</th>
-                  <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Price</th>
-                  <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Stock</th>
-                  <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Category</th>
-                  <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Actions</th>
+                <tr className="border-b border-[#17171a]">
+                  <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Image</th>
+                  <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Name</th>
+                  <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">SKU</th>
+                  <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Price</th>
+                  <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Stock</th>
+                  <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Category</th>
+                  <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {isLoading ? (
-                  <tr><td colSpan={7} className="p-8 text-center text-xs text-[#555]">Loading products...</td></tr>
+                  <tr><td colSpan={7} className="p-8 text-center text-xs text-[#8a8175]">Loading products...</td></tr>
                 ) : filteredProducts.map((product) => {
                   const totalStock = product.sizes.reduce((sum, s) => sum + s.stock, 0);
                   return (
-                    <tr key={product.id} className="border-b border-[#1e1e1e]/50 hover:bg-[#1e1e1e]/30 transition-colors">
-                      <td className="p-4"><img src={product.images[0]} alt={product.name} className="w-10 h-10 object-cover bg-[#0a0a0a]" /></td>
-                      <td className="p-4"><Link to={`/product/${product.slug}`} className="text-xs text-[#f3f3f3] hover:text-[#ffaa33] transition-colors">{product.name}</Link></td>
-                      <td className="p-4 text-xs text-[#888]">{product.sku}</td>
-                      <td className="p-4 text-xs text-[#ffaa33] font-medium">{formatPrice(product.price)}{product.compareAtPrice && <span className="text-[10px] text-[#555] line-through ml-1">{formatPrice(product.compareAtPrice)}</span>}</td>
-                      <td className="p-4"><span className={`text-xs ${totalStock <= 10 ? 'text-red-400' : 'text-[#888]'}`}>{totalStock} units</span></td>
-                      <td className="p-4"><span className="text-[10px] px-2 py-1 bg-[#1e1e1e] text-[#888] uppercase tracking-wider">{product.category}</span></td>
-                      <td className="p-4"><div className="flex items-center gap-2"><button onClick={() => openEdit(product)} className="p-1.5 text-[#555] hover:text-[#ffaa33] transition-colors"><Edit className="w-3.5 h-3.5" /></button><button onClick={() => handleDelete(product.id)} className="p-1.5 text-[#555] hover:text-red-400 transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></div></td>
+                    <tr key={product.id} className="border-b border-[#17171a]/50 hover:bg-[#17171a]/30 transition-colors">
+                      <td className="p-4"><img src={product.images[0]} alt={product.name} className="w-10 h-10 object-cover bg-[#050505]" /></td>
+                      <td className="p-4"><Link to={`/product/${product.slug}`} className="text-xs text-[#f4f0e8] hover:text-[#c8a96a] transition-colors">{product.name}</Link></td>
+                      <td className="p-4 text-xs text-[#b8b0a3]">{product.sku}</td>
+                      <td className="p-4 text-xs text-[#c8a96a] font-medium">{formatPrice(product.price)}{product.compareAtPrice && <span className="text-[10px] text-[#8a8175] line-through ml-1">{formatPrice(product.compareAtPrice)}</span>}</td>
+                      <td className="p-4"><span className={`text-xs ${totalStock <= 10 ? 'text-red-400' : 'text-[#b8b0a3]'}`}>{totalStock} units</span></td>
+                      <td className="p-4"><span className="text-[10px] px-2 py-1 bg-[#17171a] text-[#b8b0a3] uppercase tracking-wider">{product.category}</span></td>
+                      <td className="p-4"><div className="flex items-center gap-2"><button onClick={() => openEdit(product)} className="p-1.5 text-[#8a8175] hover:text-[#c8a96a] transition-colors"><Edit className="w-3.5 h-3.5" /></button><button onClick={() => handleDelete(product.id)} className="p-1.5 text-[#8a8175] hover:text-red-400 transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></div></td>
                     </tr>
                   );
                 })}
@@ -272,46 +272,46 @@ export default function AdminProducts() {
       )}
 
       {(mode === 'create' || mode === 'edit') && (
-        <div className="p-6 bg-[#121212] border border-[#1e1e1e]">
+        <div className="p-6 bg-[#0b0b0d] border border-[#17171a]">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-sm font-bold tracking-wider uppercase text-[#f3f3f3]">{mode === 'create' ? 'Add New Product' : 'Edit Product'}</h2>
-            <button onClick={() => setMode('list')} className="p-1.5 text-[#555] hover:text-[#f3f3f3]"><X className="w-4 h-4" /></button>
+            <h2 className="text-sm font-bold tracking-wider uppercase text-[#f4f0e8]">{mode === 'create' ? 'Add New Product' : 'Edit Product'}</h2>
+            <button onClick={() => setMode('list')} className="p-1.5 text-[#8a8175] hover:text-[#f4f0e8]"><X className="w-4 h-4" /></button>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
-            <input value={draft.name} onChange={(e) => updateDraft('name', e.target.value)} placeholder="Product name" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input value={draft.slug} onChange={(e) => updateDraft('slug', e.target.value)} placeholder="Slug auto-generated if empty" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input type="number" value={draft.price} onChange={(e) => updateDraft('price', Number(e.target.value))} placeholder="Price" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input type="number" value={draft.compareAtPrice || ''} onChange={(e) => updateDraft('compareAtPrice', e.target.value ? Number(e.target.value) : undefined)} placeholder="Compare at price" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <select value={draft.category} onChange={(e) => updateDraft('category', e.target.value as 'men' | 'women')} className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]"><option value="men">Men</option><option value="women">Women</option></select>
-            <input value={draft.collection} onChange={(e) => updateDraft('collection', e.target.value)} placeholder="Collection" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input value={draft.sku} onChange={(e) => updateDraft('sku', e.target.value)} placeholder="SKU" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
+            <input value={draft.name} onChange={(e) => updateDraft('name', e.target.value)} placeholder="Product name" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input value={draft.slug} onChange={(e) => updateDraft('slug', e.target.value)} placeholder="Slug auto-generated if empty" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input type="number" value={draft.price} onChange={(e) => updateDraft('price', Number(e.target.value))} placeholder="Price" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input type="number" value={draft.compareAtPrice || ''} onChange={(e) => updateDraft('compareAtPrice', e.target.value ? Number(e.target.value) : undefined)} placeholder="Compare at price" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <select value={draft.category} onChange={(e) => updateDraft('category', e.target.value as 'men' | 'women')} className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]"><option value="men">Men</option><option value="women">Women</option></select>
+            <input value={draft.collection} onChange={(e) => updateDraft('collection', e.target.value)} placeholder="Collection" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input value={draft.sku} onChange={(e) => updateDraft('sku', e.target.value)} placeholder="SKU" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
             <div className="sm:col-span-2 space-y-3">
-              <textarea value={draft.images} onChange={(e) => updateDraft('images', e.target.value)} placeholder="Image URLs, one per line" rows={3} className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-              <label className="inline-flex items-center gap-2 px-4 py-2 border border-[#222] text-xs text-[#888] hover:text-[#ffaa33] hover:border-[#ffaa33] cursor-pointer transition-colors">
+              <textarea value={draft.images} onChange={(e) => updateDraft('images', e.target.value)} placeholder="Image URLs, one per line" rows={3} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+              <label className="inline-flex items-center gap-2 px-4 py-2 border border-[#202024] text-xs text-[#b8b0a3] hover:text-[#c8a96a] hover:border-[#c8a96a] cursor-pointer transition-colors">
                 <Upload className="w-3.5 h-3.5" />
                 {isUploadingImage ? 'Uploading image...' : 'Upload Product Image'}
                 <input type="file" accept="image/jpeg,image/png,image/webp" disabled={isUploadingImage} onChange={(e) => handleImageUpload(e.target.files?.[0] || null)} className="hidden" />
               </label>
-              <p className="text-[10px] text-[#555]">First image is used as the main storefront image. Max 5MB per file.</p>
+              <p className="text-[10px] text-[#8a8175]">First image is used as the main storefront image. Max 5MB per file.</p>
             </div>
-            <input value={draft.colors} onChange={(e) => updateDraft('colors', e.target.value)} placeholder="Colors comma separated" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input value={draft.materials} onChange={(e) => updateDraft('materials', e.target.value)} placeholder="Materials comma separated" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input value={draft.tags} onChange={(e) => updateDraft('tags', e.target.value)} placeholder="Tags comma separated" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] sm:col-span-2" />
-            <select value={draft.status} onChange={(e) => updateDraft('status', e.target.value as ProductDraft['status'])} className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]">
+            <input value={draft.colors} onChange={(e) => updateDraft('colors', e.target.value)} placeholder="Colors comma separated" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input value={draft.materials} onChange={(e) => updateDraft('materials', e.target.value)} placeholder="Materials comma separated" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input value={draft.tags} onChange={(e) => updateDraft('tags', e.target.value)} placeholder="Tags comma separated" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] sm:col-span-2" />
+            <select value={draft.status} onChange={(e) => updateDraft('status', e.target.value as ProductDraft['status'])} className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]">
               <option value="draft">Draft</option>
               <option value="active">Active</option>
               <option value="hidden">Hidden</option>
               <option value="archived">Archived</option>
               <option value="sold_out">Sold Out</option>
             </select>
-            <input value={draft.sizes} onChange={(e) => updateDraft('sizes', e.target.value)} placeholder="Sizes e.g. S:10, M:8, L:4" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input value={draft.fit} onChange={(e) => updateDraft('fit', e.target.value)} placeholder="Fit e.g. Oversized fit" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <input value={draft.careInstructions} onChange={(e) => updateDraft('careInstructions', e.target.value)} placeholder="Care instructions" className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3]" />
-            <textarea value={draft.description} onChange={(e) => updateDraft('description', e.target.value)} placeholder="Description" rows={4} className="bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] sm:col-span-2" />
+            <input value={draft.sizes} onChange={(e) => updateDraft('sizes', e.target.value)} placeholder="Sizes e.g. S:10, M:8, L:4" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input value={draft.fit} onChange={(e) => updateDraft('fit', e.target.value)} placeholder="Fit e.g. Oversized fit" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <input value={draft.careInstructions} onChange={(e) => updateDraft('careInstructions', e.target.value)} placeholder="Care instructions" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+            <textarea value={draft.description} onChange={(e) => updateDraft('description', e.target.value)} placeholder="Description" rows={4} className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] sm:col-span-2" />
           </div>
           <div className="grid sm:grid-cols-4 gap-3 my-6">
             {productFlagFields.map(({ key, label }) => (
-              <label key={key} className="flex items-center gap-2 text-xs text-[#888]">
+              <label key={key} className="flex items-center gap-2 text-xs text-[#b8b0a3]">
                 <input type="checkbox" checked={draft[key]} onChange={(e) => updateDraft(key, e.target.checked)} />
                 {label}
               </label>

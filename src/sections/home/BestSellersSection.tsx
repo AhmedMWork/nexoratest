@@ -25,23 +25,23 @@ export default function BestSellersSection() {
   };
 
   return (
-    <section className="py-20 lg:py-32 bg-[#0a0a0a]">
+    <section className="py-20 lg:py-32 bg-[#050505]">
       <div className="w-full px-4 sm:px-6 lg:px-10">
         <SectionReveal className="flex items-end justify-between mb-12">
           <div>
-            <p className="nexora-caption text-[#ffaa33] mb-3">Most Loved</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">Most Loved</p>
             <h2 className="nexora-heading-md">BEST SELLERS</h2>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => scroll('left')}
-              className="w-10 h-10 flex items-center justify-center border border-[#222] text-[#888] hover:border-[#ffaa33] hover:text-[#ffaa33] transition-colors"
+              className="w-10 h-10 flex items-center justify-center border border-[#202024] text-[#b8b0a3] hover:border-[#c8a96a] hover:text-[#c8a96a] transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-10 h-10 flex items-center justify-center border border-[#222] text-[#888] hover:border-[#ffaa33] hover:text-[#ffaa33] transition-colors"
+              className="w-10 h-10 flex items-center justify-center border border-[#202024] text-[#b8b0a3] hover:border-[#c8a96a] hover:text-[#c8a96a] transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

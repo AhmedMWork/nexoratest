@@ -60,8 +60,8 @@ export default function AdminReviews() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f3f3f3]">Reviews</h1>
-          <p className="text-xs text-[#555] mt-1">{reviews.filter((r) => !r.isApproved).length} pending approval</p>
+          <h1 className="text-lg font-bold tracking-wider uppercase text-[#f4f0e8]">Reviews</h1>
+          <p className="text-xs text-[#8a8175] mt-1">{reviews.filter((r) => !r.isApproved).length} pending approval</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {(['all', 'pending', 'approved'] as const).map((f) => (
@@ -69,7 +69,7 @@ export default function AdminReviews() {
               key={f}
               onClick={() => setFilter(f)}
               className={`px-3 py-1.5 text-[10px] uppercase tracking-wider border transition-colors ${
-                filter === f ? 'border-[#ffaa33] text-[#ffaa33]' : 'border-[#222] text-[#555] hover:border-[#444]'
+                filter === f ? 'border-[#c8a96a] text-[#c8a96a]' : 'border-[#202024] text-[#8a8175] hover:border-[#6f675d]'
               }`}
             >
               {f}
@@ -81,20 +81,20 @@ export default function AdminReviews() {
 
       <div className="space-y-3">
         {isLoading ? (
-          <div className="p-8 text-center text-xs text-[#555] bg-[#121212] border border-[#1e1e1e]">Loading reviews...</div>
+          <div className="p-8 text-center text-xs text-[#8a8175] bg-[#0b0b0d] border border-[#17171a]">Loading reviews...</div>
         ) : filteredReviews.length ? filteredReviews.map((review) => (
-          <div key={review.id} className={`p-5 bg-[#121212] border ${review.isApproved ? 'border-[#1e1e1e]' : 'border-amber-500/20'} transition-all`}>
+          <div key={review.id} className={`p-5 bg-[#0b0b0d] border ${review.isApproved ? 'border-[#17171a]' : 'border-amber-500/20'} transition-all`}>
             <div className="flex items-start justify-between gap-4 mb-3">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <div className="flex">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className={`w-3 h-3 ${i < review.rating ? 'text-[#ffaa33] fill-[#ffaa33]' : 'text-[#333]'}`} />
+                      <Star key={i} className={`w-3 h-3 ${i < review.rating ? 'text-[#c8a96a] fill-[#c8a96a]' : 'text-[#2a2a2d]'}`} />
                     ))}
                   </div>
-                  <span className="text-xs text-[#f3f3f3] font-medium">{review.title}</span>
+                  <span className="text-xs text-[#f4f0e8] font-medium">{review.title}</span>
                 </div>
-                <p className="text-[10px] text-[#555]">by {review.customerName} — {review.productName}</p>
+                <p className="text-[10px] text-[#8a8175]">by {review.customerName} — {review.productName}</p>
               </div>
               <div className="flex items-center gap-2">
                 {!review.isApproved && (
@@ -102,19 +102,19 @@ export default function AdminReviews() {
                     <CheckCircle className="w-4 h-4" />
                   </button>
                 )}
-                <button onClick={() => deleteReviewById(review.id)} className="p-1.5 text-[#555] hover:text-red-400" title="Delete">
+                <button onClick={() => deleteReviewById(review.id)} className="p-1.5 text-[#8a8175] hover:text-red-400" title="Delete">
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             </div>
-            <p className="text-xs text-[#888] leading-relaxed">{review.body}</p>
+            <p className="text-xs text-[#b8b0a3] leading-relaxed">{review.body}</p>
             <div className="mt-3 flex items-center gap-4">
-              <span className="text-[10px] text-[#555]">{review.helpfulCount || 0} found helpful</span>
-              {review.isFeatured && <span className="text-[10px] px-2 py-0.5 bg-[#ffaa33]/10 text-[#ffaa33] uppercase tracking-wider">Featured</span>}
+              <span className="text-[10px] text-[#8a8175]">{review.helpfulCount || 0} found helpful</span>
+              {review.isFeatured && <span className="text-[10px] px-2 py-0.5 bg-[#c8a96a]/10 text-[#c8a96a] uppercase tracking-wider">Featured</span>}
             </div>
           </div>
         )) : (
-          <div className="p-8 text-center text-xs text-[#555] bg-[#121212] border border-[#1e1e1e]">No reviews found</div>
+          <div className="p-8 text-center text-xs text-[#8a8175] bg-[#0b0b0d] border border-[#17171a]">No reviews found</div>
         )}
       </div>
     </div>

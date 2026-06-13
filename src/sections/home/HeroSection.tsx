@@ -1,207 +1,115 @@
 // ============================================================
-// NEXORA — Hero Section
+// NEXORA — Midnight Atelier Hero Section
 // ============================================================
 
-import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-
-// Canvas-based animated glow belt effect
-function GlowBelt() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    let time = 0;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-
-    resize();
-    window.addEventListener('resize', resize);
-
-    const lines: { x: number; y: number; speed: number; opacity: number; width: number }[] = [];
-    for (let i = 0; i < 20; i++) {
-      lines.push({
-        x: Math.random() * canvas.offsetWidth,
-        y: Math.random() * canvas.offsetHeight,
-        speed: 0.2 + Math.random() * 0.5,
-        opacity: 0.1 + Math.random() * 0.3,
-        width: 0.5 + Math.random() * 2,
-      });
-    }
-
-    const animate = () => {
-      time += 0.01;
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-
-      ctx.clearRect(0, 0, w, h);
-
-      // Draw ember lines
-      lines.forEach((line) => {
-        line.y -= line.speed;
-        if (line.y < -10) {
-          line.y = h + 10;
-          line.x = Math.random() * w;
-        }
-
-        ctx.beginPath();
-        ctx.moveTo(line.x, line.y);
-        ctx.lineTo(line.x + Math.sin(time + line.y * 0.01) * 20, line.y - 30);
-        ctx.strokeStyle = `rgba(255, 170, 51, ${line.opacity * (0.5 + 0.5 * Math.sin(time * 2 + line.x))})`;
-        ctx.lineWidth = line.width;
-        ctx.stroke();
-      });
-
-      // Draw pulsing glow center
-      const centerX = w * 0.5;
-      const centerY = h * 0.6;
-      const gradient = ctx.createRadialGradient(
-        centerX, centerY, 0,
-        centerX, centerY, w * 0.4
-      );
-      gradient.addColorStop(0, `rgba(255, 170, 51, ${0.08 + 0.04 * Math.sin(time * 3)})`);
-      gradient.addColorStop(0.5, `rgba(255, 170, 51, ${0.03 + 0.02 * Math.sin(time * 2)})`);
-      gradient.addColorStop(1, 'transparent');
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, w, h);
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-    />
-  );
-}
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0a0a0a]">
-      {/* Animated glow belt background */}
-      <GlowBelt />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050505] pt-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(200,169,106,0.16),transparent_28%),radial-gradient(circle_at_78%_18%,rgba(244,240,232,0.08),transparent_24%),linear-gradient(135deg,#050505_0%,#0b0b0d_45%,#17171a_100%)]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c8a96a]/40 to-transparent" />
+      <div className="absolute right-0 top-24 hidden h-[620px] w-[620px] rounded-full border border-[#c8a96a]/10 lg:block" />
+      <div className="absolute right-24 top-48 hidden h-[360px] w-[360px] rounded-full border border-[#f4f0e8]/5 lg:block" />
 
-      {/* Content Grid */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-10 py-20 pt-32">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-0 items-center min-h-[70vh]">
-          {/* Left — Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-            className="relative flex items-center justify-center"
-          >
-            <div className="relative">
-              {/* Glow ring behind model */}
-              <div className="absolute inset-0 -m-8 lg:-m-16">
-                <div
-                  className="w-full h-full rounded-full opacity-30 blur-3xl"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(255,170,51,0.3) 0%, transparent 70%)',
-                  }}
-                />
-              </div>
-              <img
-                src="/assets/hero-model.jpg"
-                alt="NEXORA Model"
-                className="relative z-10 w-full max-w-md lg:max-w-lg mx-auto object-contain"
-              />
-            </div>
-          </motion.div>
-
-          {/* Right — Typography */}
-          <div className="flex flex-col justify-center lg:pl-12">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-10 py-20 lg:py-28">
+        <div className="grid lg:grid-cols-[1.03fr_0.97fr] gap-12 lg:gap-16 items-center min-h-[76vh]">
+          <div className="order-2 lg:order-1 flex flex-col justify-center max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="nexora-caption text-[#ffaa33] mb-4"
+              transition={{ duration: 0.65 }}
+              className="mb-6 inline-flex w-fit items-center gap-2 border border-[#c8a96a]/25 bg-[#0b0b0d]/70 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#c8a96a]"
             >
-              Summer 2024 Collection
-            </motion.p>
+              <Sparkles className="h-3.5 w-3.5" />
+              Midnight Atelier
+            </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 34 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="nexora-heading-lg mb-6"
+              transition={{ delay: 0.12, duration: 0.78 }}
+              className="nexora-heading-lg mb-7 text-[#f4f0e8]"
             >
-              THE
+              BUILT
               <br />
-              <span className="text-[#ffaa33]">SUMMER</span>
-              <br />
-              DROP.
+              <span className="text-gradient">DIFFERENT</span>
             </motion.h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="mb-8"
-            >
-              <p className="text-5xl lg:text-7xl font-black text-[#f3f3f3]/10 tracking-tight">
-                25% OFF
-              </p>
-            </motion.div>
-
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              className="text-sm text-[#888] max-w-sm mb-10 leading-relaxed"
+              transition={{ delay: 0.28, duration: 0.65 }}
+              className="max-w-xl text-base leading-8 text-[#b8b0a3] sm:text-lg"
             >
-              Elevated essentials crafted with precision. Premium organic cotton,
-              architectural fits, and finishes that define the new standard.
+              Premium essentials with a quiet edge. Clean silhouettes, refined fabric weight,
+              and a presence built for every day.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.6 }}
-              className="flex flex-wrap gap-4"
+              transition={{ delay: 0.43, duration: 0.65 }}
+              className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <Link
-                to="/shop"
-                className="nexora-button-primary flex items-center gap-2"
-              >
-                Shop Now
-                <ArrowRight className="w-3.5 h-3.5" />
+              <Link to="/shop" className="nexora-button-primary inline-flex items-center justify-center gap-3">
+                Shop New Arrivals
+                <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                to="/drops"
-                className="nexora-button"
-              >
-                View Drops
+              <Link to="/drops" className="nexora-button inline-flex items-center justify-center">
+                Explore Drops
               </Link>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.62, duration: 0.8 }}
+              className="mt-12 grid max-w-xl grid-cols-3 border-y border-[#202024] py-5"
+            >
+              {[
+                ['Premium Cotton', 'Fabric'],
+                ['Limited Runs', 'Drops'],
+                ['Egypt', 'Crafted'],
+              ].map(([value, label]) => (
+                <div key={value} className="border-r border-[#202024] px-3 last:border-r-0 first:pl-0">
+                  <p className="text-sm font-black uppercase tracking-[0.16em] text-[#f4f0e8]">{value}</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.24em] text-[#8a8175]">{label}</p>
+                </div>
+              ))}
+            </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 18 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 0.18, duration: 0.9, ease: 'easeOut' }}
+            className="order-1 lg:order-2 relative flex items-center justify-center"
+          >
+            <div className="relative w-full max-w-[520px]">
+              <div className="absolute -inset-4 border border-[#c8a96a]/15" />
+              <div className="absolute -right-5 -top-5 hidden h-32 w-32 border border-[#c8a96a]/25 sm:block" />
+              <div className="absolute -bottom-6 -left-6 hidden h-40 w-40 border border-[#f4f0e8]/10 sm:block" />
+              <div className="relative aspect-[4/5] overflow-hidden bg-[#0b0b0d] ring-1 ring-[#202024]">
+                <img
+                  src="/assets/hero-model.jpg"
+                  alt="NEXORA premium essentials"
+                  className="h-full w-full object-cover opacity-90 saturate-[0.82] contrast-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/75 via-transparent to-[#050505]/10" />
+                <div className="absolute bottom-5 left-5 right-5 border border-[#c8a96a]/20 bg-[#050505]/65 p-4 backdrop-blur-xl">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#c8a96a]">NEXORA Standard</p>
+                  <p className="mt-2 text-sm leading-6 text-[#f4f0e8]/85">Elevated fit. Balanced weight. Made to move differently.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 gradient-overlay-bottom pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 gradient-overlay-bottom pointer-events-none" />
     </section>
   );
 }

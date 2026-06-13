@@ -3,7 +3,7 @@
 // ============================================================
 
 import { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 import { HelmetProvider } from 'react-helmet-async';
@@ -54,7 +54,7 @@ function ScrollToTop() {
 // ─── Loading Fallback ───
 function PageLoader() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center">
       <SkeletonLoader type="page" />
     </div>
   );
@@ -126,28 +126,29 @@ export default function App() {
           toastOptions={{
             duration: 4000,
             style: {
-              background: '#121212',
-              color: '#f3f3f3',
-              border: '1px solid #333',
+              background: '#0b0b0d',
+              color: '#f4f0e8',
+              border: '1px solid #202024',
               borderRadius: '0',
               fontSize: '0.85rem',
             },
             success: {
               iconTheme: {
-                primary: '#ffaa33',
-                secondary: '#0a0a0a',
+                primary: '#c8a96a',
+                secondary: '#050505',
               },
             },
             error: {
               iconTheme: {
                 primary: '#ef4444',
-                secondary: '#0a0a0a',
+                secondary: '#050505',
               },
             },
           }}
         />
         <Suspense fallback={<PageLoader />}>
           <Routes>
+            <Route path="/admin/*" element={<Navigate to="/nexora-admin" replace />} />
             <Route path="/nexora-admin/*" element={<AdminRoutes />} />
             <Route path="*" element={<PublicRoutes />} />
           </Routes>

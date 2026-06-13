@@ -63,7 +63,7 @@ export default function AdminDashboard() {
   }, []);
 
   const statCards = [
-    { label: 'Total Revenue', value: formatPrice(stats.totalRevenue), icon: TrendingUp, color: 'text-[#ffaa33]' },
+    { label: 'Total Revenue', value: formatPrice(stats.totalRevenue), icon: TrendingUp, color: 'text-[#c8a96a]' },
     { label: 'Total Orders', value: String(stats.totalOrders), icon: ShoppingBag, color: 'text-blue-400' },
     { label: 'Products', value: String(stats.totalProducts), icon: Package, color: 'text-purple-400' },
     { label: 'Customers', value: String(stats.totalCustomers), icon: Users, color: 'text-green-400' },
@@ -72,18 +72,18 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-lg font-bold tracking-wider uppercase text-[#f3f3f3]">Dashboard</h1>
-        <p className="text-xs text-[#555] mt-1">{isLoading ? 'Loading store performance...' : 'Overview of your store performance'}</p>
+        <h1 className="text-lg font-bold tracking-wider uppercase text-[#f4f0e8]">Dashboard</h1>
+        <p className="text-xs text-[#8a8175] mt-1">{isLoading ? 'Loading store performance...' : 'Overview of your store performance'}</p>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {statCards.map((card) => (
-          <div key={card.label} className="p-5 bg-[#121212] border border-[#1e1e1e]">
+          <div key={card.label} className="p-5 bg-[#0b0b0d] border border-[#17171a]">
             <div className="flex items-center justify-between mb-3">
               <card.icon className={`w-5 h-5 ${card.color}`} />
-              <span className="text-[10px] text-[#555] uppercase tracking-wider">{card.label}</span>
+              <span className="text-[10px] text-[#8a8175] uppercase tracking-wider">{card.label}</span>
             </div>
-            <p className="text-2xl font-bold text-[#f3f3f3]">{card.value}</p>
+            <p className="text-2xl font-bold text-[#f4f0e8]">{card.value}</p>
           </div>
         ))}
       </div>
@@ -104,33 +104,33 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      <div className="bg-[#121212] border border-[#1e1e1e]">
-        <div className="flex items-center justify-between p-5 border-b border-[#1e1e1e]">
-          <h2 className="text-xs font-bold tracking-wider uppercase text-[#f3f3f3]">Recent Orders</h2>
-          <Link to="/nexora-admin/orders" className="text-[10px] text-[#ffaa33] hover:text-[#ffbb44] uppercase tracking-wider flex items-center gap-1">View All <ArrowRight className="w-3 h-3" /></Link>
+      <div className="bg-[#0b0b0d] border border-[#17171a]">
+        <div className="flex items-center justify-between p-5 border-b border-[#17171a]">
+          <h2 className="text-xs font-bold tracking-wider uppercase text-[#f4f0e8]">Recent Orders</h2>
+          <Link to="/nexora-admin/orders" className="text-[10px] text-[#c8a96a] hover:text-[#d8bc7e] uppercase tracking-wider flex items-center gap-1">View All <ArrowRight className="w-3 h-3" /></Link>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left min-w-[640px]">
             <thead>
-              <tr className="border-b border-[#1e1e1e]">
-                <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Order</th>
-                <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Customer</th>
-                <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Total</th>
-                <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Status</th>
-                <th className="p-4 text-[10px] font-medium text-[#555] uppercase tracking-wider">Date</th>
+              <tr className="border-b border-[#17171a]">
+                <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Order</th>
+                <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Customer</th>
+                <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Total</th>
+                <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Status</th>
+                <th className="p-4 text-[10px] font-medium text-[#8a8175] uppercase tracking-wider">Date</th>
               </tr>
             </thead>
             <tbody>
               {stats.recentOrders.length ? stats.recentOrders.map((order) => (
-                <tr key={order.id} className="border-b border-[#1e1e1e]/50 hover:bg-[#1e1e1e]/30 transition-colors">
-                  <td className="p-4 text-xs text-[#ffaa33] font-medium">{order.orderNumber}</td>
-                  <td className="p-4 text-xs text-[#f3f3f3]">{order.customer.fullName}</td>
-                  <td className="p-4 text-xs text-[#f3f3f3]">{formatPrice(order.total)}</td>
+                <tr key={order.id} className="border-b border-[#17171a]/50 hover:bg-[#17171a]/30 transition-colors">
+                  <td className="p-4 text-xs text-[#c8a96a] font-medium">{order.orderNumber}</td>
+                  <td className="p-4 text-xs text-[#f4f0e8]">{order.customer.fullName}</td>
+                  <td className="p-4 text-xs text-[#f4f0e8]">{formatPrice(order.total)}</td>
                   <td className="p-4"><span className={`status-badge ${getStatusColor(order.status)} text-[9px]`}>{getStatusLabel(order.status)}</span></td>
-                  <td className="p-4 text-xs text-[#555]">{formatTimestamp(order.createdAt)}</td>
+                  <td className="p-4 text-xs text-[#8a8175]">{formatTimestamp(order.createdAt)}</td>
                 </tr>
               )) : (
-                <tr><td colSpan={5} className="p-8 text-center text-xs text-[#555]">No orders yet</td></tr>
+                <tr><td colSpan={5} className="p-8 text-center text-xs text-[#8a8175]">No orders yet</td></tr>
               )}
             </tbody>
           </table>
@@ -143,9 +143,9 @@ export default function AdminDashboard() {
           { label: 'Manage Orders', desc: 'View and process orders', href: '/nexora-admin/orders' },
           { label: 'Store Settings', desc: 'Configure your store', href: '/nexora-admin/settings' },
         ].map((action) => (
-          <Link key={action.label} to={action.href} className="p-5 bg-[#121212] border border-[#1e1e1e] hover:border-[#333] transition-all group">
-            <h3 className="text-xs font-bold text-[#f3f3f3] group-hover:text-[#ffaa33] transition-colors mb-1">{action.label}</h3>
-            <p className="text-[10px] text-[#555]">{action.desc}</p>
+          <Link key={action.label} to={action.href} className="p-5 bg-[#0b0b0d] border border-[#17171a] hover:border-[#2a2a2d] transition-all group">
+            <h3 className="text-xs font-bold text-[#f4f0e8] group-hover:text-[#c8a96a] transition-colors mb-1">{action.label}</h3>
+            <p className="text-[10px] text-[#8a8175]">{action.desc}</p>
           </Link>
         ))}
       </div>

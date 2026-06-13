@@ -27,8 +27,8 @@ const initialSettings: StoreSettings = {
   whatsappNumber: '201020304050',
   instagram: '@nexora.eg',
   facebook: 'NEXORA Egypt',
-  primaryColor: '#0a0a0a',
-  accentColor: '#ffaa33',
+  primaryColor: '#050505',
+  accentColor: '#c8a96a',
 };
 
 export default function AdminSettings() {
@@ -115,20 +115,20 @@ export default function AdminSettings() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-lg font-bold tracking-wider uppercase text-[#f3f3f3]">Settings</h1>
-        <p className="text-xs text-[#555] mt-1">{isLoading ? 'Loading settings...' : 'Configure your store'}</p>
+        <h1 className="text-lg font-bold tracking-wider uppercase text-[#f4f0e8]">Settings</h1>
+        <p className="text-xs text-[#8a8175] mt-1">{isLoading ? 'Loading settings...' : 'Configure your store'}</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-0 border-b border-[#1e1e1e]">
+      <div className="flex gap-0 border-b border-[#17171a]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-5 py-3 text-xs tracking-wider uppercase transition-colors border-b-2 ${
               activeTab === tab.id
-                ? 'text-[#ffaa33] border-[#ffaa33]'
-                : 'text-[#555] border-transparent hover:text-[#888]'
+                ? 'text-[#c8a96a] border-[#c8a96a]'
+                : 'text-[#8a8175] border-transparent hover:text-[#b8b0a3]'
             }`}
           >
             <tab.icon className="w-3.5 h-3.5" />
@@ -139,49 +139,49 @@ export default function AdminSettings() {
 
       {/* General Settings */}
       {activeTab === 'general' && (
-        <div className="p-6 bg-[#121212] border border-[#1e1e1e] space-y-5 max-w-2xl">
+        <div className="p-6 bg-[#0b0b0d] border border-[#17171a] space-y-5 max-w-2xl">
           <div>
-            <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Store Name</label>
+            <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Store Name</label>
             <input
               value={settings.storeName}
               onChange={(e) => setSettings({ ...settings, storeName: e.target.value })}
-              className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]"
+              className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]"
             />
           </div>
           <div>
-            <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Currency</label>
+            <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Currency</label>
             <select
               value={settings.currency}
               onChange={(e) => setSettings({ ...settings, currency: e.target.value })}
-              className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]"
+              className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]"
             >
               <option value="EGP">EGP (Egyptian Pound)</option>
               <option value="USD">USD (US Dollar)</option>
             </select>
           </div>
           <div>
-            <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">WhatsApp Number</label>
+            <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">WhatsApp Number</label>
             <input
               value={settings.whatsappNumber}
               onChange={(e) => setSettings({ ...settings, whatsappNumber: e.target.value })}
-              className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]"
+              className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]"
             />
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Instagram</label>
+              <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Instagram</label>
               <input
                 value={settings.instagram}
                 onChange={(e) => setSettings({ ...settings, instagram: e.target.value })}
-                className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]"
+                className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]"
               />
             </div>
             <div>
-              <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Facebook</label>
+              <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Facebook</label>
               <input
                 value={settings.facebook}
                 onChange={(e) => setSettings({ ...settings, facebook: e.target.value })}
-                className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]"
+                className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]"
               />
             </div>
           </div>
@@ -190,23 +190,23 @@ export default function AdminSettings() {
 
       {/* Shipping Settings */}
       {activeTab === 'shipping' && (
-        <div className="p-6 bg-[#121212] border border-[#1e1e1e] space-y-5 max-w-2xl">
+        <div className="p-6 bg-[#0b0b0d] border border-[#17171a] space-y-5 max-w-2xl">
           <div>
-            <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Shipping Fee (EGP)</label>
+            <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Shipping Fee (EGP)</label>
             <input
               type="number"
               value={settings.shippingFee}
               onChange={(e) => setSettings({ ...settings, shippingFee: Number(e.target.value) })}
-              className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]"
+              className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]"
             />
           </div>
           <div>
-            <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Free Shipping Threshold (EGP)</label>
+            <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Free Shipping Threshold (EGP)</label>
             <input
               type="number"
               value={settings.freeShippingThreshold}
               onChange={(e) => setSettings({ ...settings, freeShippingThreshold: Number(e.target.value) })}
-              className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] focus:outline-none focus:border-[#ffaa33]"
+              className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] focus:outline-none focus:border-[#c8a96a]"
             />
           </div>
         </div>
@@ -214,29 +214,29 @@ export default function AdminSettings() {
 
       {/* Appearance Settings */}
       {activeTab === 'appearance' && (
-        <div className="p-6 bg-[#121212] border border-[#1e1e1e] space-y-5 max-w-2xl">
+        <div className="p-6 bg-[#0b0b0d] border border-[#17171a] space-y-5 max-w-2xl">
           <div>
-            <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Primary Color</label>
+            <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Primary Color</label>
             <div className="flex items-center gap-3">
               <input
                 type="color"
                 value={settings.primaryColor}
                 onChange={(e) => setSettings({ ...settings, primaryColor: e.target.value })}
-                className="w-12 h-10 bg-transparent border border-[#222]"
+                className="w-12 h-10 bg-transparent border border-[#202024]"
               />
-              <span className="text-xs text-[#888]">{settings.primaryColor}</span>
+              <span className="text-xs text-[#b8b0a3]">{settings.primaryColor}</span>
             </div>
           </div>
           <div>
-            <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Accent Color</label>
+            <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Accent Color</label>
             <div className="flex items-center gap-3">
               <input
                 type="color"
                 value={settings.accentColor}
                 onChange={(e) => setSettings({ ...settings, accentColor: e.target.value })}
-                className="w-12 h-10 bg-transparent border border-[#222]"
+                className="w-12 h-10 bg-transparent border border-[#202024]"
               />
-              <span className="text-xs text-[#888]">{settings.accentColor}</span>
+              <span className="text-xs text-[#b8b0a3]">{settings.accentColor}</span>
             </div>
           </div>
         </div>

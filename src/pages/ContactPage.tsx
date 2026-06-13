@@ -52,10 +52,10 @@ export default function ContactPage() {
         <meta name="description" content="Get in touch with NEXORA. We are here to help with orders, sizing, or any questions." />
       </Helmet>
 
-      <div className="pt-24 pb-20 bg-[#0a0a0a] min-h-screen">
+      <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
         <div className="w-full px-4 sm:px-6 lg:px-10">
           <SectionReveal>
-            <p className="nexora-caption text-[#ffaa33] mb-3">Get In Touch</p>
+            <p className="nexora-caption text-[#c8a96a] mb-3">Get In Touch</p>
             <h1 className="nexora-heading-md mb-8">CONTACT US</h1>
           </SectionReveal>
 
@@ -69,17 +69,17 @@ export default function ContactPage() {
                 { icon: Clock, label: 'Working Hours', value: 'Sun - Thu, 10AM - 6PM' },
               ].map((item) => (
                 <SectionReveal key={item.label}>
-                  <div className="p-5 bg-[#121212] border border-[#1e1e1e]">
+                  <div className="p-5 bg-[#0b0b0d] border border-[#17171a]">
                     <div className="flex items-center gap-3 mb-2">
-                      <item.icon className="w-4 h-4 text-[#ffaa33]" />
-                      <span className="text-[10px] tracking-[0.2em] uppercase text-[#888]">{item.label}</span>
+                      <item.icon className="w-4 h-4 text-[#c8a96a]" />
+                      <span className="text-[10px] tracking-[0.2em] uppercase text-[#b8b0a3]">{item.label}</span>
                     </div>
                     {item.href ? (
-                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm text-[#f3f3f3] hover:text-[#ffaa33] transition-colors">
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm text-[#f4f0e8] hover:text-[#c8a96a] transition-colors">
                         {item.value}
                       </a>
                     ) : (
-                      <p className="text-sm text-[#f3f3f3]">{item.value}</p>
+                      <p className="text-sm text-[#f4f0e8]">{item.value}</p>
                     )}
                   </div>
                 </SectionReveal>
@@ -101,43 +101,43 @@ export default function ContactPage() {
 
             {/* Contact Form */}
             <SectionReveal delay={0.2} className="lg:col-span-2">
-              <form onSubmit={handleSubmit(onSubmit)} className="p-6 bg-[#121212] border border-[#1e1e1e]">
-                <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f3f3f3] mb-6">Send a Message</h3>
+              <form onSubmit={handleSubmit(onSubmit)} className="p-6 bg-[#0b0b0d] border border-[#17171a]">
+                <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-[#f4f0e8] mb-6">Send a Message</h3>
                 <div className="grid sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Name *</label>
+                    <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Name *</label>
                     <input
                       {...register('name')}
-                      className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors"
+                      className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors"
                       placeholder="Your name"
                     />
                     {errors.name && <p className="text-[10px] text-red-400 mt-1">{errors.name.message}</p>}
                   </div>
                   <div>
-                    <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Email *</label>
+                    <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Email *</label>
                     <input
                       {...register('email')}
-                      className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors"
+                      className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors"
                       placeholder="your@email.com"
                     />
                     {errors.email && <p className="text-[10px] text-red-400 mt-1">{errors.email.message}</p>}
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Subject *</label>
+                  <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Subject *</label>
                   <input
                     {...register('subject')}
-                    className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors"
+                    className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors"
                     placeholder="How can we help?"
                   />
                   {errors.subject && <p className="text-[10px] text-red-400 mt-1">{errors.subject.message}</p>}
                 </div>
                 <div className="mb-6">
-                  <label className="text-[10px] text-[#555] uppercase tracking-wider mb-1.5 block">Message *</label>
+                  <label className="text-[10px] text-[#8a8175] uppercase tracking-wider mb-1.5 block">Message *</label>
                   <textarea
                     {...register('message')}
                     rows={5}
-                    className="w-full bg-[#0a0a0a] border border-[#222] px-4 py-3 text-sm text-[#f3f3f3] placeholder:text-[#333] focus:outline-none focus:border-[#ffaa33] transition-colors resize-none"
+                    className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8] placeholder:text-[#2a2a2d] focus:outline-none focus:border-[#c8a96a] transition-colors resize-none"
                     placeholder="Tell us more..."
                   />
                   {errors.message && <p className="text-[10px] text-red-400 mt-1">{errors.message.message}</p>}

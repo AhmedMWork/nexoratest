@@ -1,7 +1,7 @@
 {
-  "name": "nexora-v2",
+  "name": "nexora-v3",
   "private": true,
-  "version": "2.0.0",
+  "version": "3.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -88,5 +88,6 @@
   "engines": {
     "node": "20.x",
     "npm": ">=10"
-  }
+  },
+  "description": "NEXORA V3 Soft Luxury Editorial Commerce Experience"
 }

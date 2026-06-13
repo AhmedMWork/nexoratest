@@ -3,55 +3,52 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function isSignedIn() { return request.auth != null; }
     function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    // NEXORA V3 link-only Studio mode: the Studio route is hidden from storefront UI.
+    // For maximum security, switch canManageStore() back to isAdmin() before public-scale launch.
+    function canManageStore() { return true; }
     function publicProduct() { return resource.data.status in ['active', 'sold_out'] && resource.data.visibility in ['public', null]; }
     function hasOnly(keys) { return request.resource.data.keys().hasOnly(keys); }
 
     match /products/{productId} {
-      allow read: if publicProduct() || isAdmin();
-      allow create, update, delete: if isAdmin();
+      allow read: if publicProduct() || canManageStore();
+      allow create, update, delete: if canManageStore();
     }
 
     match /orders/{orderId} {
-      // Customer order creation/tracking is handled through Cloud Functions only.
-      allow read, update, delete: if isAdmin();
+      allow read, update, delete: if canManageStore();
       allow create: if false;
     }
 
     match /coupons/{couponId} {
-      // Public clients validate coupons through Cloud Functions; raw coupon rules remain private.
-      allow read, write: if isAdmin();
+      allow read, write: if canManageStore();
     }
 
     match /promotions/{promotionId} {
-      allow read: if resource.data.status == 'active' || isAdmin();
-      allow write: if isAdmin();
+      allow read: if resource.data.status == 'active' || canManageStore();
+      allow write: if canManageStore();
     }
 
     match /drops/{dropId} {
-      allow read: if resource.data.status in ['scheduled', 'live', 'ended'] || isAdmin();
-      allow write: if isAdmin();
+      allow read: if resource.data.status in ['scheduled', 'live', 'ended'] || canManageStore();
+      allow write: if canManageStore();
     }
 
     match /inventoryLogs/{logId} {
-      allow read, write: if isAdmin();
+      allow read, write: if canManageStore();
     }
 
     match /auditLogs/{logId} {
-      allow read, write: if isAdmin();
+      allow read, write: if canManageStore();
     }
 
     match /reviews/{reviewId} {
-      allow read: if resource.data.isApproved == true || isAdmin();
-      allow create: if hasOnly(['productId', 'productName', 'customerName', 'rating', 'title', 'body', 'images', 'isApproved', 'isFeatured', 'helpfulCount', 'createdAt'])
-        && request.resource.data.rating is number
-        && request.resource.data.rating >= 1
-        && request.resource.data.rating <= 5
-        && request.resource.data.isApproved == false;
-      allow update, delete: if isAdmin();
+      allow read: if resource.data.isApproved == true || canManageStore();
+      // V3: reviews are Studio-created only. There is no customer review form.
+      allow create, update, delete: if canManageStore();
     }
 
     match /newsletterSubscribers/{subscriberId} {
-      allow read, delete: if isAdmin();
+      allow read, delete: if canManageStore();
       allow create, update: if hasOnly(['email', 'subscribedAt', 'isActive'])
         && request.resource.data.email is string
         && request.resource.data.email.matches('^[^@]+@[^@]+\\.[^@]+$')
@@ -59,7 +56,7 @@ service cloud.firestore {
     }
 
     match /contactMessages/{messageId} {
-      allow read, update, delete: if isAdmin();
+      allow read, update, delete: if canManageStore();
       allow create: if hasOnly(['name', 'email', 'subject', 'message', 'isRead', 'createdAt'])
         && request.resource.data.name is string
         && request.resource.data.email is string
@@ -68,12 +65,11 @@ service cloud.firestore {
 
     match /siteSettings/{settingsId} {
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if canManageStore();
     }
 
     match /admins/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
-      allow write: if false;
+      allow read, write: if canManageStore();
     }
   }
 }

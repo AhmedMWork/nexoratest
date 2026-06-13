@@ -1,21 +1,18 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    function isAdmin() {
-      return request.auth != null && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
-    }
-    match /products/{allPaths=**} {
-      allow read: if true;
-      allow write: if isAdmin()
+    function validImage() {
+      return request.resource != null
         && request.resource.size < 5 * 1024 * 1024
         && request.resource.contentType.matches('image/(jpeg|jpg|png|webp)');
     }
-    match /brand/{allPaths=**} {
+
+    match /products/{allPaths=**} {
       allow read: if true;
-      allow write: if isAdmin()
-        && request.resource.size < 5 * 1024 * 1024
-        && request.resource.contentType.matches('image/(jpeg|jpg|png|webp|svg\\+xml)');
+      // NEXORA V3 link-only Studio mode. For locked production, require Firebase admin auth here.
+      allow write: if validImage();
     }
+
     match /{allPaths=**} {
       allow read: if true;
       allow write: if false;

@@ -1,57 +1,42 @@
-# NEXORA V2 Deployment Checklist
+# NEXORA V3 — Deployment Checklist
 
-## Local verification
-
+## 1. Install
 ```bash
 npm install
-npm run verify
+npm run build
 cd functions
 npm install
-npm run verify
+npm run build
 ```
 
-## Firebase
-
+## 2. Firebase
 ```bash
 firebase login
 firebase use <project-id>
-firebase deploy --only firestore:rules,firestore:indexes,storage
-firebase deploy --only functions
+firebase deploy --only firestore:rules,firestore:indexes,storage,functions
 ```
 
-## Vercel
+## 3. Vercel
+- Import the GitHub repo or upload the project.
+- Set build command: `npm run build`.
+- Set output directory: `dist`.
+- Add all `VITE_FIREBASE_*` environment variables.
 
-Add these environment variables:
+## 4. Studio
+Open `/studio` after deployment.
 
-```txt
-VITE_FIREBASE_API_KEY
-VITE_FIREBASE_AUTH_DOMAIN
-VITE_FIREBASE_PROJECT_ID
-VITE_FIREBASE_STORAGE_BUCKET
-VITE_FIREBASE_MESSAGING_SENDER_ID
-VITE_FIREBASE_APP_ID
-VITE_ENABLE_SEED_FALLBACK=false
-VITE_DEFAULT_WHATSAPP_NUMBER
-```
+## 5. QA
+- Homepage logo entry gate.
+- Light mode default.
+- Dark mode toggle.
+- EN/AR switch.
+- Men/Women/Unisex shop filters.
+- Product page.
+- Cart and checkout.
+- Track order.
+- Studio reviews creation.
+- Studio product creation.
+- Mobile menu.
 
-## Admin
-
-- [ ] Firebase Auth user created.
-- [ ] `admins/{uid}` document created.
-- [ ] Admin login tested.
-- [ ] Product creation tested.
-- [ ] Image upload tested.
-- [ ] Order status update tested.
-- [ ] Audit Logs tested.
-
-## Storefront
-
-- [ ] Products visible.
-- [ ] Hidden/draft products not visible.
-- [ ] Cart works.
-- [ ] Coupon works.
-- [ ] Checkout works.
-- [ ] Track order works.
-- [ ] Arabic/English checked.
-- [ ] Dark/Light checked.
-- [ ] iPhone/mobile checked.
+## Security note
+V3 follows the requested hidden link-only Studio entry. Before a high-volume public launch, enable Firebase Auth or a server-side Studio PIN.

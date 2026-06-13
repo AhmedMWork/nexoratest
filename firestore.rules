@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function publicProduct() { return resource.data.status in ['active', 'sold_out'] && resource.data.visibility in ['public', null]; }
+    function hasOnly(keys) { return request.resource.data.keys().hasOnly(keys); }
+
+    match /products/{productId} {
+      allow read: if publicProduct() || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /orders/{orderId} {
+      // Customer order creation/tracking is handled through Cloud Functions only.
+      allow read, update, delete: if isAdmin();
+      allow create: if false;
+    }
+
+    match /coupons/{couponId} {
+      // Public clients validate coupons through Cloud Functions; raw coupon rules remain private.
+      allow read, write: if isAdmin();
+    }
+
+    match /promotions/{promotionId} {
+      allow read: if resource.data.status == 'active' || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /drops/{dropId} {
+      allow read: if resource.data.status in ['scheduled', 'live', 'ended'] || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /inventoryLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /auditLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if resource.data.isApproved == true || isAdmin();
+      allow create: if hasOnly(['productId', 'productName', 'customerName', 'rating', 'title', 'body', 'images', 'isApproved', 'isFeatured', 'helpfulCount', 'createdAt'])
+        && request.resource.data.rating is number
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && request.resource.data.isApproved == false;
+      allow update, delete: if isAdmin();
+    }
+
+    match /newsletterSubscribers/{subscriberId} {
+      allow read, delete: if isAdmin();
+      allow create, update: if hasOnly(['email', 'subscribedAt', 'isActive'])
+        && request.resource.data.email is string
+        && request.resource.data.email.matches('^[^@]+@[^@]+\\.[^@]+$')
+        && request.resource.data.isActive == true;
+    }
+
+    match /contactMessages/{messageId} {
+      allow read, update, delete: if isAdmin();
+      allow create: if hasOnly(['name', 'email', 'subject', 'message', 'isRead', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.message is string;
+    }
+
+    match /siteSettings/{settingsId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}

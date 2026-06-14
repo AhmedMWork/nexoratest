@@ -95,8 +95,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               isSoldOut
                 ? 'border-[#8a8175]/30 bg-[#050505]/70 text-[#b8b0a3]'
                 : discount > 0
-                  ? 'border-[#c8a96a]/30 bg-[#CFAE9E] text-[#5C4A42]'
-                  : 'border-[#c8a96a]/30 bg-[#050505]/70 text-[#A97868] dark:text-[#C7A191]'
+                  ? 'border-[var(--v33-accent)] bg-[var(--v33-accent)] text-[var(--v33-text)]'
+                  : 'border-[var(--v33-accent)] bg-[color-mix(in_srgb,var(--v33-card)_72%,transparent)] text-[var(--v33-accent-strong)]'
             }`}>
               {badge}
             </span>
@@ -106,8 +106,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             onClick={handleWishlist}
             className={`absolute top-3 right-3 p-2.5 transition-all duration-300 ${
               inWishlist
-                ? 'bg-[#CFAE9E] text-[#5C4A42]'
-                : 'bg-[#050505]/55 text-[#5C4A42] dark:text-[#E9DED3] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:text-[#A97868] dark:text-[#C7A191]'
+                ? 'bg-[var(--v33-accent)] text-[var(--v33-text)]'
+                : 'bg-[color-mix(in_srgb,var(--v33-card)_72%,transparent)] text-[var(--v33-text)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:text-[var(--v33-accent-strong)]'
             }`}
             aria-label="Toggle wishlist"
           >
@@ -118,7 +118,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             <button
               onClick={handleQuickAdd}
               disabled={isSoldOut}
-              className="w-full py-3.5 bg-[#CFAE9E] text-[#5C4A42] text-[10px] font-black tracking-[0.22em] uppercase flex items-center justify-center gap-2 hover:bg-[#D8B7A8] transition-colors disabled:bg-[#17171a] disabled:text-[#8A7A72] dark:text-[#BBAEA4]"
+              className="w-full py-3.5 bg-[var(--v33-accent)] text-[var(--v33-text)] text-[10px] font-black tracking-[0.22em] uppercase flex items-center justify-center gap-2 hover:bg-[var(--v33-accent-strong)] hover:text-[#FFFDF8] transition-colors disabled:bg-[#17171a] disabled:text-[var(--v33-muted)]"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               {isSoldOut ? 'Unavailable' : 'Quick Add'}
@@ -127,25 +127,25 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
 
         <div className="p-4 sm:p-5">
-          <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[#8A7A72] dark:text-[#BBAEA4]">
+          <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[var(--v33-muted)]">
             {product.category} · {product.collection}
           </p>
-          <h3 className="mb-3 line-clamp-1 text-sm font-bold text-[#5C4A42] dark:text-[#E9DED3] transition-colors group-hover:text-[#A97868] dark:group-hover:text-[#C7A191]">
+          <h3 className="mb-3 line-clamp-1 text-sm font-bold text-[var(--v33-text)] transition-colors group-hover:text-[var(--v33-accent-strong)]">
             {product.name}
           </h3>
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-black text-[#5C4A42] dark:text-[#E9DED3]">
+              <span className="text-sm font-black text-[var(--v33-text)]">
                 {formatPrice(product.price)}
               </span>
               {product.compareAtPrice && (
-                <span className="text-xs text-[#8A7A72] dark:text-[#BBAEA4] line-through">
+                <span className="text-xs text-[var(--v33-muted)] line-through">
                   {formatPrice(product.compareAtPrice)}
                 </span>
               )}
             </div>
             {isLowStock && (
-              <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#A97868] dark:text-[#C7A191]">
+              <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-[var(--v33-accent-strong)]">
                 {totalStock} left
               </span>
             )}

@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Heart, Menu, X, Search, ChevronRight } from 'lucide-react';
 import { useCartStore } from '@/stores/cartStore';
 import { useWishlistStore } from '@/stores/wishlistStore';
@@ -22,11 +22,6 @@ export default function Navbar() {
   const { t } = useI18n();
   const cartCount = useCartStore((s) => s.getTotalItems());
   const wishlistCount = useWishlistStore((s) => s.getCount());
-  const { scrollY } = useScroll();
-
-  const navBg = useTransform(scrollY, [0, 80], ['rgba(255, 252, 246, 0.78)', 'rgba(255, 252, 246, 0.94)']);
-  const navBorder = useTransform(scrollY, [0, 80], ['rgba(207, 195, 183, 0.44)', 'rgba(207, 195, 183, 0.86)']);
-
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -42,6 +37,7 @@ export default function Navbar() {
       '/shop/men': 'nav.men',
       '/shop/women': 'nav.women',
       '/shop/unisex': 'nav.unisex',
+      '/limited': 'nav.drops',
       '/drops': 'nav.drops',
       '/reviews': 'nav.reviews',
       '/contact': 'nav.contact',
@@ -64,13 +60,13 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        style={{ backgroundColor: navBg, borderBottomColor: navBorder }}
-        className={`fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-2xl transition-shadow duration-300 dark:!bg-[#171311]/90 ${isScrolled ? 'shadow-[0_18px_55px_rgba(92,74,66,0.13)] dark:shadow-[0_18px_60px_rgba(0,0,0,0.45)]' : ''}`}
+        style={{ backgroundColor: 'color-mix(in srgb, var(--v33-card) 88%, transparent)', borderBottomColor: 'color-mix(in srgb, var(--v33-border) 82%, transparent)' }}
+        className={`fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-2xl transition-shadow duration-300 ${isScrolled ? 'shadow-lg' : ''}`}
       >
         <nav className="w-full px-4 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-16 lg:h-[4.35rem]">
             <Link to="/" className="flex items-center gap-3 group shrink-0" aria-label="NEXORA home">
-              <img src="/assets/nexora-logo.png" alt="NEXORA" className="h-8 w-auto object-contain opacity-80 transition-opacity group-hover:opacity-100 dark:brightness-0 dark:invert" />
+              <img src="/assets/nexora-logo.png" alt="NEXORA" className="h-8 w-auto object-contain opacity-90 transition-opacity group-hover:opacity-100 v34-logo-img" />
             </Link>
 
             <div className="hidden lg:flex items-center gap-8">
@@ -112,7 +108,7 @@ export default function Navbar() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(207,174,158,0.22),transparent_38%),linear-gradient(180deg,rgba(250,247,242,0.92),rgba(236,228,216,0.98))] dark:bg-[radial-gradient(circle_at_top_right,rgba(199,161,145,0.18),transparent_38%),linear-gradient(180deg,rgba(35,29,26,0.9),rgba(23,19,17,1))]" />
             <div className="relative flex flex-col h-full px-6 py-6">
               <div className="flex items-center justify-between mb-10">
-                <Link to="/" className="flex items-center gap-3"><img src="/assets/nexora-logo.png" alt="NEXORA" className="h-9 w-auto object-contain opacity-80 dark:brightness-0 dark:invert" /></Link>
+                <Link to="/" className="flex items-center gap-3"><img src="/assets/nexora-logo.png" alt="NEXORA" className="h-9 w-auto object-contain opacity-90 v34-logo-img" /></Link>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-[#8A7A72] hover:text-[#5C4A42] dark:text-[#BBAEA4] dark:hover:text-[#E9DED3]" aria-label="Close menu"><X className="w-6 h-6" /></button>
               </div>
 

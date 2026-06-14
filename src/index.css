@@ -29,17 +29,18 @@
     --ring: 14 40% 64%;
     --radius: 1rem;
 
-    --v33-bg: #F8F3EA;
-    --v33-bg-soft: #EFE3D2;
+    --v33-bg: #F7F1E8;
+    --v33-bg-soft: #E8DCCB;
     --v33-card: #FFFDF8;
-    --v33-card-muted: #F3E9DB;
-    --v33-text: #2F2520;
-    --v33-muted: #7A665B;
-    --v33-subtle: #A9968C;
-    --v33-accent: #C9927E;
-    --v33-accent-strong: #9A5F4E;
-    --v33-border: #DED1C1;
-    --v33-shadow: rgba(47, 37, 32, 0.10);
+    --v33-card-muted: #F1E6D8;
+    --v33-text: #171210;
+    --v33-muted: #6F5B51;
+    --v33-subtle: #B7A594;
+    --v33-accent: #D2B48C;
+    --v33-accent-strong: #B88A78;
+    --v33-border: #D8C9B8;
+    --v33-shadow: rgba(43, 33, 29, 0.12);
+    --v34-logo-plate: rgba(255, 253, 248, 0.86);
 
     --sidebar-background: 20 15% 10%;
     --sidebar-foreground: 28 44% 90%;
@@ -73,17 +74,18 @@
     --input: 20 13% 26%;
     --ring: 15 37% 65%;
 
-    --v33-bg: #120F0D;
-    --v33-bg-soft: #1C1613;
-    --v33-card: #241C18;
-    --v33-card-muted: #2D231E;
-    --v33-text: #F2E7DA;
-    --v33-muted: #BBA89B;
-    --v33-subtle: #8E7A70;
-    --v33-accent: #C7927E;
-    --v33-accent-strong: #E0B39F;
-    --v33-border: #4E3F37;
-    --v33-shadow: rgba(0, 0, 0, 0.36);
+    --v33-bg: #0E0B0A;
+    --v33-bg-soft: #17110F;
+    --v33-card: #211916;
+    --v33-card-muted: #2B211D;
+    --v33-text: #F4E8DA;
+    --v33-muted: #BCAEA0;
+    --v33-subtle: #8F7D70;
+    --v33-accent: #D2B48C;
+    --v33-accent-strong: #B88A78;
+    --v33-border: #4E3F36;
+    --v33-shadow: rgba(0, 0, 0, 0.42);
+    --v34-logo-plate: rgba(33, 25, 22, 0.82);
   }
 
   * { @apply border-border; }
@@ -106,7 +108,7 @@
     background:
       radial-gradient(circle at 18% 8%, color-mix(in srgb, var(--v33-accent) 16%, transparent), transparent 28rem),
       radial-gradient(circle at 88% 18%, rgba(115, 76, 61, 0.18), transparent 30rem),
-      linear-gradient(180deg, #211915 0%, #120F0D 44%, #0B0908 100%);
+      linear-gradient(180deg, #211916 0%, #0E0B0A 46%, #070504 100%);
   }
 
   ::selection { background: color-mix(in srgb, var(--v33-accent) 42%, transparent); color: var(--v33-text); }
@@ -172,12 +174,12 @@
   .nexora-button-primary,
   .v3-btn-primary {
     border: 1px solid color-mix(in srgb, var(--v33-accent) 78%, transparent) !important;
-    background: var(--v33-accent) !important;
-    color: #2F2520 !important;
+    background: #171210 !important;
+    color: #FFFDF8 !important;
     box-shadow: 0 24px 70px var(--v33-shadow) !important;
   }
   .nexora-button-primary:hover,
-  .v3-btn-primary:hover { transform: translateY(-2px); background: var(--v33-accent-strong) !important; color: #FFFDF8 !important; }
+  .v3-btn-primary:hover { transform: translateY(-2px); background: var(--v33-accent) !important; color: #171210 !important; }
 
   .nexora-card,
   .glass-panel,
@@ -325,4 +327,49 @@ html[dir="rtl"] .tracking-\[0\.15em\] { letter-spacing: .03em; }
   .v3-btn-primary,
   .v3-btn-secondary { width: 100%; }
   .v33-limited-hero-card { min-height: 380px; border-radius: 24px; }
+}
+
+
+/* NEXORA V3.4 — Ivory Noir luxury harmonization */
+html.light [class*="bg-[#F5F0E8]"],
+html.light [class*="bg-[#F8F3EA]"] { background-color: var(--v33-bg) !important; }
+html.light [class*="bg-[#FAF7F2]"],
+html.light [class*="bg-[#FFFDF8]"] { background-color: var(--v33-card) !important; }
+html.light [class*="text-[#5C4A42]"],
+html.light [class*="text-[#2F2520]"] { color: var(--v33-text) !important; }
+html.light [class*="text-[#8A7A72]"],
+html.light [class*="text-[#7A665B]"] { color: var(--v33-muted) !important; }
+html.light [class*="text-[#A97868]"],
+html.light [class*="text-[#CFAE9E]"] { color: var(--v33-accent-strong) !important; }
+html.light [class*="border-[#CFC3B7]"] { border-color: var(--v33-border) !important; }
+html.light [class*="bg-[#CFAE9E]"] { background-color: var(--v33-accent) !important; color: var(--v33-text) !important; }
+
+html.dark [class*="bg-[#171311]"],
+html.dark [class*="bg-[#120F0D]"] { background-color: var(--v33-bg) !important; }
+html.dark [class*="bg-[#231D1A]"],
+html.dark [class*="bg-[#241C18]"] { background-color: var(--v33-card) !important; }
+html.dark [class*="text-[#E9DED3]"],
+html.dark [class*="text-[#F2E7DA]"] { color: var(--v33-text) !important; }
+html.dark [class*="text-[#BBAEA4]"],
+html.dark [class*="text-[#BBA89B]"] { color: var(--v33-muted) !important; }
+html.dark [class*="text-[#C7A191]"],
+html.dark [class*="text-[#C7927E]"] { color: var(--v33-accent) !important; }
+html.dark [class*="border-[#4A3D37]"],
+html.dark [class*="border-[#4E3F37]"] { border-color: var(--v33-border) !important; }
+
+.v34-logo-plate {
+  border: 1px solid color-mix(in srgb, var(--v33-border) 72%, transparent);
+  background: var(--v34-logo-plate);
+  box-shadow: 0 36px 120px var(--v33-shadow), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(18px);
+}
+.v34-logo-img { filter: drop-shadow(0 28px 45px var(--v33-shadow)); }
+html.light .v34-logo-img { filter: contrast(1.14) saturate(.76) drop-shadow(0 28px 45px var(--v33-shadow)); }
+html.dark .v34-logo-img { filter: brightness(1.14) contrast(1.08) drop-shadow(0 32px 60px rgba(0,0,0,.62)); }
+.v34-admin-panel {
+  background: color-mix(in srgb, var(--v33-card) 90%, transparent) !important;
+  border: 1px solid var(--v33-border) !important;
+  border-radius: 24px !important;
+  color: var(--v33-text) !important;
+  box-shadow: 0 24px 75px var(--v33-shadow) !important;
 }

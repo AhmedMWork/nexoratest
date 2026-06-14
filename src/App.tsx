@@ -69,7 +69,8 @@ function PublicRoutes() {
           <Route path="/shop" element={<PageTransition><ShopPage /></PageTransition>} />
           <Route path="/shop/:category" element={<PageTransition><ShopPage /></PageTransition>} />
           <Route path="/product/:slug" element={<PageTransition><ProductDetailPage /></PageTransition>} />
-          <Route path="/drops" element={<PageTransition><DropsPage /></PageTransition>} />
+          <Route path="/limited" element={<PageTransition><DropsPage /></PageTransition>} />
+          <Route path="/drops" element={<Navigate to="/limited" replace />} />
           <Route path="/reviews" element={<PageTransition><ReviewsPage /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
           <Route path="/wishlist" element={<PageTransition><WishlistPage /></PageTransition>} />

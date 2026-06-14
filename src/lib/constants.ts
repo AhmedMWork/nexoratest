@@ -3,8 +3,8 @@
 // ============================================================
 
 export const SITE_NAME = 'NEXORA';
-export const SITE_TAGLINE = 'Built Different.';
-export const SITE_DESCRIPTION = 'Warm editorial essentials for men, women, and unisex silhouettes. Limited drops, COD ordering, and quiet luxury detail.';
+export const SITE_TAGLINE = 'Quiet Luxury. Limited By Design.';
+export const SITE_DESCRIPTION = 'Limited fashion essentials by NEXORA. Refined silhouettes, COD ordering, and a world-class ivory noir experience.';
 export const SITE_URL = 'https://nexora.store';
 
 export const NAV_LINKS = [
@@ -12,7 +12,7 @@ export const NAV_LINKS = [
   { label: 'Men', href: '/shop/men' },
   { label: 'Women', href: '/shop/women' },
   { label: 'Unisex', href: '/shop/unisex' },
-  { label: 'Limited', href: '/drops' },
+  { label: 'Limited', href: '/limited' },
   { label: 'Reviews', href: '/reviews' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -112,7 +112,7 @@ export const FOOTER_LINKS = {
   shop: [
     { label: 'All Products', href: '/shop' },
     { label: 'New Arrivals', href: '/shop?sort=newest' },
-    { label: 'Limited Drops', href: '/drops' },
+    { label: 'Limited Drops', href: '/limited' },
     { label: 'Best Sellers', href: '/shop?sort=best-selling' },
     { label: 'Men\'s T-Shirts', href: '/shop/men' },
     { label: 'Women\'s T-Shirts', href: '/shop/women' },

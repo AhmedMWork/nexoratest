@@ -1,5 +1,5 @@
 // ============================================================
-// NEXORA V3.3 — Limited Drops Home Section
+// NEXORA V3.3 — Limited Releases Home Section
 // ============================================================
 
 import { useEffect, useState } from 'react';
@@ -29,9 +29,9 @@ export default function LimitedDropsSection() {
               <span className="v33-limited-pill"><Timer className="w-3.5 h-3.5" /> Limited</span>
             </div>
             <h2 className="v3-title max-w-xl text-[clamp(2.3rem,5vw,4.9rem)]">Not part of the permanent shelf.</h2>
-            <p className="v3-lead mt-6">Limited drops are released in smaller quantities and removed once the window closes. Each piece is designed to feel rare without being loud.</p>
+            <p className="v3-lead mt-6">Limited releases are released in smaller quantities and removed once the window closes. Each piece is designed to feel rare without being loud.</p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link to="/drops" className="v3-btn-primary">Explore Limited <ArrowRight className="w-4 h-4" /></Link>
+              <Link to="/limited" className="v3-btn-primary">Explore Limited <ArrowRight className="w-4 h-4" /></Link>
               <Link to="/shop" className="v3-btn-secondary">Shop essentials</Link>
             </div>
           </SectionReveal>

@@ -47,7 +47,7 @@ export default function InfoPage() {
           <div className="mt-12 grid sm:grid-cols-3 gap-4">
             {[
               { label: 'Premium Fabric', text: 'Carefully selected materials for everyday comfort.' },
-              { label: 'Clear Process', text: 'Simple ordering, confirmation, delivery, and tracking.' },
+              { label: 'Clear Process', text: 'Simple ordering, WhatsApp confirmation, and delivery updates.' },
               { label: 'Customer First', text: 'Support through WhatsApp, contact forms, and order updates.' },
             ].map((item) => (
               <div key={item.label} className="p-5 bg-[#0b0b0d] border border-[#17171a]">

@@ -58,7 +58,7 @@ export default function HeroSection() {
                 Shop New Arrivals
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/drops" className="nexora-button inline-flex items-center justify-center">
+              <Link to="/limited" className="nexora-button inline-flex items-center justify-center">
                 Explore Limited
               </Link>
             </motion.div>

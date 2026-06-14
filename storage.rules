@@ -1,18 +1,8 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    function validImage() {
-      return request.resource != null
-        && request.resource.size < 5 * 1024 * 1024
-        && request.resource.contentType.matches('image/(jpeg|jpg|png|webp)');
-    }
-
-    match /products/{allPaths=**} {
-      allow read: if true;
-      // NEXORA V3 link-only Studio mode. For locked production, require Firebase admin auth here.
-      allow write: if validImage();
-    }
-
+    // NEXORA V3.3 uses Google Drive public links for product media.
+    // Firebase Storage uploads are disabled to avoid dependency on Storage billing/availability.
     match /{allPaths=**} {
       allow read: if true;
       allow write: if false;

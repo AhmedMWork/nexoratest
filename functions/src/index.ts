@@ -311,14 +311,3 @@ export const updateOrderStatus = onCall({ region: 'europe-west1' }, async (reque
 
   return { ok: true };
 });
-
-export const trackCustomerOrder = onCall({ region: 'europe-west1' }, async (request) => {
-  const orderNumber = sanitizeString((request.data as { orderNumber?: string }).orderNumber, 30);
-  const phone = normalizePhone(sanitizeString((request.data as { phone?: string }).phone, 30));
-  if (!orderNumber || !isValidEgyptPhone(phone)) throw new HttpsError('invalid-argument', 'Order number and valid phone are required.');
-  const snapshot = await db.collection('orders').where('orderNumber', '==', orderNumber).where('customer.phone', '==', phone).limit(1).get();
-  if (snapshot.empty) return { order: null };
-  const doc = snapshot.docs[0];
-  const data = doc.data();
-  return { order: serialize({ id: doc.id, orderNumber: data.orderNumber, items: data.items, subtotal: data.subtotal, shippingFee: data.shippingFee, discount: data.discount, couponCode: data.couponCode, total: data.total, paymentMethod: data.paymentMethod, paymentStatus: data.paymentStatus, status: data.status, trackingUpdates: data.trackingUpdates, customer: { fullName: data.customer?.fullName, phone: data.customer?.phone, governorate: data.customer?.governorate, city: data.customer?.city }, createdAt: data.createdAt, updatedAt: data.updatedAt }) };
-});

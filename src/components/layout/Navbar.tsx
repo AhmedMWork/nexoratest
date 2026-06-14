@@ -24,7 +24,7 @@ export default function Navbar() {
   const wishlistCount = useWishlistStore((s) => s.getCount());
   const { scrollY } = useScroll();
 
-  const navBg = useTransform(scrollY, [0, 80], ['rgba(250, 247, 242, 0.78)', 'rgba(250, 247, 242, 0.94)']);
+  const navBg = useTransform(scrollY, [0, 80], ['rgba(255, 252, 246, 0.78)', 'rgba(255, 252, 246, 0.94)']);
   const navBorder = useTransform(scrollY, [0, 80], ['rgba(207, 195, 183, 0.44)', 'rgba(207, 195, 183, 0.86)']);
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export default function Navbar() {
               </div>
 
               <div className="flex flex-col gap-1 flex-1 overflow-y-auto">
-                {[{ label: 'Home', href: '/' }, ...NAV_LINKS, { label: 'Track Order', href: '/track-order' }].map((link, i) => (
+                {[{ label: 'Home', href: '/' }, ...NAV_LINKS].map((link, i) => (
                   <motion.div key={link.href} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.045 }}>
                     <Link to={link.href} onClick={() => setIsMobileMenuOpen(false)} className="group flex items-center justify-between py-4 border-b border-[#CFC3B7]/70 dark:border-[#4A3D37]">
                       <span className="text-2xl font-semibold tracking-wide text-[#5C4A42] group-hover:text-[#A97868] dark:text-[#E9DED3] dark:group-hover:text-[#C7A191] transition-colors">{getNavLabel(link.href, link.label)}</span>

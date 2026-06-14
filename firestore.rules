@@ -2,53 +2,42 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function isSignedIn() { return request.auth != null; }
-    function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
-    // NEXORA V3 link-only Studio mode: the Studio route is hidden from storefront UI.
-    // For maximum security, switch canManageStore() back to isAdmin() before public-scale launch.
-    function canManageStore() { return true; }
+    function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)) && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.status == 'active'; }
     function publicProduct() { return resource.data.status in ['active', 'sold_out'] && resource.data.visibility in ['public', null]; }
     function hasOnly(keys) { return request.resource.data.keys().hasOnly(keys); }
 
     match /products/{productId} {
-      allow read: if publicProduct() || canManageStore();
-      allow create, update, delete: if canManageStore();
+      allow read: if publicProduct() || isAdmin();
+      allow create, update, delete: if isAdmin();
     }
 
     match /orders/{orderId} {
-      allow read, update, delete: if canManageStore();
+      allow read, update, delete: if isAdmin();
       allow create: if false;
     }
 
-    match /coupons/{couponId} {
-      allow read, write: if canManageStore();
-    }
+    match /coupons/{couponId} { allow read, write: if isAdmin(); }
 
     match /promotions/{promotionId} {
-      allow read: if resource.data.status == 'active' || canManageStore();
-      allow write: if canManageStore();
+      allow read: if resource.data.status == 'active' || isAdmin();
+      allow write: if isAdmin();
     }
 
     match /drops/{dropId} {
-      allow read: if resource.data.status in ['scheduled', 'live', 'ended'] || canManageStore();
-      allow write: if canManageStore();
+      allow read: if resource.data.status in ['scheduled', 'live'] || isAdmin();
+      allow write: if isAdmin();
     }
 
-    match /inventoryLogs/{logId} {
-      allow read, write: if canManageStore();
-    }
-
-    match /auditLogs/{logId} {
-      allow read, write: if canManageStore();
-    }
+    match /inventoryLogs/{logId} { allow read, write: if isAdmin(); }
+    match /auditLogs/{logId} { allow read, write: if isAdmin(); }
 
     match /reviews/{reviewId} {
-      allow read: if resource.data.isApproved == true || canManageStore();
-      // V3: reviews are Studio-created only. There is no customer review form.
-      allow create, update, delete: if canManageStore();
+      allow read: if resource.data.isApproved == true || isAdmin();
+      allow create, update, delete: if isAdmin();
     }
 
     match /newsletterSubscribers/{subscriberId} {
-      allow read, delete: if canManageStore();
+      allow read, delete: if isAdmin();
       allow create, update: if hasOnly(['email', 'subscribedAt', 'isActive'])
         && request.resource.data.email is string
         && request.resource.data.email.matches('^[^@]+@[^@]+\\.[^@]+$')
@@ -56,7 +45,7 @@ service cloud.firestore {
     }
 
     match /contactMessages/{messageId} {
-      allow read, update, delete: if canManageStore();
+      allow read, update, delete: if isAdmin();
       allow create: if hasOnly(['name', 'email', 'subject', 'message', 'isRead', 'createdAt'])
         && request.resource.data.name is string
         && request.resource.data.email is string
@@ -65,11 +54,12 @@ service cloud.firestore {
 
     match /siteSettings/{settingsId} {
       allow read: if true;
-      allow write: if canManageStore();
+      allow write: if isAdmin();
     }
 
     match /admins/{uid} {
-      allow read, write: if canManageStore();
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+      allow write: if isAdmin();
     }
   }
 }

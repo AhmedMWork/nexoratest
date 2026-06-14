@@ -1,7 +1,7 @@
 {
-  "name": "nexora-v3-3",
+  "name": "nexora-v3-4",
   "private": true,
-  "version": "3.3.0",
+  "version": "3.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -89,5 +89,5 @@
     "node": "20.x",
     "npm": ">=10"
   },
-  "description": "NEXORA V3.3 Refined Limited Drops Warm Editorial COD Commerce"
+  "description": "NEXORA V3.4 Ivory Noir Luxury Production Edition"
 }

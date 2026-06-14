@@ -4,7 +4,7 @@
 
 export const SITE_NAME = 'NEXORA';
 export const SITE_TAGLINE = 'Built Different.';
-export const SITE_DESCRIPTION = 'Soft luxury streetwear for men, women, and unisex everyday silhouettes. Editorial essentials crafted with warm minimalism.';
+export const SITE_DESCRIPTION = 'Warm editorial essentials for men, women, and unisex silhouettes. Limited drops, COD ordering, and quiet luxury detail.';
 export const SITE_URL = 'https://nexora.store';
 
 export const NAV_LINKS = [
@@ -12,7 +12,7 @@ export const NAV_LINKS = [
   { label: 'Men', href: '/shop/men' },
   { label: 'Women', href: '/shop/women' },
   { label: 'Unisex', href: '/shop/unisex' },
-  { label: 'Drops', href: '/drops' },
+  { label: 'Limited', href: '/drops' },
   { label: 'Reviews', href: '/reviews' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -68,8 +68,6 @@ export const ORDER_STATUS_FLOW = [
   'pending',
   'confirmed',
   'preparing',
-  'packed',
-  'shipped',
   'out_for_delivery',
   'delivered',
 ] as const;
@@ -82,7 +80,7 @@ export const ADMIN_NAV_LINKS = [
   { label: 'Reviews', href: '/nexora-admin/reviews', icon: 'Star' },
   { label: 'Coupons', href: '/nexora-admin/coupons', icon: 'Tag' },
   { label: 'Promotions', href: '/nexora-admin/promotions', icon: 'BadgePercent' },
-  { label: 'Drops', href: '/nexora-admin/drops', icon: 'CalendarClock' },
+  { label: 'Limited Drops', href: '/nexora-admin/drops', icon: 'CalendarClock' },
   { label: 'Settings', href: '/nexora-admin/settings', icon: 'Settings' },
   { label: 'Audit Logs', href: '/nexora-admin/audit-logs', icon: 'ShieldCheck' },
 ];
@@ -114,14 +112,14 @@ export const FOOTER_LINKS = {
   shop: [
     { label: 'All Products', href: '/shop' },
     { label: 'New Arrivals', href: '/shop?sort=newest' },
+    { label: 'Limited Drops', href: '/drops' },
     { label: 'Best Sellers', href: '/shop?sort=best-selling' },
     { label: 'Men\'s T-Shirts', href: '/shop/men' },
     { label: 'Women\'s T-Shirts', href: '/shop/women' },
     { label: 'Unisex Essentials', href: '/shop/unisex' },
   ],
   support: [
-    { label: 'Track Order', href: '/track-order' },
-    { label: 'Size Guide', href: '/info/size-guide' },
+        { label: 'Size Guide', href: '/info/size-guide' },
     { label: 'Shipping & Returns', href: '/info/shipping-returns' },
     { label: 'FAQ', href: '/info/faq' },
   ],

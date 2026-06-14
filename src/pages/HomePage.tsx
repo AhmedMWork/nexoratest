@@ -16,7 +16,7 @@ import { useI18n } from '@/i18n/I18nProvider';
 const categoryTiles = [
   { title: 'Oversized Tees', ar: 'تيشيرتات واسعة', href: '/shop/unisex', image: '/assets/products/women-sand-tee.jpg' },
   { title: 'Hoodies', ar: 'هوديز', href: '/shop/unisex', image: '/assets/products/men-gray-tee.jpg' },
-  { title: 'Drops', ar: 'الإصدارات', href: '/drops', image: '/assets/nexora-logo-bg.jpg' },
+  { title: 'Limited', ar: 'المحدود', href: '/drops', image: '/assets/nexora-logo-bg.jpg' },
 ];
 
 const staticReviews = [
@@ -73,7 +73,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link to="/shop" className="v3-btn-primary">{lang === 'ar' ? 'تسوق الآن' : 'Shop Now'} <ArrowRight className="h-4 w-4" /></Link>
-              <Link to="/drops" className="v3-btn-secondary">{lang === 'ar' ? 'استكشف الإصدارات' : 'Explore Drops'}</Link>
+              <Link to="/drops" className="v3-btn-secondary">{lang === 'ar' ? 'استكشف المحدود' : 'Explore Limited'}</Link>
             </div>
           </motion.div>
         </section>

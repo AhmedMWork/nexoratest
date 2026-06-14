@@ -59,7 +59,7 @@ export default function HeroSection() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link to="/drops" className="nexora-button inline-flex items-center justify-center">
-                Explore Drops
+                Explore Limited
               </Link>
             </motion.div>
 
@@ -71,7 +71,7 @@ export default function HeroSection() {
             >
               {[
                 ['Premium Cotton', 'Fabric'],
-                ['Limited Runs', 'Drops'],
+                ['Limited Runs', 'Limited'],
                 ['Egypt', 'Crafted'],
               ].map(([value, label]) => (
                 <div key={value} className="border-r border-[#202024] px-3 last:border-r-0 first:pl-0">

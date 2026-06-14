@@ -1,46 +1,20 @@
 // ============================================================
-// NEXORA — Firebase Storage Helpers
-// Admin-only product/brand asset uploads. Rules enforce ownership.
+// NEXORA V3.3 — Firebase Storage disabled
+// Product images are managed through Google Drive public URLs.
+// This module is kept as a safe compatibility guard so old imports
+// fail with a clear message instead of referencing Firebase Storage.
 // ============================================================
 
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { storage } from './config';
-import { generateSlug } from '@/lib/utils';
-
-const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/jpg', 'image/png', 'image/webp']);
-const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024;
-
 export function validateImageFile(file: File): void {
-  if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
-    throw new Error('Only JPG, PNG, and WEBP product images are allowed.');
-  }
-  if (file.size > MAX_IMAGE_SIZE_BYTES) {
-    throw new Error('Image size must be less than 5MB.');
-  }
+  const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  if (!validTypes.includes(file.type)) throw new Error('Only JPG, PNG, and WEBP images are supported.');
+  if (file.size > 5 * 1024 * 1024) throw new Error('Image must be smaller than 5MB.');
 }
 
-export async function uploadProductImage(file: File, productNameOrSku: string): Promise<string> {
-  validateImageFile(file);
-  const safeBase = generateSlug(productNameOrSku || 'product');
-  const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg';
-  const path = `products/${safeBase}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${extension}`;
-  const imageRef = ref(storage, path);
-  await uploadBytes(imageRef, file, {
-    contentType: file.type,
-    customMetadata: { source: 'nexora-admin' },
-  });
-  return getDownloadURL(imageRef);
+export async function uploadProductImage(): Promise<string> {
+  throw new Error('Firebase Storage is disabled. Add a public Google Drive image link instead.');
 }
 
-export async function uploadBrandAsset(file: File, folder = 'brand'): Promise<string> {
-  validateImageFile(file);
-  const safeFolder = generateSlug(folder || 'brand');
-  const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg';
-  const path = `${safeFolder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${extension}`;
-  const imageRef = ref(storage, path);
-  await uploadBytes(imageRef, file, {
-    contentType: file.type,
-    customMetadata: { source: 'nexora-admin' },
-  });
-  return getDownloadURL(imageRef);
+export async function uploadBrandAsset(): Promise<string> {
+  throw new Error('Firebase Storage is disabled. Add a public image link instead.');
 }

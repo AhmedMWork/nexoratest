@@ -1,1 +1,1 @@
-export { createOrderWithStockTransaction, getOrderByNumberAndPhone, getOrders, updateOrderStatus } from '@/lib/firebase/db';
+export { createOrderWithStockTransaction, getOrders, updateOrderStatus, markOrderPaymentCollected } from '@/lib/firebase/db';

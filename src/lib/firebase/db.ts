@@ -142,23 +142,17 @@ export async function createOrderWithStockTransaction(
   return response.data;
 }
 
-export async function getOrderByNumber(orderNumber: string): Promise<Order | null> {
-  const q = query(ordersRef, where('orderNumber', '==', orderNumber), limit(1));
-  const snapshot = await getDocs(q);
-  if (snapshot.empty) return null;
-  return { id: snapshot.docs[0].id, ...snapshot.docs[0].data() } as Order;
-}
-
-export async function getOrderByNumberAndPhone(orderNumber: string, phone: string): Promise<Order | null> {
-  const trackCustomerOrder = httpsCallable<{ orderNumber: string; phone: string }, { order: Order | null }>(functions, 'trackCustomerOrder');
-  const response = await trackCustomerOrder({ orderNumber, phone: normalizePhone(phone) });
-  return response.data.order;
-}
 
 export async function getOrders(): Promise<Order[]> {
   const q = query(ordersRef, orderBy('createdAt', 'desc'));
   const snapshot = await getDocs(q);
   return snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() } as Order));
+}
+
+export async function markOrderPaymentCollected(orderId: string): Promise<void> {
+  const docRef = doc(db, 'orders', orderId);
+  await updateDoc(docRef, { paymentStatus: 'collected', updatedAt: now() });
+  await createAuditLog({ action: 'order.payment_collected', entityType: 'order', entityId: orderId, after: { paymentStatus: 'collected' } });
 }
 
 export async function updateOrderStatus(orderId: string, status: OrderStatus, message?: string, updatedBy = 'admin'): Promise<void> {

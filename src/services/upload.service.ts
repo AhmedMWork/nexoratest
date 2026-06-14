@@ -1,1 +1,1 @@
-export { uploadProductImage, uploadBrandAsset, validateImageFile } from '@/lib/firebase/storage';
+export { normalizeImageUrl, toGoogleDriveDirectUrl, extractDriveFileId, isGoogleDriveUrl } from '@/lib/media/googleDrive';

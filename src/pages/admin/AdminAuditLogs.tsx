@@ -43,7 +43,7 @@ export default function AdminAuditLogs() {
         <div>
           <p className="text-xs uppercase tracking-[0.35em] text-[#c8a96a]">Security</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[#f4f0e8]">Audit Logs</h1>
-          <p className="mt-2 max-w-2xl text-sm text-[#b8b0a3]">Track important admin actions across products, orders, coupons, promotions, drops, and settings.</p>
+          <p className="mt-2 max-w-2xl text-sm text-[#b8b0a3]">Track important admin actions across products, orders, coupons, promotions, limited drops, and settings.</p>
         </div>
         <div className="flex items-center gap-2 border border-[#2a2a2d] bg-[#0b0b0d] px-3 py-2">
           <Search className="h-4 w-4 text-[#8a8175]" />

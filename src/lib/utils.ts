@@ -78,8 +78,6 @@ export function getStatusLabel(status: string, lang: 'en' | 'ar' = 'en'): string
       pending: 'قيد المراجعة',
       confirmed: 'تم التأكيد',
       preparing: 'جاري التجهيز',
-      packed: 'تم التغليف',
-      shipped: 'تم الشحن',
       out_for_delivery: 'خرج للتوصيل',
       delivered: 'تم التسليم',
       cancelled: 'تم الإلغاء',
@@ -94,9 +92,7 @@ export function getNextStatus(currentStatus: string): string | null {
   const flow: Record<string, string> = {
     pending: 'confirmed',
     confirmed: 'preparing',
-    preparing: 'packed',
-    packed: 'shipped',
-    shipped: 'out_for_delivery',
+    preparing: 'out_for_delivery',
     out_for_delivery: 'delivered',
   };
   return flow[currentStatus] || null;

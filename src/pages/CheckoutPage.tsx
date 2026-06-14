@@ -26,7 +26,6 @@ export default function CheckoutPage() {
   const { items, getTotalPrice, clearCart } = useCartStore();
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
   const [selectedGovernorate, setSelectedGovernorate] = useState('');
   const [whatsAppNumber, setWhatsAppNumber] = useState(DEFAULT_WHATSAPP);
   const [couponCode, setCouponCode] = useState('');
@@ -134,7 +133,6 @@ export default function CheckoutPage() {
         ],
       });
 
-      setCustomerPhone(data.phone);
       setOrderNumber(createdOrder.orderNumber || newOrderNumber);
       setOrderComplete(true);
       clearCart();
@@ -157,7 +155,7 @@ export default function CheckoutPage() {
   }
 
   if (orderComplete) {
-    const whatsappMessage = `Hello NEXORA! I just placed an order. My order number is: ${orderNumber}`;
+    const whatsappMessage = `Hello NEXORA! I just placed an order with cash on delivery. My order number is: ${orderNumber}`;
     return (
       <div className="pt-32 pb-20 min-h-screen bg-[#050505] flex items-center justify-center">
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center max-w-md mx-auto px-6">
@@ -191,9 +189,7 @@ export default function CheckoutPage() {
                 {t('checkout.confirmWhatsapp')}
               </a>
             )}
-            <Link to={`/track-order?order=${encodeURIComponent(orderNumber)}&phone=${encodeURIComponent(customerPhone)}`} className="nexora-button flex items-center justify-center gap-2">
-              {t('checkout.track')}
-            </Link>
+            <p className="rounded-2xl border border-[#202024] bg-[#0b0b0d]/60 px-4 py-3 text-xs leading-6 text-[#b8b0a3]">{t('checkout.whatsappNext')}</p>
             <Link to="/shop" className="text-xs text-[#b8b0a3] hover:text-[#c8a96a] transition-colors tracking-wider uppercase">
               {t('common.continueShopping')}
             </Link>

@@ -4,10 +4,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Edit, Trash2, Search, X, RefreshCw, Upload } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, X, RefreshCw, Link as LinkIcon, Eye } from 'lucide-react';
 import { formatPrice, generateSlug } from '@/lib/utils';
 import type { Product } from '@/types';
 import toast from 'react-hot-toast';
+import { normalizeImageUrl } from '@/lib/media/googleDrive';
 
 type ProductFormMode = 'list' | 'create' | 'edit';
 
@@ -70,7 +71,6 @@ export default function AdminProducts() {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [draft, setDraft] = useState<ProductDraft>(emptyDraft);
   const [isLoading, setIsLoading] = useState(true);
-  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const loadCatalog = async () => {
     setIsLoading(true);
@@ -138,23 +138,29 @@ export default function AdminProducts() {
     }
   };
 
-  const handleImageUpload = async (file: File | null) => {
-    if (!file) return;
-    setIsUploadingImage(true);
+  const normalizeImages = () => {
     try {
-      const { uploadProductImage } = await import('@/lib/firebase/storage');
-      const url = await uploadProductImage(file, draft.sku || draft.name || 'product');
-      setDraft((current) => ({ ...current, images: current.images ? `${current.images}\n${url}` : url }));
-      toast.success('Image uploaded');
+      const normalized = draft.images
+        .split(/[\n,]/)
+        .map((v) => v.trim())
+        .filter(Boolean)
+        .map((url) => normalizeImageUrl(url));
+      setDraft((current) => ({ ...current, images: normalized.join('\n') }));
+      toast.success('Image links normalized');
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Could not upload image');
-    } finally {
-      setIsUploadingImage(false);
+      toast.error(error instanceof Error ? error.message : 'Could not normalize image links');
     }
   };
 
+
   const saveProduct = async () => {
-    const imageList = draft.images.split(/[\n,]/).map((v) => v.trim()).filter(Boolean);
+    let imageList: string[];
+    try {
+      imageList = draft.images.split(/[\n,]/).map((v) => v.trim()).filter(Boolean).map((url) => normalizeImageUrl(url));
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Invalid product image link');
+      return;
+    }
     if (!draft.name || !draft.price || !draft.sku || imageList.length === 0) {
       toast.error('Name, price, SKU, and at least one image are required');
       return;
@@ -214,6 +220,8 @@ export default function AdminProducts() {
   const updateDraft = <K extends keyof ProductDraft>(key: K, value: ProductDraft[K]) => {
     setDraft((current) => ({ ...current, [key]: value }));
   };
+
+  const firstImage = draft.images.split(/[\n,]/).map((v) => v.trim()).filter(Boolean)[0];
 
   return (
     <div className="space-y-6">
@@ -286,13 +294,20 @@ export default function AdminProducts() {
             <input value={draft.collection} onChange={(e) => updateDraft('collection', e.target.value)} placeholder="Collection" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
             <input value={draft.sku} onChange={(e) => updateDraft('sku', e.target.value)} placeholder="SKU" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
             <div className="sm:col-span-2 space-y-3">
-              <textarea value={draft.images} onChange={(e) => updateDraft('images', e.target.value)} placeholder="Image URLs, one per line" rows={3} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
-              <label className="inline-flex items-center gap-2 px-4 py-2 border border-[#202024] text-xs text-[#b8b0a3] hover:text-[#c8a96a] hover:border-[#c8a96a] cursor-pointer transition-colors">
-                <Upload className="w-3.5 h-3.5" />
-                {isUploadingImage ? 'Uploading image...' : 'Upload Product Image'}
-                <input type="file" accept="image/jpeg,image/png,image/webp" disabled={isUploadingImage} onChange={(e) => handleImageUpload(e.target.files?.[0] || null)} className="hidden" />
-              </label>
-              <p className="text-[10px] text-[#8a8175]">First image is used as the main storefront image. Max 5MB per file.</p>
+              <label className="text-[10px] text-[#8a8175] uppercase tracking-wider block">Google Drive / public image links</label>
+              <textarea value={draft.images} onChange={(e) => updateDraft('images', e.target.value)} placeholder="Paste Google Drive share links or public image URLs, one per line" rows={4} className="w-full bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
+              <div className="flex flex-wrap gap-2">
+                <button type="button" onClick={normalizeImages} className="inline-flex items-center gap-2 px-4 py-2 border border-[#202024] text-xs text-[#b8b0a3] hover:text-[#c8a96a] hover:border-[#c8a96a] transition-colors">
+                  <LinkIcon className="w-3.5 h-3.5" />
+                  Normalize Drive Links
+                </button>
+                {firstImage && (
+                  <a href={firstImage} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 border border-[#202024] text-xs text-[#b8b0a3] hover:text-[#c8a96a] hover:border-[#c8a96a] transition-colors">
+                    <Eye className="w-3.5 h-3.5" /> Preview first image
+                  </a>
+                )}
+              </div>
+              <p className="text-[10px] text-[#8a8175] leading-relaxed">Upload images to Google Drive, set sharing to “Anyone with the link”, then paste the share link here. First image becomes the main storefront image.</p>
             </div>
             <input value={draft.colors} onChange={(e) => updateDraft('colors', e.target.value)} placeholder="Colors comma separated" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />
             <input value={draft.materials} onChange={(e) => updateDraft('materials', e.target.value)} placeholder="Materials comma separated" className="bg-[#050505] border border-[#202024] px-4 py-3 text-sm text-[#f4f0e8]" />

@@ -1,10 +1,10 @@
 // ============================================================
-// NEXORA — Limited Drops Section
+// NEXORA V3.3 — Limited Drops Home Section
 // ============================================================
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Timer, ArrowRight } from 'lucide-react';
+import { Timer, ArrowRight, Sparkles } from 'lucide-react';
 import SectionReveal from '@/components/ui/SectionReveal';
 import { loadProducts } from '@/services/productService';
 import type { Product } from '@/types';
@@ -14,85 +14,51 @@ export default function LimitedDropsSection() {
   const [drops, setDrops] = useState<Product[]>([]);
 
   useEffect(() => {
-    loadProducts({ isLimitedDrop: true }).then(setDrops);
+    loadProducts({ isLimitedDrop: true }).then((items) => setDrops(items.filter((product) => product.isLimitedDrop).slice(0, 3)));
   }, []);
 
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(135deg, #050505 0%, #0b0b0d 50%, #050505 100%)',
-        }}
-      />
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #2a2a2d 1px, transparent 0)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-      </div>
+    <section className="relative py-20 lg:py-28 overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,var(--v33-bg-soft),var(--v33-bg))] dark:bg-[linear-gradient(135deg,#211915,#120F0D)]" />
+      <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(circle_at_1px_1px,var(--v33-text)_1px,transparent_0)] [background-size:38px_38px]" />
 
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left — Text */}
+      <div className="relative z-10 v3-shell">
+        <div className="grid lg:grid-cols-[0.8fr_1fr] gap-10 lg:gap-14 items-center">
           <SectionReveal>
             <div className="flex items-center gap-3 mb-6">
-              <Timer className="w-4 h-4 text-[#c8a96a]" />
-              <p className="nexora-caption text-[#c8a96a]">Limited Availability</p>
+              <span className="v33-limited-pill"><Timer className="w-3.5 h-3.5" /> Limited</span>
             </div>
-            <h2 className="nexora-heading-md mb-6">
-              LIMITED
-              <br />
-              <span className="text-[#c8a96a]">DROPS</span>
-            </h2>
-            <p className="text-sm text-[#b8b0a3] max-w-md mb-8 leading-relaxed">
-              Exclusive pieces produced in limited quantities. Once they are gone,
-              they are gone forever. Each drop is numbered and crafted with the
-              same obsessive attention to detail.
-            </p>
-            <Link
-              to="/shop?filter=limited"
-              className="nexora-button-primary inline-flex items-center gap-2"
-            >
-              Shop Limited Drops
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            <h2 className="v3-title max-w-xl text-[clamp(2.3rem,5vw,4.9rem)]">Not part of the permanent shelf.</h2>
+            <p className="v3-lead mt-6">Limited drops are released in smaller quantities and removed once the window closes. Each piece is designed to feel rare without being loud.</p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Link to="/drops" className="v3-btn-primary">Explore Limited <ArrowRight className="w-4 h-4" /></Link>
+              <Link to="/shop" className="v3-btn-secondary">Shop essentials</Link>
+            </div>
           </SectionReveal>
 
-          {/* Right — Product Cards */}
           <div className="space-y-4">
-            {drops.map((product, i) => (
-              <SectionReveal key={product.slug} delay={0.1 + i * 0.1}>
-                <Link
-                  to={`/product/${product.slug}`}
-                  className="group flex items-center gap-4 bg-[#0b0b0d] border border-[#17171a] hover:border-[#c8a96a]/30 transition-all p-4"
-                >
-                  <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-[#050505]">
-                    <img
-                      src={product.images[0]}
-                      alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+            {drops.length ? drops.map((product, i) => (
+              <SectionReveal key={product.slug} delay={0.1 + i * 0.08}>
+                <Link to={`/product/${product.slug}`} className="group v33-limited-row">
+                  <div className="h-24 w-24 sm:h-28 sm:w-28 flex-shrink-0 overflow-hidden rounded-[18px] bg-[var(--v33-bg-soft)]">
+                    <img src={product.images[0]} alt={product.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#8a8175] mb-1">
-                      {product.category} — Only {product.sizes.reduce((sum, s) => sum + s.stock, 0)} left
-                    </p>
-                    <h3 className="text-sm font-bold text-[#f4f0e8] group-hover:text-[#c8a96a] transition-colors truncate">
-                      {product.name}
-                    </h3>
-                    <p className="text-xs text-[#c8a96a] mt-1">
-                      {formatPrice(product.price)}
-                    </p>
+                  <div className="min-w-0 flex-1">
+                    <p className="mb-2 flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[var(--v33-muted)]"><Sparkles className="h-3 w-3 text-[var(--v33-accent-strong)]" /> Limited · {product.category}</p>
+                    <h3 className="truncate text-sm sm:text-base font-semibold text-[var(--v33-text)] group-hover:text-[var(--v33-accent-strong)] transition-colors">{product.name}</h3>
+                    <p className="mt-1 text-xs font-bold text-[var(--v33-accent-strong)]">{formatPrice(product.price)}</p>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#2a2a2d] group-hover:text-[#c8a96a] transition-colors flex-shrink-0" />
+                  <ArrowRight className="w-4 h-4 text-[var(--v33-muted)] group-hover:text-[var(--v33-accent-strong)] transition-colors" />
                 </Link>
               </SectionReveal>
-            ))}
+            )) : (
+              <SectionReveal>
+                <div className="v33-empty-panel text-left rtl:text-right">
+                  <p>No limited drop is live right now.</p>
+                  <span className="mt-2 block text-xs text-[var(--v33-muted)]">The next release is being prepared.</span>
+                </div>
+              </SectionReveal>
+            )}
           </div>
         </div>
       </div>

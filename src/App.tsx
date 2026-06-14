@@ -26,7 +26,6 @@ const ContactPage = lazy(() => import('@/pages/ContactPage'));
 const WishlistPage = lazy(() => import('@/pages/WishlistPage'));
 const CartPage = lazy(() => import('@/pages/CartPage'));
 const CheckoutPage = lazy(() => import('@/pages/CheckoutPage'));
-const TrackOrderPage = lazy(() => import('@/pages/TrackOrderPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 const InfoPage = lazy(() => import('@/pages/info/InfoPage'));
 
@@ -54,7 +53,7 @@ function ScrollToTop() {
 // ─── Loading Fallback ───
 function PageLoader() {
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+    <div className="min-h-screen bg-[var(--v33-bg)] flex items-center justify-center">
       <SkeletonLoader type="page" />
     </div>
   );
@@ -76,7 +75,6 @@ function PublicRoutes() {
           <Route path="/wishlist" element={<PageTransition><WishlistPage /></PageTransition>} />
           <Route path="/cart" element={<PageTransition><CartPage /></PageTransition>} />
           <Route path="/checkout" element={<PageTransition><CheckoutPage /></PageTransition>} />
-          <Route path="/track-order" element={<PageTransition><TrackOrderPage /></PageTransition>} />
           <Route path="/info/:slug" element={<PageTransition><InfoPage /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
         </Routes>
@@ -108,6 +106,13 @@ function AdminRoutes() {
   );
 }
 
+
+function SplashGate() {
+  const { pathname } = useLocation();
+  if (pathname.startsWith('/admin') || pathname.startsWith('/studio') || pathname.startsWith('/nexora-admin')) return null;
+  return <SplashScreen />;
+}
+
 // ─── Main App ───
 export default function App() {
   useEffect(() => {
@@ -121,22 +126,22 @@ export default function App() {
         <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
-        <SplashScreen />
+        <SplashGate />
         <Toaster
           position="bottom-right"
           toastOptions={{
             duration: 4000,
             style: {
-              background: '#faf7f2',
-              color: '#5c4a42',
-              border: '1px solid #cfc3b7',
-              borderRadius: '0',
+              background: 'var(--v33-card)',
+              color: 'var(--v33-text)',
+              border: '1px solid var(--v33-border)',
+              borderRadius: '18px',
               fontSize: '0.85rem',
             },
             success: {
               iconTheme: {
-                primary: '#cfae9e',
-                secondary: '#5c4a42',
+                primary: 'var(--v33-accent)',
+                secondary: '#2F2520',
               },
             },
             error: {

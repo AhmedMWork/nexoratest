@@ -49,7 +49,7 @@ export const productFormSchema = z.object({
   description: z.string().min(10, 'Description must be at least 10 characters').max(2000),
   price: z.number().positive('Price must be greater than 0'),
   compareAtPrice: z.number().positive().optional(),
-  category: z.enum(['men', 'women']),
+  category: z.enum(['men', 'women', 'unisex']),
   collection: z.string().min(1, 'Collection is required'),
   colors: z.array(z.string()).min(1, 'At least one color is required'),
   materials: z.array(z.string()).min(1, 'At least one material is required'),
@@ -94,14 +94,6 @@ export const newsletterSchema = z.object({
 });
 
 export type NewsletterFormData = z.infer<typeof newsletterSchema>;
-
-// ─── Track Order Form ───
-export const trackOrderSchema = z.object({
-  orderNumber: z.string().min(5, 'Please enter a valid order number'),
-  phone: z.string().regex(EGYPTIAN_PHONE_REGEX, 'Invalid Egyptian phone number'),
-});
-
-export type TrackOrderFormData = z.infer<typeof trackOrderSchema>;
 
 // ─── Review Form ───
 export const reviewSchema = z.object({

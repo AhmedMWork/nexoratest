@@ -54,7 +54,7 @@ export default function AdminLoginPage() {
             />
           </div>
           <h1 className="text-sm font-black tracking-[0.28em] uppercase text-[#f4f0e8]">NEXORA Admin</h1>
-          <p className="mt-3 text-xs leading-6 text-[#8a8175]">Manage products, orders, inventory, drops, and campaigns from one command center.</p>
+          <p className="mt-3 text-xs leading-6 text-[#8a8175]">Manage products, orders, inventory, limited drops, and campaigns from one command center.</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

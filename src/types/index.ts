@@ -70,8 +70,8 @@ export interface Order {
   discount: number;
   couponCode?: string;
   total: number;
-  paymentMethod: 'cod' | 'card';
-  paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
+  paymentMethod: 'cod';
+  paymentStatus: 'pending' | 'collected' | 'failed' | 'refunded';
   status: OrderStatus;
   trackingUpdates: TrackingUpdate[];
   adminNotes?: string;
